@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        
+        /* SECoin Brand Colors - Light Mode */
+        --background: 0.98 0 0;
+        --foreground: 0.15 0 0;
+        
+        --card: 1 0 0;
+        --card-foreground: 0.15 0 0;
+        
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0 0;
+        
+        /* Primary: #0B3D91 (Deep Blue) */
+        --primary: 0.32 0.18 264;
+        --primary-foreground: 0.98 0 0;
+        
+        /* Secondary: Lighter blue */
+        --secondary: 0.92 0.05 264;
+        --secondary-foreground: 0.15 0 0;
+        
+        /* Accent: #F6A100 (Orange) */
+        --accent: 0.75 0.20 65;
+        --accent-foreground: 0.15 0 0;
+        
+        --muted: 0.95 0 0;
+        --muted-foreground: 0.50 0 0;
+        
+        --destructive: 0.60 0.24 27;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.88 0 0;
+        --input: 0.88 0 0;
+        --ring: 0.32 0.18 264;
+        
+        --chart-1: 0.32 0.18 264;
+        --chart-2: 0.75 0.20 65;
+        --chart-3: 0.50 0.15 180;
+        --chart-4: 0.65 0.18 120;
+        --chart-5: 0.70 0.16 300;
+        
+        --sidebar: 0.98 0 0;
+        --sidebar-foreground: 0.15 0 0;
+        --sidebar-primary: 0.32 0.18 264;
+        --sidebar-primary-foreground: 0.98 0 0;
+        --sidebar-accent: 0.92 0.05 264;
+        --sidebar-accent-foreground: 0.15 0 0;
+        --sidebar-border: 0.88 0 0;
+        --sidebar-ring: 0.32 0.18 264;
+    }
+
+    .dark {
+        /* Dark Mode: #0F1724 base */
+        --background: 0.12 0.02 240;
+        --foreground: 0.95 0 0;
+        
+        --card: 0.16 0.02 240;
+        --card-foreground: 0.95 0 0;
+        
+        --popover: 0.16 0.02 240;
+        --popover-foreground: 0.95 0 0;
+        
+        /* Primary: Brighter blue for dark mode */
+        --primary: 0.55 0.20 264;
+        --primary-foreground: 0.98 0 0;
+        
+        --secondary: 0.22 0.03 240;
+        --secondary-foreground: 0.95 0 0;
+        
+        /* Accent: #F6A100 (Orange) - slightly adjusted for dark */
+        --accent: 0.72 0.22 65;
+        --accent-foreground: 0.12 0.02 240;
+        
+        --muted: 0.22 0.03 240;
+        --muted-foreground: 0.65 0 0;
+        
+        --destructive: 0.65 0.22 27;
+        --destructive-foreground: 0.95 0 0;
+        
+        --border: 0.25 0.03 240;
+        --input: 0.25 0.03 240;
+        --ring: 0.55 0.20 264;
+        
+        --chart-1: 0.55 0.20 264;
+        --chart-2: 0.72 0.22 65;
+        --chart-3: 0.60 0.18 180;
+        --chart-4: 0.70 0.20 120;
+        --chart-5: 0.75 0.18 300;
+        
+        --sidebar: 0.16 0.02 240;
+        --sidebar-foreground: 0.95 0 0;
+        --sidebar-primary: 0.55 0.20 264;
+        --sidebar-primary-foreground: 0.98 0 0;
+        --sidebar-accent: 0.22 0.03 240;
+        --sidebar-accent-foreground: 0.95 0 0;
+        --sidebar-border: 0.25 0.03 240;
+        --sidebar-ring: 0.55 0.20 264;
+    }
+
+    /* Rainbow Theme (VIBGYOR) */
+    .rainbow-theme {
+        --background: 0.95 0.05 300;
+        --foreground: 0.20 0 0;
+        
+        --card: 0.98 0.08 280;
+        --card-foreground: 0.20 0 0;
+        
+        --popover: 0.98 0.08 280;
+        --popover-foreground: 0.20 0 0;
+        
+        /* Violet */
+        --primary: 0.50 0.25 280;
+        --primary-foreground: 0.98 0 0;
+        
+        /* Indigo */
+        --secondary: 0.45 0.22 260;
+        --secondary-foreground: 0.98 0 0;
+        
+        /* Orange */
+        --accent: 0.70 0.25 40;
+        --accent-foreground: 0.15 0 0;
+        
+        --muted: 0.90 0.05 300;
+        --muted-foreground: 0.45 0 0;
+        
+        /* Red */
+        --destructive: 0.55 0.25 20;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.85 0.08 280;
+        --input: 0.85 0.08 280;
+        --ring: 0.50 0.25 280;
+        
+        /* VIBGYOR spectrum */
+        --chart-1: 0.50 0.25 280; /* Violet */
+        --chart-2: 0.45 0.22 260; /* Indigo */
+        --chart-3: 0.55 0.28 240; /* Blue */
+        --chart-4: 0.60 0.30 140; /* Green */
+        --chart-5: 0.70 0.25 60;  /* Yellow */
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+}
+
+@layer utilities {
+    /* 3D Border Effect */
+    .border-3d {
+        border-width: 3px;
+        border-style: solid;
+        box-shadow: 
+            0 0 0 1px oklch(var(--border)),
+            0 0 0 3px oklch(var(--primary) / 0.3),
+            0 0 0 5px oklch(var(--accent) / 0.2),
+            0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Soft Shadow */
+    .shadow-soft {
+        box-shadow: 
+            0 2px 8px -2px rgb(0 0 0 / 0.1),
+            0 4px 16px -4px rgb(0 0 0 / 0.1);
+    }
+}

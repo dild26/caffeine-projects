@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://secoin-ep6.caffeine.xyz/sitemap.xml

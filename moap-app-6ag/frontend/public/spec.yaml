@@ -1,0 +1,514 @@
+# MoAP Application Registry - Unified Configuration
+# This YAML file serves as the single source of truth for all application data
+
+specVersion: 1
+specAuthority: caffeine.xyz
+mutationPolicy: merge-only
+urlSourceOfTruth: canonical
+generatedAt: 2025-12-15T00:00:00Z
+
+# Tenant Configuration
+tenant:
+  id: moap-app-6ag
+  name: MoAP Application Registry
+  domain: moap-app-6ag.caffeine.xyz
+
+# Runtime Guards
+runtimeGuards:
+  maxAppsPerUser: 100
+  requireCanonicalUrls: true
+  allowArchiving: true
+
+# Data Policies
+policies:
+  mergeOnly: true
+  noDeleteByOmission: true
+  explicitArchiveRequired: true
+  fullReplaceRequiresFlag: true
+
+# Logging Configuration
+logging:
+  enabled: true
+  level: info
+  trackChanges: true
+  trackMigrations: true
+
+# Broadcast Configuration
+broadcast:
+  enabled: false
+  channels: []
+
+# Ranking Configuration
+rank:
+  algorithm: default
+  weights: {}
+
+# Incentives Configuration
+incentives:
+  enabled: false
+  programs: []
+
+# Applications Registry (26 SECOINFI Applications)
+appsRegistry:
+  - id: moap-app-6ag
+    name: MoAP
+    description: Caffeine Domains Apps Store
+    features:
+      - search
+      - compare
+      - analytics
+    rank: 1
+    url: https://moap-app-6ag.caffeine.xyz/
+    archived: false
+    category: registry
+
+  - id: profile-app-3qv
+    name: Profile App
+    description: Create and manage Caffeine profile cards
+    features:
+      - profile creation
+      - social links
+      - customization
+    rank: 2
+    url: https://profile-app-3qv.caffeine.xyz/
+    archived: false
+    category: social
+
+  - id: factory-exchange-2q9
+    name: Factory Exchange
+    description: Decentralized exchange platform for Caffeine Domains
+    features:
+      - swaps
+      - liquidity pools
+      - analytics
+    rank: 3
+    url: https://factory-exchange-2q9.caffeine.xyz/
+    archived: false
+    category: defi
+
+  - id: factory-service-2q9
+    name: Factory Service
+    description: Domain factory management service
+    features:
+      - domain creation
+      - factory management
+      - analytics
+    rank: 4
+    url: https://factory-service-2q9.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: domain-app-mre
+    name: Domain App
+    description: Manage your Caffeine Domains
+    features:
+      - domain search
+      - registration
+      - management
+    rank: 5
+    url: https://domain-app-mre.caffeine.xyz/
+    archived: false
+    category: domains
+
+  - id: whois-azk
+    name: WHOIS Lookup
+    description: Check domain ownership and availability
+    features:
+      - lookup
+      - history
+      - analytics
+    rank: 6
+    url: https://whois-azk.caffeine.xyz/
+    archived: false
+    category: tools
+
+  - id: caffeine-game-ftw
+    name: Caffeine Game
+    description: Play games and earn rewards
+    features:
+      - games
+      - rewards
+      - leaderboards
+    rank: 7
+    url: https://caffeine-game-ftw.caffeine.xyz/
+    archived: false
+    category: gaming
+
+  - id: factory-core-6dq
+    name: Factory Core
+    description: Main domain factory core system
+    features:
+      - core services
+      - management
+      - analytics
+    rank: 8
+    url: https://factory-core-6dq.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: meta-app-4fa
+    name: Meta App
+    description: Caffeine meta tools and services
+    features:
+      - tools
+      - services
+      - analytics
+    rank: 9
+    url: https://meta-app-4fa.caffeine.xyz/
+    archived: false
+    category: tools
+
+  - id: sign-in-app-okv
+    name: Sign In App
+    description: Authentication and sign-in services
+    features:
+      - auth
+      - login
+      - security
+    rank: 10
+    url: https://sign-in-app-okv.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: caffeine-factory-ex7
+    name: Caffeine Factory
+    description: Caffeine domains factory system
+    features:
+      - factory
+      - management
+      - analytics
+    rank: 11
+    url: https://caffeine-factory-ex7.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: sync-app-tr2
+    name: Sync App
+    description: Sync services for domains and apps
+    features:
+      - sync
+      - integration
+      - management
+    rank: 12
+    url: https://sync-app-tr2.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: analytics-app-7dx
+    name: Analytics App
+    description: Analyze domains and app data
+    features:
+      - analytics
+      - reports
+      - visualizations
+    rank: 13
+    url: https://analytics-app-7dx.caffeine.xyz/
+    archived: false
+    category: analytics
+
+  - id: links-app-311
+    name: Links App
+    description: Manage and share domain links
+    features:
+      - links
+      - sharing
+      - management
+    rank: 14
+    url: https://links-app-311.caffeine.xyz/
+    archived: false
+    category: social
+
+  - id: rewards-app-4ls
+    name: Rewards App
+    description: Earn and redeem rewards
+    features:
+      - rewards
+      - points
+      - redeem
+    rank: 15
+    url: https://rewards-app-4ls.caffeine.xyz/
+    archived: false
+    category: incentives
+
+  - id: factory-db7
+    name: Factory DB
+    description: Database services for domains
+    features:
+      - database
+      - queries
+      - management
+    rank: 16
+    url: https://factory-db7.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: caffeine-core-3xw
+    name: Caffeine Core
+    description: Main core services for Caffeine
+    features:
+      - services
+      - core
+      - tools
+    rank: 17
+    url: https://caffeine-core-3xw.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: caffeine-domain-rw8
+    name: Caffeine Domain
+    description: Manage Caffeine domain properties
+    features:
+      - management
+      - properties
+      - analytics
+    rank: 18
+    url: https://caffeine-domain-rw8.caffeine.xyz/
+    archived: false
+    category: domains
+
+  - id: search-app-icn
+    name: Search App
+    description: Search domains and apps
+    features:
+      - search
+      - filter
+      - analytics
+    rank: 19
+    url: https://search-app-icn.caffeine.xyz/
+    archived: false
+    category: tools
+
+  - id: factory-llq
+    name: Factory
+    description: Create and manage domain factories
+    features:
+      - create
+      - manage
+      - analytics
+    rank: 20
+    url: https://factory-llq.caffeine.xyz/
+    archived: false
+    category: infrastructure
+
+  - id: webpage-app-qpg
+    name: Webpage App
+    description: Create and manage web pages
+    features:
+      - create
+      - manage
+      - publish
+    rank: 21
+    url: https://webpage-app-qpg.caffeine.xyz/
+    archived: false
+    category: content
+
+  - id: media-app-vz6
+    name: Media App
+    description: Manage domain media content
+    features:
+      - media
+      - management
+      - analytics
+    rank: 22
+    url: https://media-app-vz6.caffeine.xyz/
+    archived: false
+    category: content
+
+  - id: inventory-app-m9r
+    name: Inventory App
+    description: Track and manage inventory
+    features:
+      - track
+      - manage
+      - analytics
+    rank: 23
+    url: https://inventory-app-m9r.caffeine.xyz/
+    archived: false
+    category: business
+
+  - id: catalog-app-mre
+    name: Catalog App
+    description: Manage domain catalogs
+    features:
+      - manage
+      - catalog
+      - analytics
+    rank: 24
+    url: https://catalog-app-mre.caffeine.xyz/
+    archived: false
+    category: business
+
+  - id: finance-app-7jw
+    name: Finance App
+    description: Manage domain finance data
+    features:
+      - manage
+      - finance
+      - analytics
+    rank: 25
+    url: https://finance-app-7jw.caffeine.xyz/
+    archived: false
+    category: business
+
+  - id: test-app-rde
+    name: Test App
+    description: Testing features for Caffeine Apps
+    features:
+      - unit testing
+      - integration testing
+      - analytics
+    rank: 26
+    url: https://test-app-rde.caffeine.xyz/
+    archived: false
+    category: development
+
+# Secoinfi Apps (26 modules integrated into MoAP ecosystem)
+secoinfiApps:
+  - name: Authentication Module
+    key: auth-module
+    url: https://auth.caffeine.xyz
+    description: Secure authentication and identity management for Secoinfi applications
+
+  - name: Payment Gateway
+    key: payment-gateway
+    url: https://payments.caffeine.xyz
+    description: Integrated payment processing and transaction management
+
+  - name: Analytics Dashboard
+    key: analytics-dashboard
+    url: https://analytics.caffeine.xyz
+    description: Real-time analytics and reporting for business intelligence
+
+  - name: Notification Service
+    key: notification-service
+    url: https://notifications.caffeine.xyz
+    description: Multi-channel notification delivery system
+
+  - name: File Storage
+    key: file-storage
+    url: https://storage.caffeine.xyz
+    description: Secure cloud storage and file management
+
+  - name: API Gateway
+    key: api-gateway
+    url: https://api.caffeine.xyz
+    description: Centralized API management and routing
+
+  - name: User Management
+    key: user-management
+    url: https://users.caffeine.xyz
+    description: Comprehensive user account and profile management
+
+  - name: Content Management
+    key: content-management
+    url: https://cms.caffeine.xyz
+    description: Flexible content creation and publishing platform
+
+  - name: Email Service
+    key: email-service
+    url: https://email.caffeine.xyz
+    description: Reliable email delivery and template management
+
+  - name: Search Engine
+    key: search-engine
+    url: https://search.caffeine.xyz
+    description: Powerful full-text search and indexing
+
+  - name: Cache Manager
+    key: cache-manager
+    url: https://cache.caffeine.xyz
+    description: Distributed caching for improved performance
+
+  - name: Queue Service
+    key: queue-service
+    url: https://queue.caffeine.xyz
+    description: Asynchronous task processing and job management
+
+  - name: Logging Service
+    key: logging-service
+    url: https://logs.caffeine.xyz
+    description: Centralized logging and monitoring
+
+  - name: Backup Service
+    key: backup-service
+    url: https://backup.caffeine.xyz
+    description: Automated backup and disaster recovery
+
+  - name: CDN Manager
+    key: cdn-manager
+    url: https://cdn.caffeine.xyz
+    description: Content delivery network management
+
+  - name: Security Scanner
+    key: security-scanner
+    url: https://security.caffeine.xyz
+    description: Automated security scanning and vulnerability detection
+
+  - name: Rate Limiter
+    key: rate-limiter
+    url: https://ratelimit.caffeine.xyz
+    description: API rate limiting and throttling
+
+  - name: Webhook Manager
+    key: webhook-manager
+    url: https://webhooks.caffeine.xyz
+    description: Webhook delivery and management system
+
+  - name: Scheduler Service
+    key: scheduler-service
+    url: https://scheduler.caffeine.xyz
+    description: Cron job and task scheduling
+
+  - name: Translation Service
+    key: translation-service
+    url: https://translate.caffeine.xyz
+    description: Multi-language translation and localization
+
+  - name: Image Processor
+    key: image-processor
+    url: https://images.caffeine.xyz
+    description: Image optimization and transformation
+
+  - name: Video Processor
+    key: video-processor
+    url: https://video.caffeine.xyz
+    description: Video encoding and streaming
+
+  - name: Chat Service
+    key: chat-service
+    url: https://chat.caffeine.xyz
+    description: Real-time messaging and chat functionality
+
+  - name: Geolocation Service
+    key: geolocation-service
+    url: https://geo.caffeine.xyz
+    description: Location-based services and mapping
+
+  - name: Reporting Engine
+    key: reporting-engine
+    url: https://reports.caffeine.xyz
+    description: Automated report generation and distribution
+
+  - name: Audit Logger
+    key: audit-logger
+    url: https://audit.caffeine.xyz
+    description: Comprehensive audit trail and compliance logging
+
+# Features Registry
+features: []
+
+# Sitemap Configuration (Merged from master and map sitemaps)
+sitemap:
+  sections: []
+
+# Leaderboards Configuration
+leaderboards:
+  rankings: []
+
+# Version History
+versions:
+  versionHistory: []
+
+# Migration History
+migrations:
+  migrationHistory: []

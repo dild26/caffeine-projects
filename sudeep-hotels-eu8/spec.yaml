@@ -1,0 +1,283 @@
+name: Op Hotels to Rest
+version: 1.0.0
+description: Full-stack task management and data synchronization application with enhanced contact verification and cross-origin integration
+
+backend:
+  language: Motoko
+  features:
+    - Task Management System
+    - Data Object Management
+    - Contact Data Verification
+    - Data Integrity Management
+    - Cross-Origin Synchronization
+    - Sitemap and Metadata Management
+    - Blob Storage
+    - HTTP Outcalls
+    - Authorization System
+
+  data_models:
+    Task:
+      fields:
+        - id: Text
+        - title: Text
+        - description: Text
+        - status: Text
+        - branch: Text
+        - createdAt: Time
+        - updatedAt: Time
+        - merkleProof: Text
+    
+    TaskEvent:
+      fields:
+        - taskId: Text
+        - eventType: Text
+        - timestamp: Time
+        - details: Text
+    
+    MerkleRoot:
+      fields:
+        - root: Text
+        - timestamp: Time
+    
+    DataObject:
+      fields:
+        - id: Text
+        - name: Text
+        - fileType: Text
+        - metadata: Text
+        - preview: Optional<Text>
+        - uploadedAt: Time
+        - blob: ExternalBlob
+    
+    ContactData:
+      fields:
+        - id: Text
+        - name: Text
+        - email: Text
+        - phone: Text
+        - verified: Bool
+        - source: Text
+        - lastVerified: Time
+    
+    VerificationLog:
+      fields:
+        - contactId: Text
+        - verificationResult: Bool
+        - timestamp: Time
+        - details: Text
+    
+    IntegrityLog:
+      fields:
+        - id: Text
+        - operation: Text
+        - result: Text
+        - timestamp: Time
+        - details: Text
+    
+    IntegritySchedule:
+      fields:
+        - id: Text
+        - frequency: Text
+        - nextRun: Time
+        - lastRun: Time
+    
+    SyncOperation:
+      fields:
+        - id: Text
+        - source: Text
+        - target: Text
+        - status: Text
+        - timestamp: Time
+        - details: Text
+    
+    ClonedPage:
+      fields:
+        - id: Text
+        - url: Text
+        - content: Text
+        - metadata: Text
+        - lastSynced: Time
+    
+    SitemapEntry:
+      fields:
+        - id: Text
+        - url: Text
+        - title: Text
+        - description: Text
+        - lastUpdated: Time
+    
+    SearchIndex:
+      fields:
+        - id: Text
+        - content: Text
+        - keywords: Array<Text>
+        - lastIndexed: Time
+
+  api_endpoints:
+    tasks:
+      - createTask(task: Task): void
+      - getTask(taskId: Text): Optional<Task>
+      - getAllTasks(): Array<Task>
+      - updateTask(task: Task): void
+      - getTaskEvents(taskId: Text): Array<TaskEvent>
+      - addMerkleRoot(merkleRoot: MerkleRoot): void
+    
+    data_objects:
+      - addDataObject(dataObject: DataObject): void
+      - getDataObject(dataObjectId: Text): Optional<DataObject>
+      - getAllDataObjects(): Array<DataObject>
+    
+    contact:
+      - addContactData(contact: ContactData): void
+      - getContactData(contactId: Text): Optional<ContactData>
+      - getAllContactData(): Array<ContactData>
+      - addVerificationLog(log: VerificationLog): void
+      - fetchExternalContactData(): Text
+    
+    integrity:
+      - addIntegrityLog(log: IntegrityLog): void
+      - getAllIntegrityLogs(): Array<IntegrityLog>
+      - addIntegritySchedule(schedule: IntegritySchedule): void
+    
+    sync:
+      - addSyncOperation(operation: SyncOperation): void
+      - getAllSyncOperations(): Array<SyncOperation>
+      - fetchExternalSyncData(): Text
+    
+    sitemap:
+      - addClonedPage(page: ClonedPage): void
+      - getAllClonedPages(): Array<ClonedPage>
+      - addSitemapEntry(entry: SitemapEntry): void
+      - getAllSitemapEntries(): Array<SitemapEntry>
+      - addSearchIndex(index: SearchIndex): void
+      - getAllSearchIndexes(): Array<SearchIndex>
+
+  external_integrations:
+    - url: https://networth-htm.caffeine.xyz/contact
+      purpose: Contact data verification
+      method: HTTP GET
+    - url: https://map-56b.caffeine.xyz/
+      purpose: Cross-origin synchronization
+      method: HTTP GET
+
+frontend:
+  framework: React + TypeScript
+  styling: Tailwind CSS + shadcn/ui
+  state_management: React Query + Zustand
+  routing: TanStack Router
+  
+  pages:
+    - path: /
+      name: Dashboard
+      description: Global KPIs and multi-branch Kanban board
+      access: Authenticated users
+    
+    - path: /contact
+      name: Contact
+      description: Enhanced contact page with iframe and verification
+      access: Public
+    
+    - path: /data-objects
+      name: Data Objects
+      description: File upload and management interface
+      access: Authenticated users
+    
+    - path: /admin
+      name: Admin Settings
+      description: Integrity monitoring and audit trails
+      access: Admin only
+    
+    - path: /page/:pageId
+      name: Cloned Page
+      description: Display cloned sitemap pages
+      access: Public
+
+  features:
+    navigation:
+      - Responsive header with logo
+      - Theme toggle (light/dark/rainbow)
+      - Mobile menu support
+      - Footer with attribution
+    
+    authentication:
+      - Internet Identity integration
+      - User profile setup
+      - Role-based access control
+    
+    dashboard:
+      - Task statistics cards
+      - Multi-branch Kanban board
+      - Task creation and editing
+      - Merkle proof display
+      - Event history tracking
+    
+    contact:
+      - Iframe embedding of external source
+      - Automatic verification indicators
+      - Local data fallback
+      - Sync functionality
+      - Responsive design
+    
+    data_objects:
+      - File upload with drag-and-drop
+      - Support for .json, .csv, .md, .zip
+      - Metadata extraction
+      - File preview
+      - Blob storage integration
+    
+    admin:
+      - Integrity logs visualization
+      - Sync operations history
+      - System health monitoring
+      - Exportable audit trails
+      - Access control
+
+  theme:
+    colors:
+      primary: VIBGYOR spectrum
+      secondary: Complementary tones
+      accent: Dynamic based on theme mode
+    
+    modes:
+      - light: Clean and professional
+      - dark: High contrast with purple accents
+      - rainbow: Full VIBGYOR spectrum
+
+mock_data:
+  branches:
+    - name: Berlin-HQ
+      tasks:
+        - title: Setup infrastructure
+          status: completed
+        - title: Deploy monitoring
+          status: in-progress
+        - title: Security audit
+          status: pending
+    
+    - name: Tokyo-Branch
+      tasks:
+        - title: Localization setup
+          status: completed
+        - title: API integration
+          status: in-progress
+        - title: Performance testing
+          status: pending
+
+security:
+  - CORS headers for cross-origin requests
+  - CSP headers for iframe sandboxing
+  - Role-based access control
+  - Secure session management
+  - Access logging for external integrations
+
+deployment:
+  platform: Internet Computer
+  canisters:
+    - backend: Motoko canister
+    - frontend: Asset canister
+  
+  domains:
+    - primary: op-hotels-to-rest.caffeine.xyz
+    - external_integrations:
+      - networth-htm.caffeine.xyz
+      - map-56b.caffeine.xyz

@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme - WCAG AA compliant with enhanced contrast */
+    --background: 100 0 0;
+    --foreground: 15 0 0;
+    --card: 100 0 0;
+    --card-foreground: 15 0 0;
+    --popover: 100 0 0;
+    --popover-foreground: 15 0 0;
+    --primary: 20 0 0;
+    --primary-foreground: 98 0 0;
+    --secondary: 96 0 0;
+    --secondary-foreground: 20 0 0;
+    --muted: 94 0 0;
+    --muted-foreground: 40 0 0;
+    --accent: 96 0 0;
+    --accent-foreground: 20 0 0;
+    --destructive: 50 0.22 25;
+    --destructive-foreground: 98 0 0;
+    --border: 88 0 0;
+    --input: 88 0 0;
+    --ring: 20 0 0;
+    --radius: 0.5rem;
+    --chart-1: 60 0.15 25;
+    --chart-2: 50 0.12 180;
+    --chart-3: 40 0.10 200;
+    --chart-4: 65 0.18 85;
+    --chart-5: 55 0.16 40;
+  }
+
+  .dark {
+    /* Dark theme - WCAG AA compliant with enhanced contrast */
+    --background: 15 0 0;
+    --foreground: 98 0 0;
+    --card: 18 0 0;
+    --card-foreground: 98 0 0;
+    --popover: 18 0 0;
+    --popover-foreground: 98 0 0;
+    --primary: 98 0 0;
+    --primary-foreground: 15 0 0;
+    --secondary: 25 0 0;
+    --secondary-foreground: 98 0 0;
+    --muted: 25 0 0;
+    --muted-foreground: 75 0 0;
+    --accent: 30 0 0;
+    --accent-foreground: 98 0 0;
+    --destructive: 50 0.20 25;
+    --destructive-foreground: 98 0 0;
+    --border: 28 0 0;
+    --input: 28 0 0;
+    --ring: 90 0 0;
+    --chart-1: 60 0.15 240;
+    --chart-2: 55 0.12 170;
+    --chart-3: 65 0.14 50;
+    --chart-4: 70 0.16 290;
+    --chart-5: 60 0.13 350;
+  }
+
+  .vibgyor {
+    /* VIBGYOR theme - WCAG AA compliant with enhanced contrast */
+    --background: 98 0.01 300;
+    --foreground: 20 0.08 280;
+    --card: 99 0.01 300;
+    --card-foreground: 20 0.08 280;
+    --popover: 99 0.01 300;
+    --popover-foreground: 20 0.08 280;
+    --primary: 45 0.20 280;
+    --primary-foreground: 98 0 0;
+    --secondary: 75 0.10 320;
+    --secondary-foreground: 20 0.08 280;
+    --muted: 94 0.02 300;
+    --muted-foreground: 40 0.08 280;
+    --accent: 55 0.18 200;
+    --accent-foreground: 98 0 0;
+    --destructive: 50 0.22 25;
+    --destructive-foreground: 98 0 0;
+    --border: 85 0.03 300;
+    --input: 85 0.03 300;
+    --ring: 45 0.20 280;
+    --radius: 0.75rem;
+    --chart-1: 50 0.20 280;
+    --chart-2: 55 0.18 320;
+    --chart-3: 60 0.18 200;
+    --chart-4: 65 0.20 60;
+    --chart-5: 55 0.20 10;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Immediate theme application - no transitions on initial load */
+html {
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+}
+
+/* Apply theme classes immediately without transition */
+html.vibgyor,
+html.dark,
+html.light {
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+}
+
+/* Smooth transitions only after initial load */
+html.theme-loaded {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.theme-loaded * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ensure sufficient contrast for all interactive elements */
+a {
+  @apply text-foreground underline-offset-4 hover:underline;
+  color: oklch(var(--foreground));
+}
+
+button {
+  color: inherit;
+}
+
+/* Focus states with high contrast */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Ensure readable text in all themes */
+.text-muted-foreground {
+  color: oklch(var(--muted-foreground));
+}
+
+/* Force high contrast for critical text */
+h1, h2, h3, h4, h5, h6 {
+  color: oklch(var(--foreground));
+}
+
+p, span, div {
+  color: inherit;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --foreground: 0 0 0;
+    --background: 100 0 0;
+    --muted-foreground: 0 0 0;
+  }
+  
+  .dark {
+    --foreground: 100 0 0;
+    --background: 0 0 0;
+    --muted-foreground: 100 0 0;
+  }
+  
+  .vibgyor {
+    --foreground: 0 0 0;
+    --background: 100 0 0;
+    --muted-foreground: 0 0 0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html *,
+  html.theme-loaded,
+  html.theme-loaded * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Loading state indicator */
+.loading-indicator {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Ensure cards and containers have proper contrast */
+.card,
+[class*="card"] {
+  background-color: oklch(var(--card));
+  color: oklch(var(--card-foreground));
+}
+
+/* Ensure buttons have proper contrast */
+.btn,
+button[class*="btn"],
+[role="button"] {
+  color: inherit;
+}
+
+/* Skeleton loading states */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(var(--muted)) 0%,
+    oklch(var(--muted) / 0.5) 50%,
+    oklch(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

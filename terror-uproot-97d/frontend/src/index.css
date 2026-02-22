@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Light mode - Professional command center theme */
+        --background: 0.98 0 0;
+        --foreground: 0.2 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.2 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.2 0 0;
+        
+        /* Primary - Deep blue for authority */
+        --primary: 0.45 0.15 250;
+        --primary-foreground: 0.98 0 0;
+        
+        /* Secondary - Slate gray */
+        --secondary: 0.92 0.01 250;
+        --secondary-foreground: 0.2 0 0;
+        
+        --muted: 0.95 0.01 250;
+        --muted-foreground: 0.5 0.01 250;
+        
+        /* Accent - Cyan for highlights */
+        --accent: 0.7 0.15 200;
+        --accent-foreground: 0.98 0 0;
+        
+        /* Destructive - Red for critical alerts */
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0 0;
+        
+        /* Success - Green for verified/safe */
+        --success: 0.65 0.18 145;
+        --success-foreground: 0.98 0 0;
+        
+        /* Warning - Amber for caution */
+        --warning: 0.75 0.15 75;
+        --warning-foreground: 0.2 0 0;
+        
+        --border: 0.88 0.01 250;
+        --input: 0.88 0.01 250;
+        --ring: 0.45 0.15 250;
+        
+        /* Chart colors - distinct and accessible */
+        --chart-1: 0.6 0.2 250;
+        --chart-2: 0.65 0.18 145;
+        --chart-3: 0.7 0.15 200;
+        --chart-4: 0.75 0.15 75;
+        --chart-5: 0.55 0.22 25;
+        
+        --sidebar: 0.98 0 0;
+        --sidebar-foreground: 0.2 0 0;
+        --sidebar-primary: 0.45 0.15 250;
+        --sidebar-primary-foreground: 0.98 0 0;
+        --sidebar-accent: 0.95 0.01 250;
+        --sidebar-accent-foreground: 0.2 0 0;
+        --sidebar-border: 0.88 0.01 250;
+        --sidebar-ring: 0.45 0.15 250;
+    }
+
+    .dark {
+        /* Dark mode - Command center aesthetic */
+        --background: 0.12 0.02 250;
+        --foreground: 0.95 0.01 250;
+        --card: 0.18 0.02 250;
+        --card-foreground: 0.95 0.01 250;
+        --popover: 0.15 0.02 250;
+        --popover-foreground: 0.95 0.01 250;
+        
+        /* Primary - Bright cyan for command center feel */
+        --primary: 0.75 0.18 200;
+        --primary-foreground: 0.12 0.02 250;
+        
+        /* Secondary - Dark slate */
+        --secondary: 0.25 0.02 250;
+        --secondary-foreground: 0.95 0.01 250;
+        
+        --muted: 0.22 0.02 250;
+        --muted-foreground: 0.6 0.01 250;
+        
+        /* Accent - Electric blue */
+        --accent: 0.65 0.2 250;
+        --accent-foreground: 0.95 0.01 250;
+        
+        /* Destructive - Bright red for alerts */
+        --destructive: 0.6 0.25 25;
+        --destructive-foreground: 0.95 0.01 250;
+        
+        /* Success - Bright green */
+        --success: 0.7 0.2 145;
+        --success-foreground: 0.12 0.02 250;
+        
+        /* Warning - Bright amber */
+        --warning: 0.8 0.18 75;
+        --warning-foreground: 0.12 0.02 250;
+        
+        --border: 0.3 0.02 250;
+        --input: 0.3 0.02 250;
+        --ring: 0.75 0.18 200;
+        
+        /* Chart colors - vibrant for dark mode */
+        --chart-1: 0.7 0.2 250;
+        --chart-2: 0.7 0.2 145;
+        --chart-3: 0.75 0.18 200;
+        --chart-4: 0.8 0.18 75;
+        --chart-5: 0.6 0.25 25;
+        
+        --sidebar: 0.15 0.02 250;
+        --sidebar-foreground: 0.95 0.01 250;
+        --sidebar-primary: 0.75 0.18 200;
+        --sidebar-primary-foreground: 0.12 0.02 250;
+        --sidebar-accent: 0.22 0.02 250;
+        --sidebar-accent-foreground: 0.95 0.01 250;
+        --sidebar-border: 0.3 0.02 250;
+        --sidebar-ring: 0.75 0.18 200;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .text-success {
+        color: oklch(var(--success));
+    }
+    
+    .text-warning {
+        color: oklch(var(--warning));
+    }
+    
+    .bg-success {
+        background-color: oklch(var(--success));
+    }
+    
+    .bg-warning {
+        background-color: oklch(var(--warning));
+    }
+    
+    .border-success {
+        border-color: oklch(var(--success));
+    }
+    
+    .border-warning {
+        border-color: oklch(var(--warning));
+    }
+}
+

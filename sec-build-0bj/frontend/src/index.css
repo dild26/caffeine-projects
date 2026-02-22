@@ -1,0 +1,797 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme - Enhanced Ethereum-themed color palette */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 265 100% 65%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 210 40% 98%;
+
+    --muted: 215 20% 25%;
+    --muted-foreground: 215 16% 70%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 25%;
+    --input: 215 20% 25%;
+    --ring: 265 100% 65%;
+
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Explicit dark theme */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 265 100% 65%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 210 40% 98%;
+
+    --muted: 215 20% 25%;
+    --muted-foreground: 215 16% 70%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 25%;
+    --input: 215 20% 25%;
+    --ring: 265 100% 65%;
+
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+  }
+
+  .light {
+    /* Light theme with high contrast */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 265 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 91% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 280 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 40%;
+
+    --destructive: 0 84% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 91%;
+    --ring: 265 100% 45%;
+
+    --success: 142 76% 35%;
+    --warning: 38 92% 40%;
+  }
+
+  .rainbow {
+    /* VIBGYOR gradient theme with high contrast */
+    --background: 270 50% 12%;
+    --foreground: 0 0% 98%;
+
+    --card: 270 50% 16%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 270 50% 16%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 280 100% 65%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 200 100% 55%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --muted: 270 30% 28%;
+    --muted-foreground: 270 10% 75%;
+
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 270 30% 30%;
+    --input: 270 30% 30%;
+    --ring: 280 100% 65%;
+
+    --success: 120 100% 45%;
+    --warning: 60 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  canvas {
+    display: block;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Rainbow theme gradient background effect */
+.rainbow body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+      hsl(280, 100%, 20%) 0%,
+      hsl(240, 100%, 20%) 20%,
+      hsl(200, 100%, 20%) 40%,
+      hsl(120, 100%, 20%) 60%,
+      hsl(60, 100%, 20%) 80%,
+      hsl(0, 100%, 20%) 100%);
+  background-size: 400% 400%;
+  animation: rainbow-gradient 15s ease infinite;
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes rainbow-gradient {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Enhanced animation for executing blocks */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 5px hsl(var(--primary) / 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* CLI chain highlight animation */
+@keyframes cli-chain-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0.8);
+    border-color: hsl(var(--accent));
+  }
+
+  50% {
+    box-shadow: 0 0 30px 8px hsl(var(--accent) / 0.4);
+    border-color: hsl(var(--accent) / 0.6);
+  }
+}
+
+.cli-chain-highlight {
+  animation: cli-chain-pulse 1.5s ease-in-out 3;
+  border: 2px solid hsl(var(--accent));
+  position: relative;
+  z-index: 10;
+}
+
+/* CLI syntax highlighting */
+.cli-syntax-valid {
+  color: hsl(var(--success));
+}
+
+.cli-syntax-invalid {
+  color: hsl(var(--destructive));
+}
+
+.cli-syntax-operator {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Enhanced WebGL shader effects */
+@keyframes data-flow {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+.data-flow-particle {
+  animation: data-flow 2s ease-in-out infinite;
+}
+
+/* Shimmer effect for progress bars */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* GPU-accelerated transforms */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Enhanced WebGL performance optimizations */
+@keyframes webgl-ready {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.webgl-canvas {
+  animation: webgl-ready 0.3s ease-out;
+}
+
+/* Enhanced connection flow animation */
+@keyframes connection-pulse {
+
+  0%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dashoffset: 20;
+  }
+}
+
+.connection-active {
+  stroke-dasharray: 10 5;
+  animation: connection-pulse 1s linear infinite;
+}
+
+/* Error state animation */
+@keyframes error-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 8px rgba(239, 68, 68, 0.3);
+  }
+}
+
+.error-state {
+  animation: error-pulse 1.5s ease-in-out infinite;
+}
+
+/* Success state animation */
+@keyframes success-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 8px rgba(16, 185, 129, 0.3);
+  }
+}
+
+.success-state {
+  animation: success-pulse 1.5s ease-in-out infinite;
+}
+
+/* Window control animations */
+@keyframes window-zoom-in {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes window-zoom-out {
+  from {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes window-minimize {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes window-restore {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .data-flow-particle,
+  .connection-active,
+  .animate-pulse-glow,
+  .error-state,
+  .success-state,
+  .cli-chain-highlight {
+    animation: none !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 215 20% 35%;
+    --muted: 215 20% 35%;
+  }
+
+  .light {
+    --border: 214 32% 75%;
+    --muted: 210 40% 86%;
+  }
+}
+
+/* Performance overlay styling */
+.performance-overlay {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+
+/* Smooth transitions for WebGL elements */
+.webgl-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced debug overlay animations */
+@keyframes debug-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.debug-overlay {
+  animation: debug-fade-in 0.3s ease-out;
+}
+
+/* Enhanced Ethereum-themed glow effects */
+.eth-glow {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
+    0 0 40px hsl(var(--primary) / 0.2),
+    0 0 60px hsl(var(--primary) / 0.1);
+}
+
+.eth-glow-secondary {
+  box-shadow: 0 0 20px hsl(var(--secondary) / 0.3),
+    0 0 40px hsl(var(--secondary) / 0.2);
+}
+
+.eth-glow-success {
+  box-shadow: 0 0 20px hsl(var(--success) / 0.4),
+    0 0 40px hsl(var(--success) / 0.2);
+}
+
+.eth-glow-error {
+  box-shadow: 0 0 20px hsl(var(--destructive) / 0.4),
+    0 0 40px hsl(var(--destructive) / 0.2);
+}
+
+/* Optimized rendering hints */
+.render-optimized {
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Interactive element hover effects */
+.interactive-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Data flow visualization */
+@keyframes data-flow-stream {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.data-flow-stream {
+  animation: data-flow-stream 2s ease-in-out infinite;
+}
+
+/* Module connection indicators */
+.connection-indicator {
+  position: relative;
+}
+
+.connection-indicator::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  animation: connection-pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced visual feedback for active states */
+.active-module {
+  border: 2px solid hsl(var(--primary));
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+}
+
+.processing-module {
+  border: 2px solid hsl(var(--warning));
+  box-shadow: 0 0 20px hsl(var(--warning) / 0.5);
+}
+
+.error-module {
+  border: 2px solid hsl(var(--destructive));
+  box-shadow: 0 0 20px hsl(var(--destructive) / 0.5);
+}
+
+/* Fallback styles for theme loading - prevent blank screens */
+html {
+  background-color: #1a1f2e;
+  color: #f8fafc;
+}
+
+html:not(.light):not(.dark):not(.rainbow) {
+  /* Default to dark theme if no class is applied yet */
+  background-color: #1a1f2e;
+  color: #f8fafc;
+}
+
+html:not(.light):not(.dark):not(.rainbow) body {
+  background-color: #1a1f2e;
+  color: #f8fafc;
+}
+
+/* Ensure text is always visible with proper contrast */
+.light {
+  background-color: #ffffff;
+  color: #1a1f2e;
+}
+
+.dark {
+  background-color: #1a1f2e;
+  color: #f8fafc;
+}
+
+.rainbow {
+  background-color: #1a0f2e;
+  color: #f8fafc;
+}
+
+/* Prevent invisible text during theme transitions */
+body {
+  min-height: 100vh;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+/* Ensure cards and popovers have proper contrast */
+[class*="card"],
+[class*="popover"],
+[class*="dialog"],
+[class*="sheet"] {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+/* Ensure buttons have proper contrast */
+button {
+  color: inherit;
+}
+
+/* Ensure inputs have proper contrast */
+input,
+textarea,
+select {
+  background-color: hsl(var(--input));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Theme toggle button - ensure visibility in all themes */
+.theme-toggle-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+.theme-toggle-button:hover {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+}
+
+.theme-toggle-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Theme toggle icon - ensure visibility */
+.theme-toggle-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--primary));
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle-button:hover .theme-toggle-icon {
+  transform: scale(1.1);
+}
+
+/* Theme label - ensure readability */
+.theme-toggle-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+/* Light theme specific overrides for theme toggle */
+.light .theme-toggle-button {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+.light .theme-toggle-button:hover {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--primary));
+}
+
+.light .theme-toggle-icon {
+  color: hsl(var(--primary));
+}
+
+.light .theme-toggle-label {
+  color: hsl(var(--foreground));
+}
+
+/* Dark theme specific overrides for theme toggle */
+.dark .theme-toggle-button {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+.dark .theme-toggle-button:hover {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--primary));
+}
+
+.dark .theme-toggle-icon {
+  color: hsl(var(--primary));
+}
+
+.dark .theme-toggle-label {
+  color: hsl(var(--foreground));
+}
+
+/* Rainbow theme specific overrides for theme toggle */
+.rainbow .theme-toggle-button {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+}
+
+.rainbow .theme-toggle-button:hover {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--accent));
+  box-shadow: 0 0 15px hsl(var(--accent) / 0.5);
+}
+
+.rainbow .theme-toggle-icon {
+  color: hsl(var(--accent));
+}
+
+.rainbow .theme-toggle-label {
+  color: hsl(var(--foreground));
+  background: linear-gradient(90deg,
+      hsl(280, 100%, 70%),
+      hsl(240, 100%, 70%),
+      hsl(200, 100%, 70%),
+      hsl(120, 100%, 70%),
+      hsl(60, 100%, 70%),
+      hsl(0, 100%, 70%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ensure mobile theme toggle is visible */
+@media (max-width: 768px) {
+  .theme-toggle-button {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-background/30 border border-white/10 shadow-xl;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-card/40 border border-white/10 shadow-2xl;
+  }
+
+  .eth-glow {
+    @apply relative overflow-hidden;
+    &::before {
+      content: '';
+      @apply absolute inset-0 bg-primary/10 blur-[120px] -z-10 rounded-full;
+    }
+  }
+
+  .eth-title {
+    @apply font-bold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+}

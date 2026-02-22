@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Property",
+  "description": "Schema for property data in SECoin platform",
+  "type": "object",
+  "required": ["id", "name", "location", "price", "fractionalOwnership", "floors", "schemaVersion"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the property",
+      "pattern": "^[a-zA-Z0-9-_]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the property",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of the property",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "price": {
+      "type": "number",
+      "description": "Total price of the property in INR",
+      "minimum": 0
+    },
+    "schemaVersion": {
+      "type": "number",
+      "description": "Version of the schema for migration support",
+      "minimum": 1,
+      "default": 1
+    },
+    "fractionalOwnership": {
+      "type": "array",
+      "description": "List of fractional owners",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["owner", "percentage"],
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Name or identifier of the owner",
+            "minLength": 1
+          },
+          "percentage": {
+            "type": "number",
+            "description": "Ownership percentage",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "floors": {
+      "type": "array",
+      "description": "List of floors in the property",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["floorNumber", "area", "price"],
+        "properties": {
+          "floorNumber": {
+            "type": "number",
+            "description": "Floor number",
+            "minimum": 0
+          },
+          "area": {
+            "type": "number",
+            "description": "Area of the floor in square feet",
+            "minimum": 0
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the floor in INR",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        /* Futuristic color palette with vibrant accents */
+        --background: 0.98 0.01 240;
+        --foreground: 0.12 0.02 240;
+        --card: 1 0 0;
+        --card-foreground: 0.12 0.02 240;
+        --popover: 1 0 0;
+        --popover-foreground: 0.12 0.02 240;
+        /* Vibrant blue-purple primary */
+        --primary: 0.58 0.24 264;
+        --primary-foreground: 0.99 0 0;
+        /* Cyan secondary for tech feel */
+        --secondary: 0.75 0.18 200;
+        --secondary-foreground: 0.12 0.02 240;
+        --muted: 0.94 0.02 240;
+        --muted-foreground: 0.48 0.02 240;
+        /* Electric pink accent */
+        --accent: 0.68 0.28 330;
+        --accent-foreground: 0.99 0 0;
+        /* Neon green for success */
+        --success: 0.72 0.22 145;
+        --success-foreground: 0.12 0.02 240;
+        --destructive: 0.58 0.24 27;
+        --destructive-foreground: 0.99 0 0;
+        --border: 0.88 0.03 240;
+        --input: 0.88 0.03 240;
+        --ring: 0.58 0.24 264;
+        /* Vibrant chart colors */
+        --chart-1: 0.58 0.24 264;
+        --chart-2: 0.68 0.28 330;
+        --chart-3: 0.75 0.18 200;
+        --chart-4: 0.72 0.22 145;
+        --chart-5: 0.65 0.22 45;
+        --sidebar: 0.98 0.01 240;
+        --sidebar-foreground: 0.12 0.02 240;
+        --sidebar-primary: 0.58 0.24 264;
+        --sidebar-primary-foreground: 0.99 0 0;
+        --sidebar-accent: 0.94 0.02 240;
+        --sidebar-accent-foreground: 0.12 0.02 240;
+        --sidebar-border: 0.88 0.03 240;
+        --sidebar-ring: 0.58 0.24 264;
+    }
+
+    .dark {
+        /* Dark mode with deep space theme */
+        --background: 0.08 0.03 240;
+        --foreground: 0.96 0.01 240;
+        --card: 0.12 0.04 240;
+        --card-foreground: 0.96 0.01 240;
+        --popover: 0.10 0.04 240;
+        --popover-foreground: 0.96 0.01 240;
+        /* Brighter primary in dark mode */
+        --primary: 0.68 0.28 264;
+        --primary-foreground: 0.08 0.03 240;
+        /* Bright cyan secondary */
+        --secondary: 0.82 0.20 200;
+        --secondary-foreground: 0.08 0.03 240;
+        --muted: 0.18 0.04 240;
+        --muted-foreground: 0.62 0.03 240;
+        /* Neon pink accent */
+        --accent: 0.75 0.30 330;
+        --accent-foreground: 0.08 0.03 240;
+        /* Bright green for success */
+        --success: 0.78 0.24 145;
+        --success-foreground: 0.08 0.03 240;
+        --destructive: 0.65 0.26 27;
+        --destructive-foreground: 0.96 0.01 240;
+        --border: 0.22 0.05 240;
+        --input: 0.22 0.05 240;
+        --ring: 0.68 0.28 264;
+        --chart-1: 0.68 0.28 264;
+        --chart-2: 0.75 0.30 330;
+        --chart-3: 0.82 0.20 200;
+        --chart-4: 0.78 0.24 145;
+        --chart-5: 0.70 0.24 45;
+        --sidebar: 0.12 0.04 240;
+        --sidebar-foreground: 0.96 0.01 240;
+        --sidebar-primary: 0.68 0.28 264;
+        --sidebar-primary-foreground: 0.08 0.03 240;
+        --sidebar-accent: 0.18 0.04 240;
+        --sidebar-accent-foreground: 0.96 0.01 240;
+        --sidebar-border: 0.22 0.05 240;
+        --sidebar-ring: 0.68 0.28 264;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* 3D Border Effects */
+@layer components {
+    .border-3d {
+        border-width: 4px;
+        border-style: solid;
+        border-image: linear-gradient(135deg, oklch(var(--primary)), oklch(var(--accent)), oklch(var(--secondary))) 1;
+        position: relative;
+    }
+
+    .border-3d::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: inherit;
+        padding: 4px;
+        background: linear-gradient(135deg, oklch(var(--primary) / 0.3), oklch(var(--accent) / 0.3), oklch(var(--secondary) / 0.3));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    .card-3d {
+        border: 3px solid transparent;
+        background:
+            linear-gradient(oklch(var(--card)), oklch(var(--card))) padding-box,
+            linear-gradient(135deg, oklch(var(--primary) / 0.5), oklch(var(--accent) / 0.5)) border-box;
+        box-shadow:
+            0 4px 6px -1px oklch(var(--primary) / 0.1),
+            0 2px 4px -1px oklch(var(--accent) / 0.06),
+            inset 0 1px 0 0 oklch(var(--primary) / 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .card-3d-hover {
+        transition: all 0.3s ease;
+    }
+
+    .card-3d-hover:hover {
+        transform: translateY(-4px);
+        box-shadow:
+            0 20px 25px -5px oklch(var(--primary) / 0.2),
+            0 10px 10px -5px oklch(var(--accent) / 0.1),
+            inset 0 1px 0 0 oklch(var(--primary) / 0.2);
+    }
+
+    .gradient-border {
+        position: relative;
+        background: oklch(var(--card));
+        border-radius: var(--radius);
+    }
+
+    .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 3px;
+        background: linear-gradient(135deg, oklch(var(--primary)), oklch(var(--accent)), oklch(var(--secondary)));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+    }
+
+    .neon-glow {
+        box-shadow:
+            0 0 10px oklch(var(--primary) / 0.5),
+            0 0 20px oklch(var(--accent) / 0.3),
+            0 0 30px oklch(var(--secondary) / 0.2);
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, oklch(var(--primary)), oklch(var(--accent)));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .text-gradient-secondary {
+        background: linear-gradient(135deg, oklch(var(--secondary)), oklch(var(--success)));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+}
+
+/* Animations */
+@layer utilities {
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes pulse-glow {
+
+        0%,
+        100% {
+            box-shadow: 0 0 10px oklch(var(--primary) / 0.5),
+                0 0 20px oklch(var(--accent) / 0.3);
+        }
+
+        50% {
+            box-shadow: 0 0 20px oklch(var(--primary) / 0.8),
+                0 0 40px oklch(var(--accent) / 0.5);
+        }
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+}

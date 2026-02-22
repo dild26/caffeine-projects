@@ -1,0 +1,11 @@
+{
+  "metrics": [
+    "contentUpdates",
+    "daoVotes",
+    "disputesRaised",
+    "ledgerAnchors",
+    "pageViews"
+  ],
+  "visibility": "public",
+  "refresh": "periodic"
+}

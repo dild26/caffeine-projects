@@ -1,0 +1,1212 @@
+# SECoin Property Investment Platform
+
+## Overview
+A property investment platform that enables fractional ownership of real estate properties with dynamic node-based property subscriptions, real-time price updates, comprehensive content management, advanced navigation features, cryptographic data integrity verification through enhanced Fixtures system, and a comprehensive AI-actionable realty business blog system. Properties are publicly viewable with interactive map features and subscriber-based property listing capabilities with dynamic node management. The platform includes enterprise-grade reliability, scalability, and audit-ready operational features with structured logging, failure containment, and performance optimization.
+
+## Schema Architecture
+- Primary specification source: spec.yaml as the authoritative schema for all modules
+- YAML parsing enabled in backend loader with validation against defined modules: authentication, storage, nodes, images, audit, billing, blog, referrals, sitemap, gallery, faq, frontend, operations, and performance-monitoring
+- Anchors and $ref references implemented in parser to avoid duplication and ensure DRY schema management
+- Execution model reads and caches each module once, with all downstream services referencing normalized YAML keys instead of re-parsing prose
+- Fallback hierarchy: spec.yaml → spec.json → spec.md (only when YAML/JSON unavailable, with performance degradation warnings)
+- Admin notifications on successful spec.yaml load: "✅ YAML spec loaded successfully. All modules active. Source: spec.yaml. Mode: deduplicated, unit-safe."
+- Fallback warning when spec.md is used: "⚠️ spec.md fallback in use. Performance may be degraded."
+- All modules (property management, node import, audit logging, billing, etc.) reference the normalized YAML/JSON schema
+- Enhanced performance monitoring module in spec.yaml for tracking degraded performance states and admin notifications
+- Future-proofing section in YAML schema for updates, upgrades, modifications, and migrations with explicit error prevention
+- Automatic conversion system from spec.md to spec.yaml when YAML format is not present, setting it as the canonical specification
+- Backend loader configuration to check for spec.yaml existence and activate it as the authoritative schema
+- Robust schema migration system ensuring seamless transition from markdown to YAML format with data integrity preservation
+- Proactive performance monitoring with automated degraded performance prevention and admin notifications
+- Enhanced spec.yaml loader with robust fallback handling for all future updates, upgrades, migrations, or modifications
+- System health monitoring with proactive performance optimization and degraded mode prevention
+
+## Authentication
+- Admin authentication using Internet Identity for content management, feature tracking, blog management, and social media link management
+- Genesis admin system: the first user to authenticate with Internet Identity automatically receives permanent admin privileges
+- Genesis admin privileges are irrevocable and cannot be lost through any system updates or changes
+- Robust admin access protection preventing lockouts or privilege loss for the Genesis admin in both draft and live modes
+- Genesis admin status is permanently persisted across all application states and environments
+- Enhanced Genesis admin recognition system that always identifies the first logged-in user as admin regardless of session changes, principal variations, or redeployment
+- Persistent Genesis admin tracking that stores the original principal ID and maintains admin status across all sessions
+- Admin status validation system that checks against the stored Genesis principal ID for every admin access request
+- Bulletproof admin access logic that prevents "Access Denied" errors for the Genesis admin on dashboard or any admin-only pages
+- Session-independent admin verification that maintains admin status even after session expiration or principal changes
+- Redeployment-resistant admin status that persists Genesis admin privileges across application updates and restarts
+- Admin status indicator system displaying current principal ID and admin status in the dashboard
+- Clear admin status display showing whether the current user is the Genesis admin with visual confirmation
+- Robust error handling for admin access with clear user feedback and recovery instructions if admin status is ever at risk
+- Admin access recovery system with detailed instructions for restoring admin privileges if issues occur
+- Fail-safe admin access mechanisms that prevent permanent lockout of the Genesis admin user
+- Public access for property viewing, investment information, content pages, and blog reading
+- Subscriber authentication using Internet Identity for property listing submissions with dynamic nodes and payment processing
+- Multi-author support with role-based authoring system (Agent, Developer, Blogger) with appropriate permissions
+- Enhanced Internet Identity delegation management with automatic expiry detection and refresh capabilities
+- Robust session validation and renewal mechanisms to prevent authentication failures during blog operations
+- Graceful handling of expired delegations with automatic re-authentication prompts and session recovery
+- Auth hardening with multi-factor authentication support, session timeout policies, and suspicious activity detection
+- Secrets hygiene with encrypted credential storage, automatic rotation, and secure key management
+- User profile management system with profile creation, editing, and retrieval capabilities
+- Profile setup modal functionality for new users with name collection and validation
+- User profile persistence across sessions with proper state management
+
+## Backend Features
+- Store property data including details, pricing, fractional ownership information, floor partitioning, and dynamic node system with geographic coordinates
+- Unit-safe field enforcement at ingestion: all numeric values must be stored as objects with value (int), unit (string), scale (int), and editableBy (array), preventing BigInt/float precision issues
+- Enhanced unit-safe numeric field storage with all measurable values stored as objects containing `{ "value": <integer>, "unit": "<string>", "scale": <integer>, "editableBy": ["Admin", "Owner"] }` format
+- Unit-safe storage system converting all decimal values to integers using appropriate scale factors with metadata preservation
+- Unit metadata storage with editability permissions and scale factors for precise decimal-to-integer conversion
+- Backend schema validation accepting and processing unit-safe fields with automatic float-to-scaled-integer conversion
+- Unit conversion logic in backend for standardizing values to base units while preserving original input units and scaling decimals to integers
+- Robust property JSON upload handler that properly handles unit-safe objects by parsing the `.value` field and storing unit/scale metadata
+- Enhanced error handling for property uploads with clear validation messages for unit-safe object structure
+- Backend property schema supporting unit-safe objects and primitive values with proper parsing and storage
+- Future-proof unit system supporting additional units and scaling factors with extensible metadata structure
+- Dynamic node storage system for properties with variable number of nodes per property with latitude, longitude, and altitude data using unit-safe storage
+- Node ID scheme implementation: node-prop-{PropertyID}-f{Floor}-{CornerId} for systematic node identification
+- Floor-to-node linking system where each floor object contains a nodes array referencing its corner nodes
+- Property-to-floor relationship management with floor objects containing node references
+- Auto-indexed node fields with unit-safe coordinate storage and validation
+- Node pricing calculation with unit-safe precision support
+- Dynamic node addition and removal capabilities with real-time updates and immediate persistence
+- Node data validation and geographic coordinate verification with enhanced error handling
+- Node order management and switching capabilities with audit logging
+- Bulk node import system supporting CSV, JSON, and ZIP file formats
+- Auto-mapping of import headers (Node, Floor, CornerId, Latitude, Longitude, Altitude_m) with flexible column detection
+- Import validation including floor range validation, corner ID validation, latitude/longitude bounds checking, altitude validation, and duplicate detection
+- Import preview system showing row-by-row validation status before commit
+- Import commit process with comprehensive audit logging and rollback capabilities
+- File checksum generation and validation for imported files
+- Import manifest tracking with file metadata, row counts, error summaries, and processing timestamps
+- Enhanced property-specific image management system with strict property isolation and validated matched-image-only display
+- Property-specific gallery field storage supporting one validated matched image per property with reliable image serving and strict property isolation
+- Enhanced image matching system using case-insensitive, extension-agnostic filename matching that validates property ID matches (e.g., prop-001.png for prop-001) with strict property isolation
+- Robust property-to-image association logic that matches property IDs to image filenames using validated comparison with strict property isolation and guaranteed matched-image-only display
+- Property-specific image serving system ensuring each property displays only its own validated matched image with comprehensive validation and error prevention
+- Image cache invalidation system with property-specific cache busting to prevent stale or mismatched images with immediate refresh capabilities
+- Enhanced image validation system preventing cross-property image display and ensuring strict property isolation with comprehensive error detection
+- Comprehensive audit logging for all property-specific image operations including upload, matching, display, cache invalidation, error handling, and property isolation validation
+- Property image fallback system with clear placeholder management when no matched image is found with proper error handling
+- Image deduplication system using Merkle-root hash verification with property-specific validation and strict isolation
+- Enhanced error handling for property image operations with detailed logging, admin feedback, and comprehensive property isolation validation
+- Property image metadata storage including original filename, normalized matching key, hash, upload timestamp, associated property ID, and isolation validation status
+- Automated testing validation for image-to-property matching logic with comprehensive test coverage and property isolation verification
+- Cross-browser and cross-device image serving reliability with proper error handling, recovery, and strict property isolation
+- Property-specific cache management with automatic invalidation triggers for individual property image updates and comprehensive error prevention
+- Robust image serving API that validates property ownership before serving images and prevents cross-property access
+- Enhanced image upload validation that verifies filename-to-property matching before storage and prevents mismatched uploads
+- Property image access control ensuring only matched images are served for each property with comprehensive validation
+- Image serving endpoint with property ID validation and strict access control preventing unauthorized or mismatched image access
+- Comprehensive error logging for all image operations with detailed property isolation validation and mismatch prevention
+- Property image integrity validation ensuring uploaded images are correctly associated and served only to their matched properties
+- Enhanced cache-busting mechanism with property-specific versioning to ensure immediate image updates across all browsers and devices
+- Robust error recovery system for image operations with automatic retry and comprehensive property isolation validation
+- Comprehensive testing audit logs for image-to-property matching logic with property isolation verification and cross-property access prevention
+- Enhanced audit logging for property map display operations with coordinate validation and fallback handling
+- Comprehensive error logging for map display failures with fallback to matched image and error prevention
+- Gallery page data storage and retrieval for dedicated gallery management interface
+- Gallery navigation data for sitemap and menu integration with searchable functionality
+- Performance monitoring system for tracking degraded performance states and admin notifications
+- SpecificationStatus page backend data for monitoring spec.yaml vs spec.json vs spec.md usage and performance metrics
+- Future-proofing data storage for updates, upgrades, modifications, and migrations with error prevention tracking
+- Schema conversion system for automatic migration from spec.md to spec.yaml format
+- Backend loader configuration management for YAML/JSON parsing with fallback hierarchy
+- Specification source validation and activation system for canonical schema management
+- Search menu analysis system for tracking and validating all unique pages in the navigation menu
+- Menu structure data storage including page paths, labels, categories, and visibility settings
+- Automated menu validation system that checks for missing essential pages like /admin
+- Menu deduplication system ensuring no duplicate entries exist in the search menu
+- Admin page validation ensuring /admin is always present in the menu structure with appropriate label
+- Menu integrity checking system that validates all menu entries link to existing pages
+- Search menu configuration management with automatic updates and validation
+- Menu structure audit logging for tracking changes and ensuring completeness
+- Automated menu health checks ensuring all critical pages are accessible through search
+- Admin access control system for menu items with role-based visibility
+- Admin-only page identification and access control for menu display
+- Lock icon indicator system for admin-restricted pages in menu structure
+- Admin authentication status tracking for menu access control
+- Runtime error logging system for client-side errors and performance issues
+- Performance optimization audit logging for page load times and responsiveness
+- Cross-browser compatibility audit logging for rendering and functionality issues
+- Admin permission audit logging for access control and security events
+- User profile data storage and management including name, preferences, and profile completion status
+- saveCallerUserProfile() function for creating and updating user profiles with validation
+- User profile retrieval functions for displaying personalized content
+- Profile validation system ensuring required fields are properly filled and trimmed
+- User profile state management with proper persistence across sessions
+- Profile completion tracking to determine when setup is required
+- Enhanced error handling for profile operations with detailed logging and user feedback
+- Profile data integrity validation and consistency checks
+- User profile audit logging for all profile operations including creation, updates, and retrieval
+- Profile setup workflow management with proper state transitions
+- User profile cache management with automatic invalidation when profiles are updated
+
+## Bundle Optimization and Performance
+- Comprehensive node_modules deduplication and optimization system with tree-shaking, bundle splitting, dependency flattening, symbol-level pruning, and cache cleanup
+- Essential module preservation while removing redundant or duplicated dependencies
+- Build output optimization through minification, dead-code elimination, and alias resolution to prevent excess dependencies
+- Final optimized bundle validation for runtime integrity and robust operation with minimal module footprint
+- Automated dependency analysis and optimization recommendations
+- Bundle size monitoring and reporting with optimization metrics
+- Dependency tree visualization showing optimization results
+- Cache management system for optimized builds with intelligent invalidation
+- Performance impact analysis of optimization changes
+- Rollback capabilities for optimization changes if issues are detected
+- Automated testing validation for optimized bundles ensuring functionality preservation
+- Build performance metrics tracking optimization effectiveness
+- Memory usage optimization and monitoring for reduced footprint
+- Load time improvement tracking and reporting
+- Asset optimization including image compression and lazy loading
+- Code splitting optimization for improved initial load times
+- Module federation support for micro-frontend architecture
+- Progressive web app optimization with service worker integration
+- Critical path optimization for faster initial rendering
+- Resource prioritization and preloading optimization
+- Intelligent compression and module pruning within node_modules directory
+- Dependency flattening to eliminate redundant package installations
+- Tree-shaking implementation for unused code elimination
+- Vendor splitting for optimal caching strategies
+- Alias optimization to prevent dependency conflicts
+- Latest compatible lightweight module versions for reduced disk footprint
+- Enhanced performance robustness through optimized dependencies
+- Bundle optimization reports with size reduction metrics
+- Cache validation for improved performance tracking
+- Reduced disk footprint analysis and monitoring
+- Client-side performance optimization with lazy loading and debouncing
+- Runtime error boundary implementation for error containment
+- Memory-efficient component rendering with deferred loading
+- Responsive component optimization for different browsing environments
+- Performance monitoring for unresponsive page behavior detection
+
+## Audit-Ready Operational Features
+- Structured JSON logging with correlation IDs for all critical operations including property management, blog operations, authentication flows, payment processing, and user profile operations
+- Error taxonomy classification system with standardized error codes, severity levels, and resolution pathways
+- Manifest and version tracking for all deployments, schema changes, and feature releases with automated rollback capabilities
+- Preflight validation for all critical flows including property submissions, payment processing, user authentication, content publishing, and profile setup
+- Failure containment with retry policies using exponential backoff for transient failures
+- Circuit breaker patterns for external service dependencies and high-load scenarios
+- Dead-letter queues for failed operations with manual review and reprocessing capabilities
+- Self-test suites for onboarding flows, property listing submissions, checkout processes, profile setup, and reconciliation operations
+- Tiered concurrency management with priority queues for different operation types
+- Sharding and isolation strategies for high-volume data operations
+- Cold-start mitigation with pre-warming strategies and connection pooling
+- Chunked processing for large data operations with progress tracking
+- Selective read/write operations with optimized query patterns
+- Telemetry budgets with cost monitoring and usage optimization
+- Rate-limit guardians with adaptive throttling based on system load
+- Backpressure signals for queue management and flow control
+- User-facing degraded-mode banners with clear status communication
+- Performance SLOs enforcement with automated alerting and escalation
+- Node and endpoint profiling with performance bottleneck identification
+- Reconciliation jobs for data consistency validation and correction
+- Transparent metering with usage tracking and billing transparency
+- Anomaly detection with machine learning-based pattern recognition
+- Upgrade nudges with feature deprecation warnings and migration guidance
+- Operational budgets with cost tracking and optimization recommendations
+- Deprecation policy enforcement with automated sunset procedures
+- Resilience drills with chaos engineering and disaster recovery testing
+- Uptime dashboards with real-time system health monitoring
+- Composable modules with microservice architecture and API versioning
+- Policy-as-code implementation with automated compliance checking
+- In-app AI assistance for optimization recommendations and error recovery guidance
+- Checklist-driven operations with automated validation and compliance verification
+- Supply-chain safety with dependency scanning and vulnerability assessment
+- Automated vulnerability scanning with security patch management
+- Manifest tracking with version control and change management
+- Queue management with priority handling and overflow protection
+- Testing automation with continuous integration and deployment pipelines
+- UI and finance transparency with clear cost breakdowns and usage metrics
+- Audit-first design with comprehensive logging and compliance reporting
+- Runtime error tracking and performance issue monitoring
+- Cross-browser compatibility audit logging and issue resolution
+- Admin permission audit trails for security and access control
+
+## Frontend Features
+- Public property listing display with responsive grid layout accessible without authentication requirements
+- Interactive large Google Map component displaying property locations with real-time coordinate updates for all property nodes
+- Default map center at coordinates (13.081828, 77.542533) for Sudha Enterprises
+- Dynamic map updates when hovering over property images or map icons, showing all node coordinates for the hovered property
+- Property cards displaying all node coordinates and per-node pricing information with unit-safe precision support
+- Enhanced property-specific image display system with strict validated matched-image-only display and comprehensive property isolation
+- Property-specific image display ensuring each property card shows only its own validated matched image with comprehensive validation and error prevention
+- Robust, case-insensitive, extension-agnostic filename matching system that validates property ID matches (e.g., prop-001.png for prop-001) with strict property isolation
+- Property image isolation preventing cross-property image display with comprehensive validation and error detection
+- Cache-busting system for property-specific images with automatic invalidation when images are updated and immediate refresh across all browsers and devices
+- Enhanced error handling and fallback states for missing property images with clear placeholder display and comprehensive error logging
+- Property image placeholder system that shows appropriate fallback content when no validated matched image is found with proper error handling
+- Automated validation and testing for image-to-property matching logic with comprehensive error prevention and property isolation verification
+- Cross-browser and cross-device compatible property image display with proper scaling, fallback mechanisms, and strict property isolation
+- Real-time property image updates with cache invalidation when new matching images are uploaded with immediate display across all components
+- Property card click navigation that displays property map by default using exact coordinates in Google Maps iframe with up-to-date iframe embed data, with validated matched image as fallback only when coordinates are unavailable
+- Enhanced property detail page that shows property map by default using exact coordinates in Google Maps iframe with current iframe data, with validated matched image fallback only when coordinates are missing
+- Strict prevention of unmatched or unrelated gallery images from appearing in property cards or detail views
+- Comprehensive error prevention system ensuring property cards and detail pages never display shared, mismatched, or incorrect images
+- Property-specific image loading with validation that prevents cross-property access and ensures only validated matched images are displayed
+- Enhanced cache management with property-specific versioning to ensure image updates are reflected instantly across all browsers and devices
+- Robust error handling for image loading failures with comprehensive logging and admin notification for rapid debugging
+- Property image integrity validation ensuring uploaded images are correctly associated and displayed only on their matched property cards and detail pages
+- Enhanced image serving with property ID validation and access control preventing unauthorized or mismatched image display
+- Comprehensive testing interface for property image isolation with validation that no cross-property image display occurs
+- Property-specific gallery management with strict isolation ensuring each property's images are managed and displayed independently
+- Map display priority system that shows property coordinates in Google Maps iframe by default on property card click
+- Validated matched image fallback system that only displays the property's validated matched image when coordinates are unavailable
+- Enhanced property detail view with map-first display using exact coordinates in Google Maps iframe and validated matched image fallback for properties without coordinates
+- Robust cache handling system for both property maps and images with comprehensive error logging and prevention
+- Minimap preview system in property card placeholders using each property's exact coordinates with dynamic generation per property and robust error handling
+- Full-sized map loading system that dynamically loads complete maps for properties on click using exact coordinates with up-to-date iframe embed data
+- Coordinate accuracy display ensuring all property location maps use the exact coordinates entered with no defaults or substitutions
+- Enhanced Live Status page displaying multi-party verification results, consensus coordinates, Merkle root proofs, and fixture consensus results with admin approval workflow
+- Live Status page with fixture consensus results display including admin checkboxes for Approve/Reject actions
+- Bulk action controls with +SelectAll button for efficient fixture consensus management
+- Admin approval/rejection interface with business rule enforcement for rejections and bans
+- User enforcement display showing ban status, violation records, and security events
+- Consensus workflow interface with signature verification status and Merkle-root tracking
+- Manifest logging display for all fixture consensus operations with comprehensive audit trails
+- Security events interface showing user violations, enforcement actions, and compliance status
+- Timestamped audit log display for all property verification activities and coordinate changes
+- Live Status page navigation integration in sitemap and main navigation menu
+- Seamless map interaction with smooth coordinate transitions and hover effects for multiple nodes
+- Mobile-first design with bottom sheet navigation (mobile) and collapsible left dock (desktop)
+- Property card click navigation to tabbed property detail page instead of popup
+- Tabbed property detail page with Nodes and Floors tables displayed side by side in fully responsive layout
+- Property detail page with comprehensive node and floor information display
+- Real-time price updates for properties with per-node pricing calculations using unit-safe precision
+- Subscriber property listing submission interface with dynamic node creation and payment processing for 0.01% monthly listing fee
+- Enhanced property editor UI supporting unit-safe objects with proper handling of value/unit/scale structure
+- Unit dropdown selectors next to every numeric field in the property editor allowing Admin/Owner to select and convert units dynamically
+- Frontend unit conversion utility supporting standard units with automatic base unit conversion and decimal scaling
+- Enhanced property upload form requiring value, unit, and scale for all numeric fields with automatic conversion before upload
+- Clear UI warnings for unit conversions and decimal-to-integer scaling with contextual messages
+- Robust error handling for property uploads with clear error messages for invalid unit-safe object values
+- Fully editable numeric fields with unit dropdowns allowing value, unit, and scale modification for all property data by Admin and Owner roles
+- Property data upload, edit, and display compatibility with new unit-safe schema
+- Future-proof interface supporting additional units and scaling factors with extensible dropdown options
+- Tabbed Node Management page replacing popup interface with comprehensive node management capabilities
+- Table tab: sortable and filterable grid view of all nodes with comprehensive column options
+- Cards tab: card-based view of nodes with integrated mini-map display for each node
+- Import tab: bulk import interface supporting CSV, JSON, and ZIP file formats with drag-and-drop upload
+- Enhanced Import tab with reliable "Browse File" button that is always responsive and triggers file picker across all browsers and devices
+- Robust file picker implementation with comprehensive error handling for CSV, JSON, and ZIP uploads
+- Cross-browser compatibility for file selection with fallback mechanisms for different devices
+- Enhanced file upload validation with detailed error messages and recovery options
+- Audit Log tab: comprehensive change history with filtering and search capabilities
+- Settings tab: unit defaults configuration, permission management, and billing settings
+- Bulk import interface with file upload, header auto-mapping, validation preview, and commit functionality
+- Import validation display showing row-by-row status with error highlighting and success indicators
+- Import preview table showing mapped data with validation results before final commit
+- File format support for CSV, JSON, and ZIP with automatic format detection and processing
+- Header auto-mapping interface for Node, Floor, CornerId, Latitude, Longitude, Altitude_m columns
+- Validation feedback for floor ranges, corner IDs, coordinate bounds, altitude values, and duplicate detection
+- Import commit interface with progress tracking and comprehensive audit logging
+- Permission-based UI controls: Admin (full access), Subscriber (limited with approval prompts), Public (read-only)
+- Price change fee interface prompting $0.50 payment for subscriber-initiated price modifications
+- Price change confirmation dialogs with before/after value display and payment processing
+- Node permalink generation and display for public access (e.g., /prop-004/floor-{Floor}/corner-{CornerId})
+- Public read-only access to property, floor, and node information with proper navigation
+- Enhanced Admin Panel with comprehensive node management interface
+- Clear, accessible "Node Management" links visible in the Admin Panel for each property
+- "Manage Nodes" buttons on property detail pages for admin and owner users
+- Dedicated tabbed node management interface replacing popup with full-page experience
+- All node management changes reflected in real time across the application
+- Permission-checked node management with role-based access control
+- Modular, scalable, and user-friendly tabbed node management UI
+- Dynamic node management interface for subscribers with add/remove nodes functionality using unit-safe coordinates
+- Input fields for latitude, longitude, and altitude for each node with unit dropdown selectors and unit-safe support
+- Auto-indexing of node fields with unit-safe precision
+- Dynamic table display showing all nodes for each property with unit-safe values and unit display
+- Node pricing calculator showing calculations with unit-safe precision
+- Real-time validation of node coordinates and altitude calculations using unit-safe values
+- Property listing fee calculator showing cost based on listing price with node considerations and unit-safe calculations
+- Admin-only and Owner-only property editing, updating, and deletion controls with full node management capabilities and unit conversion support
+- Property submission queue interface for admin approval workflow with node validation for unit-safe values
+- Schema validation feedback for property submissions including node structure and unit metadata
+- Advanced searchable modular Menulist component accessible from top and bottom navigation bars
+- Menulist integration in sidebar for easy navigation
+- Guaranteed visibility of "../features" and "../dashboard" menu items for all users in menu list and search results
+- Admin menu items (features, dashboard) always visible and accessible regardless of authentication status in menu display
+- Enhanced menu visibility ensuring Features and Dashboard are never hidden from Genesis admin
+- Expanded bottom navigation bar displaying menu list horizontally as tiled buttons with clear labels and SECoin brand styling
+- Enhanced Features/Fixtures page with comprehensive multi-column table displaying all SECOIN functionalities, features, and pros grouped by category
+- Dual verification system: AI auto-detection checkbox and manual admin verification checkbox per row
+- Enhanced dual verification display with separate columns for "Fixture: Auto" and "Fixture: Manual" validation
+- Sortable columns: name, type, category, priority, progress, AI verification status, manual verification status, completion status
+- Filterable by all table columns with real-time search functionality
+- Admin controls for inline editing, updating, modifying, and deleting features directly from the table
+- Category-based grouping with expandable/collapsible sections
+- Visual indicators for both AI-detected and manually verified features
+- Fixtures integration with cryptographic verification status display
+- Display Merkle/Verkle proof status and verification results with clear indicators
+- Visual indicators for discrepancies or auto-updates performed through Fixtures system
+- Admin controls to trigger fixture recalculation and view proof status
+- Modular and scalable table design supporting future analytics and extensibility
+- Dynamic feature addition interface that automatically adds missing or pending features
+- Auto-checking mechanism for new features with visual indicators for AI implementation status
+- Enhanced Leaderboard page displaying best features sorted by score or value based on dual verification
+- Feature ranking system promoting top-performing features based on AI and admin verification scores
+- Leaderboard interface with sortable rankings and performance metrics
+- Enhanced property-specific gallery management interface with robust image matching, reliable display, and strict property isolation
+- Property-specific image upload interface supporting PNG, JPG, JPEG formats with drag-and-drop functionality and comprehensive validation
+- Enhanced case-insensitive, extension-agnostic filename matching for property association with validated matching that ensures property ID matches with strict property isolation
+- Property-specific image display system ensuring each property shows only its own validated matched image with comprehensive validation and error prevention
+- Real-time property card image updates with cache-busting when validated matching images are uploaded with immediate display and strict property isolation
+- Robust property-specific image display system ensuring uploaded images appear immediately on the correct property cards and detail pages with comprehensive validation
+- Property image deduplication interface showing hash verification status and preventing duplicate uploads with property-specific validation
+- Property-specific gallery preview showing uploaded images with associated property matches and strict isolation validation
+- Property image management controls for editing, replacing, and removing property-specific images with comprehensive access control
+- Progress tracking for property image processing with error reporting, validation feedback, and property isolation verification
+- Enhanced audit logging interface for all property image operations with detailed error tracking and property isolation validation
+- Comprehensive error handling interface for property image operations with clear admin feedback and rapid debugging capabilities
+- Property image cache management interface with manual refresh capabilities, automatic invalidation, and property-specific versioning
+- Dedicated Gallery page with comprehensive property-specific image management interface and strict property isolation
+- Gallery page navigation link in sitemap and main navigation with searchable functionality and property-specific management
+- Clear UI guidance and file upload interface on Gallery and Admin pages for property-specific image uploads with validation
+- Real-time property card updates when validated matching images are found and uploaded for specific properties with immediate display
+- Merkle-root verification display for all property images with deduplication status and property-specific validation
+- Scalable and auditable property-specific gallery management with comprehensive validation, error handling, and strict property isolation
+- Enhanced property image placeholder management with automatic replacement when new validated images are uploaded for specific properties
+- Cross-browser property image loading compatibility with fallback mechanisms for different devices and strict property isolation
+- Property image scaling and optimization for consistent display across all property cards and detail pages with property-specific handling
+- Comprehensive testing interface for property image isolation with validation that prevents cross-property image display
+- Enhanced error detection and admin notification system for gallery and image errors with rapid debugging capabilities
+- Property-specific image serving validation ensuring only validated matched images are displayed for each property with comprehensive access control
+- Robust cache-busting implementation with property-specific versioning to ensure image updates are reflected instantly across all browsers and devices
+- Enhanced image loading validation that prevents shared or mismatched images from being displayed on property cards or detail pages
+- Comprehensive property image integrity validation ensuring correct association and display only on validated matched properties
+- Property-specific gallery management with strict isolation ensuring independent image management and display for each property
+- Responsive theme cycling system with Dark, Light, and Rainbow (VIBGYOR) color themes
+- Theme cycling triggered only when hovering or clicking the theme icon, not the entire application
+- Theme toggle indicator showing current theme state with visual feedback
+- Smooth color transitions between themes with consistent branding elements
+- Rainbow theme implementation using VIBGYOR color spectrum with accessibility compliance
+- Theme persistence and user preference management across sessions
+- Comprehensive AI-actionable blog system with enhanced authentication handling and error recovery
+- Modern blog listing page with dynamic blog cards and infinite scroll/pagination
+- Enhanced blog post creation interface with robust Internet Identity delegation handling
+- Automatic delegation expiry detection with proactive session refresh before operations
+- Comprehensive error handling for authentication failures with user-friendly error messages
+- Automatic re-authentication prompts when sessions expire during blog operations
+- Session recovery mechanisms with automatic retry of failed operations after successful login
+- Real-time blog post state synchronization ensuring immediate visibility of new posts on live Blog page
+- Enhanced blog post publishing controls with instant state updates and live site propagation
+- Robust error recovery mechanisms for failed blog operations with detailed user feedback
+- Success/error notifications for blog post creation, editing, and publishing actions with specific guidance
+- Automatic retry mechanisms for failed blog operations due to authentication issues
+- Loading states and progress indicators for blog operations with timeout handling
+- Blog post validation feedback with detailed error descriptions and recovery suggestions
+- Confirmation dialogs for critical blog actions (publish, delete) with session validation
+- Real-time blog post status indicators showing draft/published state with instant updates
+- Immediate refresh and state synchronization after blog operations across all components
+- Blog listing page with instant display of newly published posts without manual refresh
+- Consistent blog post visibility across draft and live modes with proper cache invalidation
+- Enhanced admin dashboard synchronization showing correct post counts and content in real-time
+- AI-powered search functionality with intelligent content discovery
+- Blog post creation and editing interface with markdown and rich-text support
+- Draft autosave with visual indicators and version history
+- Multi-author dashboard with role-based access controls
+- Category and tag management interface with drag-and-drop organization
+- SEO optimization panel with AI-generated suggestions
+- Blog-property linking interface for realty-specific content
+- Interactive maps integration for geo-targeted posts
+- Price trend charts and data visualization for market analysis
+- Virtual tour and video embedding capabilities
+- Content auto-generation tools with AI assistance
+- Image captioning and media management interface
+- Engagement prediction dashboard with performance metrics
+- FAQ auto-linking suggestions and integration
+- Comment moderation interface with AI-powered spam detection
+- Social sharing buttons with platform-specific optimization
+- Newsletter subscription forms and management
+- Push notification settings and delivery interface
+- Affiliate and partner content management
+- Sponsored post creation with disclosure management
+- AI-driven lead form builder with dynamic fields
+- Dynamic CTA management with A/B testing capabilities
+- Content analytics dashboard with heatmaps and insights
+- SEO analysis tools with keyword tracking
+- User intent analysis and behavior tracking
+- Conversion funnel visualization and optimization
+- JSON import/export interface for content migration
+- Backup and restore management interface
+- Dark/light mode toggle with user preference persistence
+- Three-contrast color palette implementation
+- Mobile-responsive design with touch-optimized controls
+- Accessibility compliance with WCAG AA standards
+- Real-time collaboration features for multi-author editing
+- Admin Dashboard with system status, statistics, and quick action links, always accessible to Genesis admin with optimized performance
+- Enhanced Admin Dashboard with clear admin status indicator displaying current principal ID and admin status
+- Admin status display showing whether the current user is the Genesis admin with visual confirmation
+- Current principal ID display in the dashboard for transparency and verification
+- Admin status badge or indicator clearly showing "Genesis Admin" status when applicable
+- Visual confirmation of admin privileges with clear status messaging
+- Admin access status panel showing session information and privilege level
+- Enhanced Admin Dashboard with intelligent social media management section
+- Admin-editable form fields for social platform URLs with robust clean domain-only extraction and display
+- Platform name display showing only the clean domain with first character capitalized
+- Icon name generation using lowercase clean domain names for consistent mapping
+- Auto-fill functionality for platform name and icon name fields using clean domain extraction, with editable capability
+- Form fields that display the extracted clean domain-based platform name, never the full URL
+- Add new social platform functionality with automatic clean domain extraction from provided URL
+- Domain extraction logic that strips protocol, www prefix, paths, queries, fragments, and identifies only the domain portion
+- Edit existing social media links with real-time validation and robust domain extraction
+- Remove social platforms with confirmation dialogs
+- Drag-and-drop reordering for social media display order
+- URL validation and deterministic clean domain extraction capabilities handling malformed URLs
+- Save and update functionality with success/error feedback and instant live updates
+- Legacy data migration interface to update existing entries to clean domain format
+- Guaranteed prevention of platform name or icon overwriting with full URLs through robust validation
+- Deterministic icon mapping logic ensuring consistent platform identification across all components
+- Real-time search functionality for social platforms by clean domain-based platform names with instant results
+- Instant update propagation to Contact Us page and search results when admin makes changes
+- All social media management operations use clean domain extraction for consistent domain processing and icon mapping
+- Compact, accurate, and error-free display of social links with proper validation
+- Enhanced Admin Dashboard with clickable table headers for improved navigation
+- "Total Properties" header links to the properties page for property management
+- "Blog Posts" header links to the blog management page for content administration
+- "Features Tracked" header links to the features page for feature tracking and management
+- "Total Users" header links to the users page for user management and analytics
+- All clickable headers styled consistently with SECoin brand colors and design
+- Hover and focus states with clear visual cues for accessibility
+- Proper ARIA labels and keyboard navigation support for screen readers
+- Visual indicators (subtle underlines or icons) to show headers are clickable
+- Smooth hover transitions and color changes using SECoin brand palette
+- Genesis admin access protection preventing any restrictions or lockouts from admin-only pages in both draft and live modes
+- Robust admin privilege validation ensuring permanent access to Feature Compare and Admin Dashboard with enhanced error handling
+- Fast-loading page components with optimized data fetching and caching for admin pages
+- Comprehensive error handling and fallback logic for admin page access preventing frozen or slow loads
+- Reliable page loading mechanisms with timeout handling and retry logic for admin functionality
+- Admin access error handling with clear user feedback and recovery instructions if admin status is ever at risk
+- Admin status recovery interface with detailed instructions for restoring admin privileges if issues occur
+- Fail-safe admin access mechanisms preventing permanent lockout of the Genesis admin user
+- Content pages: About Us, Pros of SECoin, What We Do, Why Us, Contact Us, FAQ, Terms & Conditions, Referral, Proof of Trust, Sitemap, Gallery, Live Status
+- Blog management system with admin creation, editing, and publishing capabilities
+- Consistent navigation structure across top and bottom bars matching Menulist
+- Enhanced FAQ page with accordion/expandable format for all 39 FAQ entries with center-aligned content
+- All FAQ entries visible by default with expand/collapse functionality for individual questions
+- Search functionality within FAQ page to filter questions and answers with keyword highlighting
+- FAQ entries use A-Z indexed questions paired with corresponding "Pros of SECoin in Realty as it is Forever" points as answers
+- Visually attractive, attention-grabbing formatting for FAQ entries using SECoin brand highlights and clear separation for readability
+- Admin interface for FAQ management (create, edit, delete, reorder FAQ entries)
+- Dedicated sitemap page displaying navigation links as a basic tree-root style structure with hyperlinks showing the hierarchy
+- Each sitemap entry links to the correct page with proper navigation functionality using corrected relative URLs
+- Sitemap includes Live Status page link with proper navigation integration
+- Concise display focused on navigation hierarchy without metadata or additional fields
+- Comprehensive error prevention and fallback handling for all page displays ensuring no blank or missing content
+- All content entries are always visible and accessible with proper error handling and recovery mechanisms
+- Client-side data integrity validation before displaying content to users
+- Automatic content recovery and refresh mechanisms if data corruption is detected
+- User-friendly error messages and fallback content when data issues occur
+- Real-time content validation and consistency checks across all pages
+- Automated testing interface for content integrity verification
+- Warning systems and notifications for administrators when data integrity issues are detected
+- SECoin logo displayed at double the current size throughout the application (header and all branding locations)
+- Logo text is clickable and links to the domain home page ("/")
+- Logo and text maintain visual balance and responsive design across all devices
+- Enhanced social platform search functionality on Contact Us page
+- Search results display only the clean platform name extracted from domain with first character capitalized
+- Each search result is clickable and opens the corresponding admin-provided URL in a new tab
+- Search results show correct imported logo/icon for each platform using clean domain name for icon mapping
+- Icons are visible, inline, and compact (16px size) in search results
+- Clean domain-only display with no extra symbols, paths, or query strings
+- Real-time search with instant updates when admin makes changes to social media links
+- Error-free social links that are always up to date and properly validated
+- All social media display operations use clean domain extraction for consistent domain processing
+- Compact, accurate, and error-free social links display with proper domain extraction
+- Pay As You Use (PAYU) fee structure section on Subscribers, Features, and Home pages
+- PAYU fee display showing sample fees for Sale, Rental, and Lease operations
+- Predictable income highlighting for top referrers in table/form format on Referral and Dashboard pages
+- Referral banner codes with embeddable, scalable functionality and Merkle root-based tracking
+- Referral banner tracking with UID/Nonce/UserID integration for comprehensive tracking
+- Payout and income tables on Referral page to attract clients and subscribers
+- Stripe configuration interface for admin to fill and update API keys and webhook URLs
+- Masked/hashed display of Stripe keys in UI for security
+- One-time Stripe setup system that never asks for same details again after initial configuration
+- Allowed countries list configuration for Stripe payment processing
+- Secure handling of all environment variables with no exposure or retention after use
+- Modular and failure-resilient interface components for all critical features
+- Security and compliance features including HTTPS enforcement, CORS configuration, reCAPTCHA integration, GDPR compliance, auto-moderation, and content sanitization
+- Audit log interface displaying comprehensive change history with filtering, search, and export capabilities including detailed property image operation logs
+- Rollback interface allowing admins to restore from previous snapshots with confirmation dialogs and property image state restoration
+- Import progress tracking with real-time status updates and error reporting including property image validation
+- File validation interface showing checksum verification and format validation results for property images
+- Comprehensive validation and error handling interfaces for all import, gallery, and feature management operations with detailed property image validation
+- Enhanced error detection and admin notification interface for gallery and image errors with rapid debugging capabilities and property isolation validation
+- Property image operation monitoring interface with real-time error detection and admin alerts for immediate issue resolution
+- Comprehensive testing interface for property image isolation with validation results and cross-property access prevention verification
+- Enhanced cache-busting validation interface showing property-specific versioning and immediate update confirmation across all browsers and devices
+- Property image integrity validation interface with filename matching verification, property association validation, and isolation compliance reporting
+- SpecificationStatus page displaying spec.yaml vs spec.json vs spec.md usage, performance metrics, and degraded mode warnings
+- Performance monitoring interface with degraded performance alerts and admin notifications
+- Future-proofing interface for updates, upgrades, modifications, and migrations with error prevention controls
+- Schema conversion interface for automatic migration from spec.md to spec.yaml format
+- Backend loader configuration interface for YAML/JSON parsing with fallback hierarchy management
+- Specification source validation and activation interface for canonical schema management
+- Bundle optimization interface with dependency analysis, tree-shaking visualization, and optimization metrics
+- Module deduplication dashboard showing before/after comparisons and optimization results
+- Build performance monitoring interface with load time tracking and optimization recommendations
+- Dependency tree visualization showing optimization impact and redundancy elimination
+- Cache management interface for optimized builds with intelligent invalidation controls
+- Bundle size analysis dashboard with detailed breakdown and optimization suggestions
+- Performance impact visualization showing optimization benefits and runtime integrity validation
+- Automated testing interface for optimized bundles ensuring functionality preservation
+- Memory usage optimization dashboard with footprint reduction tracking
+- Asset optimization interface with compression settings and lazy loading configuration
+- Code splitting visualization showing bundle optimization and load time improvements
+- Progressive web app optimization interface with service worker integration controls
+- Critical path optimization dashboard with rendering performance metrics
+- Resource prioritization interface with preloading optimization controls
+- Search menu analysis interface displaying all unique pages currently in the navigation menu
+- Menu structure validation dashboard showing page paths, labels, categories, and visibility settings
+- Automated menu completeness checker highlighting missing essential pages like /admin
+- Menu deduplication interface showing duplicate entries and providing removal options
+- Admin page validation interface ensuring /admin is always present with appropriate label ("Admin")
+- Menu integrity checker displaying validation results for all menu entries and their corresponding pages
+- Search menu configuration interface with automatic updates and validation controls
+- Menu health monitoring dashboard showing real-time status of all menu entries
+- Menu structure audit log displaying changes and ensuring completeness over time
+- Admin-only menu item identification with lock icon indicators
+- Lock icon display beside admin-restricted pages in search menu using admin-lock-icon-transparent.dim_16x16.png
+- Admin authentication-based menu access control using useIsCallerAdmin() hook
+- Admin-only route protection with hidden/disabled states for non-admins
+- Performance-optimized component rendering with lazy loading and debouncing
+- Runtime error boundary components for error containment and recovery
+- Deferred loading of large admin components until authentication resolves
+- Memory-efficient rendering optimization for improved responsiveness
+- Cross-browser compatibility optimization for all page components
+- Client-side performance monitoring and unresponsive behavior detection
+- Cached asset regeneration and page manifest updates for optimization
+- Runtime error logging and audit trail integration for performance issues
+- Progressive rendering implementation to prevent total page freeze
+- Enhanced error boundaries with fallback UI for slow modules
+- Lazy-loading guards for heavy components to prevent blank screens
+- Improved error handling with clearer alerts and snackbars for access denied scenarios
+- Cross-browser performance optimization specifically for Comet browser
+- Defensive rendering with requestIdleCallback and safer Suspense fallbacks
+- React hydration fixes to eliminate unresponsive state
+- Global error handling system with user-friendly notifications
+- Access restriction enforcement for admin-only routes with proper redirects
+- Performance monitoring for page-level optimization across all routes
+- Memoization enforcement for expensive components to improve responsiveness
+- Home page profile setup modal (ProfileSetupModal.tsx) with responsive "Continue" button functionality
+- Profile setup modal form with name input field and proper validation (non-empty, trimmed whitespace)
+- Responsive "Continue" button that correctly handles form submission across all browsers including Comet
+- Loading state management for the "Continue" button to prevent multiple submissions during profile save operations
+- Form submission integration with backend saveCallerUserProfile() function for profile creation
+- User state management updates to reflect profile completion after successful save
+- Success/failure feedback system using existing error boundary and auditLogger systems for profile operations
+- Modal close functionality after successful profile save with automatic home page content refresh
+- Personalized welcome message display on home page after profile setup completion
+- Cross-browser compatibility testing and validation for profile setup modal functionality
+- Accessibility compliance for profile setup modal including keyboard navigation and screen reader support
+- Profile setup workflow integration with proper state transitions and error handling
+- Real-time form validation feedback with clear error messages for invalid input
+- Profile setup modal responsive design optimization for mobile and desktop devices
+- Enhanced user experience with smooth transitions and visual feedback during profile setup process
+- Property detail routing system supporting both `/property/:id` and `/properties/:id` URL patterns
+- Router configuration with redirect mapping from `/properties/:id` to `/property/:id` for URL compatibility
+- Property card navigation links using correct `/property/:id` path format for consistent routing
+- Dynamic property ID parameter validation and passing from PropertyGrid and PropertyCard components
+- Property detail page data loading with proper property ID extraction from URL parameters
+- Cross-browser compatible property detail navigation with fallback handling for routing errors
+- Property detail route error handling preventing "Not Found" errors for valid property IDs
+- URL alias system ensuring backward compatibility with existing property listing URLs
+- Property navigation validation ensuring all property cards link to accessible detail pages
+- Enhanced property detail routing with comprehensive error handling and recovery mechanisms
+
+## Streamlined UI/UX Features
+- Clear information architecture with intuitive navigation patterns and logical content hierarchy
+- Role-aware UI with personalized interfaces based on user permissions and authentication status
+- Trust badges displaying security certifications, verification status, and platform reliability indicators
+- Preview flows for property listings, blog posts, and user submissions before final publication
+- Receipt flows with detailed transaction summaries and confirmation pages
+- Report flows with comprehensive analytics, performance metrics, and audit trails
+- Live status indicators showing real-time system health, operation progress, and connection status
+- Progress bars with detailed completion percentages and estimated time remaining
+- Accessibility improvements including enhanced keyboard navigation, screen reader optimization, and color contrast compliance
+- Responsive design optimization for mobile, tablet, and desktop experiences
+- Loading state management with skeleton screens and progressive content loading
+- Error state handling with clear recovery instructions and support contact information
+- Success state confirmation with visual feedback and next-step guidance
+- Form validation with real-time feedback and inline error messages
+- Search functionality with autocomplete, filters, and result highlighting
+- Notification system with categorized alerts and dismissible messages
+- Help system with contextual tooltips, guided tours, and documentation links
+- Performance optimization with lazy loading, image compression, and code splitting
+- User preference management with customizable themes, layouts, and notification settings
+- Breadcrumb navigation with clear page hierarchy and back navigation options
+- Runtime error boundary implementation for graceful error handling
+- Performance-optimized component rendering with memory efficiency
+- Debounced menu operations for improved responsiveness
+- Cross-browser compatibility optimization for different browsing environments
+
+## Design Requirements
+- Color palette: #0B3D91 (primary blue), #F6A100 (accent orange), #0F1724 (dark)
+- Three-contrast color palette implementation for enhanced accessibility
+- Responsive theme cycling system with Dark, Light, and Rainbow (VIBGYOR) themes
+- Theme cycling triggered only when hovering or clicking the theme icon, not the entire application
+- Theme toggle indicator showing current theme state with visual feedback
+- Smooth color transitions between themes with consistent branding elements
+- Rainbow theme implementation using VIBGYOR color spectrum with accessibility compliance
+- Theme persistence and user preference management across sessions
+- Multi-layered wide borders with 3D visual effects
+- Rounded 2xl corners on cards and components
+- Soft shadow effects
+- WCAG AA accessibility compliance
+- Full keyboard navigation support
+- Proper ARIA labels for screen readers
+- Progress bars with color-filled percentage indicators
+- Searchable menu components with filtering capabilities
+- Accordion components with smooth expand/collapse animations
+- Keyword highlighting using brand accent colors
+- Bottom navigation bar with horizontally tiled menu buttons styled according to SECoin brand guidelines
+- Sortable and filterable table components with responsive design
+- Inline editing controls with validation and error handling
+- Modular table design supporting extensibility and future analytics integration
+- Visual indicators for cryptographic verification status using Merkle/Verkle proofs
+- Status badges and alerts for fixture verification results and data integrity
+- Clear visual distinction for verified, pending, and discrepancy states in Fixtures system
+- Dual checkbox system for AI auto-detection and manual admin verification with distinct visual styling
+- Enhanced dual verification display with separate "Fixture: Auto" and "Fixture: Manual" columns
+- Category-based grouping with expandable/collapsible sections in Features table
+- Dynamic node management interface with add/remove buttons and real-time validation
+- Node pricing calculator display with clear calculation formula visualization
+- Auto-indexed node field display with dynamic table generation
+- SECoin logo displayed at double the current size with clickable functionality linking to home page ("/")
+- Logo and text maintain visual balance and responsive design across all device sizes
+- Enhanced social media management interface with clean domain-only extraction, form controls, validation feedback, and drag-and-drop functionality
+- Compact inline social media display components with 0.5x sized logos (16px), clean domain-only platform names with first character capitalized, and responsive horizontal layout
+- Hover effects and visual feedback for social media links and management controls with compact design optimization
+- Deterministic visual display ensuring only clean domain names are shown, never full URLs
+- Guaranteed prevention of visual corruption or overwriting of platform names and icons with full URLs through robust validation
+- Professional, accurate, and compact social media display with imported remote logos where available
+- Instant visual updates across all components when admin makes social media changes
+- Enhanced search result display for social platforms with clean domain-only names, clickable links opening in new tabs, and visible inline icons
+- Enhanced blog management interface design with clear visual feedback and authentication error handling
+- Success/error notification banners with SECoin brand styling and specific authentication error messages
+- Loading spinners and progress indicators for blog operations with session validation indicators
+- Status badges showing draft/published state with color coding and authentication status
+- Confirmation dialogs with clear action buttons and session expiry warnings
+- Error message displays with troubleshooting guidance and re-authentication prompts
+- Real-time validation feedback with inline error messages and session status indicators
+- Responsive blog creation and editing forms with proper spacing and authentication state display
+- Visual indicators for required fields, validation states, and session expiry warnings
+- Authentication error recovery interfaces with clear re-login prompts and automatic retry options
+- Session timeout warnings with countdown timers and proactive refresh options
+- User-friendly authentication failure messages with step-by-step recovery instructions
+- Enhanced Admin Dashboard table header design with clickable navigation
+- Clickable table headers styled with SECoin brand colors (#0B3D91, #F6A100, #0F1724)
+- Subtle visual indicators (underlines, icons, or color changes) showing headers are interactive
+- Hover states with smooth color transitions and visual feedback using brand palette
+- Focus states with proper keyboard navigation support and ARIA labels
+- Consistent typography and spacing with existing dashboard design
+- Clear visual distinction between clickable headers and regular table content
+- Accessibility-compliant color contrast ratios for all interactive states
+- Responsive design ensuring clickable headers work across all device sizes
+- Admin status indicator design with clear visual confirmation of Genesis admin status
+- Admin status badge or panel showing current principal ID and admin privilege level
+- Visual confirmation of admin privileges with clear status messaging and color coding
+- Admin access status display with session information and privilege verification
+- Clear "Genesis Admin" status indicator when applicable with distinctive styling
+- Current principal ID display in dashboard for transparency and admin verification
+- Admin status panel with visual confirmation of permanent admin privileges
+- Search menu analysis interface design with clear visualization of all unique pages
+- Menu structure validation display with color-coded status indicators for completeness
+- Menu deduplication interface with visual highlighting of duplicate entries
+- Admin page validation display with clear indicators for /admin presence and proper labeling
+- Menu integrity checker with visual status indicators for all menu entries
+- Search menu configuration interface with intuitive controls and validation feedback
+- Menu health monitoring display with real-time status indicators and alerts
+- Lock icon indicators for admin-restricted pages in search menu using admin-lock-icon-transparent.dim_16x16.png
+- Admin-only menu item visual distinction with lock icon beside labels
+- Performance optimization visual indicators for page load states
+- Runtime error boundary visual feedback with recovery options
+- Cross-browser compatibility visual indicators and status displays
+- Progressive rendering visual feedback to prevent blank page appearance
+- Error boundary fallback UI with clear messaging and recovery options
+- Loading state indicators for heavy components to prevent unresponsive appearance
+- Access denied visual feedback with clear instructions and redirect options
+- Performance monitoring visual indicators for page optimization status
+- Profile setup modal design with SECoin brand styling and responsive layout
+- "Continue" button design with clear visual states (normal, hover, loading, disabled)
+- Form input field styling with proper validation states and error message display
+- Loading spinner integration for profile save operations with visual feedback
+- Success/error message styling consistent with existing notification system
+- Modal overlay and container styling with proper z-index and accessibility
+- Responsive modal design optimized for mobile and desktop viewing
+- Form validation visual feedback with real-time error highlighting
+- Profile setup progress indicators and completion status display
+- Cross-browser compatible button styling and interaction states
+- Property detail routing visual indicators showing correct navigation paths
+- Property card link styling with hover states and navigation feedback
+- URL compatibility indicators for both `/property/:id` and `/properties/:id` patterns
+- Navigation error handling with user-friendly "Not Found" page design
+- Property detail page loading states with skeleton screens and progress indicators
+- Route validation visual feedback for successful property navigation
+- Property ID parameter display for debugging and validation purposes
+- Cross-browser routing compatibility indicators and fallback UI states
+
+## Technical Requirements
+- TypeScript and Tailwind CSS for frontend
+- Responsive design optimized for mobile and desktop
+- YAML/JSON parsing enabled in backend loader with validation against defined modules: authentication, storage, nodes, images, audit, billing, blog, referrals, sitemap, gallery, faq, frontend, operations, and performance-monitoring
+- Anchors and $ref references implemented in parser to avoid duplication and ensure DRY schema management
+- Execution model reads and caches each module once, with all downstream services referencing normalized YAML keys instead of re-parsing prose
+- Unit-safe field enforcement at ingestion: all numeric values must be stored as objects with value (int), unit (string), scale (int), and editableBy (array), preventing BigInt/float precision issues
+- Admin notifications on successful spec.yaml load: "✅ YAML spec loaded successfully. All modules active. Source: spec.yaml. Mode: deduplicated, unit-safe."
+- Fallback warning when spec.md is used: "⚠️ spec.md fallback in use. Performance may be degraded."
+- All modules (property management, node import, audit logging, billing, etc.) reference the normalized YAML/JSON schema and enforce unit-safe, editable fields throughout
+- Enhanced JSON schema validation for property data uploads and subscriber submissions supporting unit metadata and unit-safe values
+- Property schema located at /schemas/property.schema.json with node validation support and unit metadata validation
+- Unit conversion utility implementation supporting standard units with automatic base unit conversion and unit-safe scaling
+- Robust property JSON handler supporting unit-safe objects with proper parsing of value/unit/scale structure
+- Backend and frontend unit conversion logic for standardizing values to base units while preserving original input and scaling decimals to integers
+- Enhanced error handling for property uploads with clear messages for invalid numeric values in unit-safe objects
+- Property data compatibility validation ensuring all uploads, edits, and displays work with new unit-safe schema
+- Future-proof unit system implementation supporting additional units and scaling factors with extensible architecture
+- Search functionality for navigation menus and FAQ page with keyword highlighting
+- Progress bar components with percentage-based styling
+- Content management system for static pages
+- Accordion components with accessibility support
+- Sortable and filterable table components with real-time search capabilities and dual verification system
+- Inline editing functionality with validation and error handling for Features/Fixtures management
+- Modular table architecture supporting future analytics and extensibility with category-based grouping
+- Genesis admin system with permanent privilege assignment and protection across all environments
+- Enhanced Genesis admin recognition system that always identifies the first logged-in user as admin regardless of session changes, principal variations, or redeployment
+- Persistent Genesis admin tracking that stores the original principal ID and maintains admin status across all sessions
+- Admin status validation system that checks against the stored Genesis principal ID for every admin access request
+- Bulletproof admin access logic that prevents "Access Denied" errors for the Genesis admin on dashboard or any admin-only pages
+- Session-independent admin verification that maintains admin status even after session expiration or principal changes
+- Redeployment-resistant admin status that persists Genesis admin privileges across application updates and restarts
+- Admin status indicator system displaying current principal ID and admin status in the dashboard
+- Clear admin status display showing whether the current user is the Genesis admin with visual confirmation
+- Robust error handling for admin access with clear user feedback and recovery instructions if admin status is ever at risk
+- Admin access recovery system with detailed instructions for restoring admin privileges if issues occur
+- Fail-safe admin access mechanisms that prevent permanent lockout of the Genesis admin user
+- Admin access validation with lockout prevention mechanisms and enhanced error handling
+- Fast-loading admin page components with optimized data fetching and performance tuning
+- Comprehensive error handling and fallback logic for admin functionality preventing slow or frozen page loads
+- Reliable timeout handling and retry mechanisms for admin page access
+- Interactive Google Maps integration with real-time coordinate updates and smooth transitions for multiple property nodes using unit-safe precision
+- Property hover detection and map coordinate synchronization for all nodes with unit-safe support
+- Geographic coordinate validation and display functionality for dynamic node system using unit-safe values
+- Subscriber authentication and payment processing for property listing fees with node-based calculations using unit-safe precision
+- Property listing fee calculation based on 0.01% of listing price per month with node considerations and unit-safe support
+- Property card click navigation system to tabbed property detail page instead of popup interface
+- Tabbed property detail page implementation with Nodes and Floors tables side by side in fully responsive layout
+- Property detail page routing and navigation with comprehensive node and floor information display
+- Enhanced property-specific image display system with strict validated matched-image-only display and comprehensive property isolation for individual properties
+- Reliable property-specific image serving system with proper cache headers, versioning, forced refresh capabilities, and strict access control for individual properties
+- Property image cache management system with automatic invalidation triggers when new validated images are uploaded for specific properties and comprehensive isolation validation
+- Enhanced case-insensitive, extension-agnostic filename matching system for property association with validated matching that ensures property ID matches with strict property isolation
+- Real-time property card image updates with cache-busting when validated matching images are uploaded for specific properties with immediate display and strict isolation
+- Robust property image placeholder replacement system that automatically updates when new validated matching images are found for specific properties with comprehensive validation
+- Cross-browser and cross-device compatible property image display with proper scaling, fallback mechanisms, and strict property isolation
+- Property image serving reliability system with fallback mechanisms, error recovery, and strict isolation enforcement for individual properties
+- Comprehensive audit logging system for all property-specific image operations including upload, matching, display failures, cache invalidation, property isolation validation, and cross-property access prevention
+- Enhanced error handling system for property image operations with detailed logging, clear admin feedback, property-specific context, and isolation validation
+- Property-specific image serving API with property ID validation and access control preventing unauthorized or mismatched image access
+- Enhanced image upload validation system that verifies filename-to-property matching before storage and prevents mismatched uploads with comprehensive validation
+- Property image access control system ensuring only validated matched images are served for each property with comprehensive validation and isolation enforcement
+- Image serving endpoint implementation with property ID validation and strict access control preventing unauthorized or mismatched image access
+- Comprehensive error logging system for all image operations with detailed property isolation validation, mismatch prevention, and access control verification
+- Property image integrity validation system ensuring uploaded images are correctly associated and served only to their validated matched properties with strict isolation
+- Enhanced cache-busting mechanism implementation with property-specific versioning to ensure immediate image updates across all browsers and devices
+- Robust error recovery system for image operations with automatic retry and comprehensive property isolation validation
+- Property image operation audit system with property ID validation, access control verification, isolation compliance tracking, and cross-property access prevention
+- Property card click navigation system that displays property map by default using exact coordinates in Google Maps iframe with up-to-date iframe embed data, with validated matched image as fallback only when coordinates are unavailable
+- Enhanced property detail view system that shows property map by default using exact coordinates in Google Maps iframe with current iframe data, with validated matched image fallback only when coordinates are missing
+- Map display priority system implementation that shows property coordinates in Google Maps iframe by default on property card click
+- Validated matched image fallback system implementation that only displays the property's validated matched image when coordinates are unavailable
+- Strict prevention system ensuring unmatched or unrelated gallery images never appear in property cards or detail views
+- Robust cache handling system implementation for both property maps and images with comprehensive error logging and prevention
+- Minimap preview system implementation in property card placeholders using each property's exact coordinates with dynamic generation per property and robust error handling
+- Full-sized map loading system implementation that dynamically loads complete maps for properties on click using exact coordinates with up-to-date iframe embed data
+- Coordinate accuracy enforcement system ensuring all property location maps use the exact coordinates entered with no defaults or substitutions
+- Coordinate discrepancy logging system implementation for audit and legal compliance tracking any coordinate variations
+- Multi-party verification system implementation storing provider and subscriber votes for property coordinates
+- Consensus coordinate calculation system based on multi-party verification results
+- Merkle root proof generation system for each property's verification data
+- Timestamped audit logging system for all property verification activities and coordinate changes
+- Live Status page implementation displaying multi-party verification results, consensus coordinates, and Merkle root proofs
+- Enhanced Live Status system implementation with fixture consensus results and admin approval workflow
+- Fixture result records backend system with consensus data, approval status, rejection reasons, and admin actions
+- User enforcement system implementation with ban tracking, violation records, and security event logging
+- Consensus workflow backend implementation with strict validation, signature verification, and Merkle-root tracking
+- Security events backend system for user violations, enforcement actions, and audit compliance
+- Manifest logging system for all fixture consensus operations with comprehensive audit trails
+- Admin approval/rejection system implementation with bulk action support and business rule enforcement
+- Signature verification system implementation for all fixture consensus operations with cryptographic validation
+- User ban enforcement implementation with automatic restriction application and violation tracking
+- Comprehensive audit logging system for all Live Status operations including consensus, approvals, rejections, and enforcement actions
+- Live Status page routing and navigation integration in sitemap and main navigation menu
+- Responsive theme cycling system implementation with Dark, Light, and Rainbow (VIBGYOR) themes
+- Theme cycling triggered only when hovering or clicking the theme icon, not the entire application
+- Theme toggle indicator implementation showing current theme state with visual feedback
+- Smooth color transitions between themes with consistent branding elements preservation
+- Rainbow theme implementation using VIBGYOR color spectrum with accessibility compliance
+- Theme persistence and user preference management across browser sessions
+- Tabbed Node Management system replacing popup interface with comprehensive full-page experience
+- Table tab implementation with sortable and filterable grid view of all nodes
+- Cards tab implementation with node cards and integrated mini-map display
+- Import tab implementation with bulk import capabilities for CSV, JSON, and ZIP files
+- Enhanced Import tab implementation with reliable "Browse File" button functionality across all browsers and devices
+- Cross-browser compatible file picker with robust error handling and fallback mechanisms for file selection
+- Comprehensive file upload validation with detailed error messages and recovery options for CSV, JSON, and ZIP formats
+- Audit Log tab implementation with comprehensive change history and filtering
+- Settings tab implementation with unit defaults, permissions, and billing configuration
+- Bulk import system with drag-and-drop file upload and automatic format detection
+- Header auto-mapping system for Node, Floor, CornerId, Latitude, Longitude, Altitude_m columns
+- Import validation system with floor range, corner ID, coordinate bounds, altitude, and duplicate checking
+- Import preview system with row-by-row validation status display before commit
+- Import commit system with progress tracking and comprehensive audit logging
+- File checksum generation and validation for all imported files
+- Import manifest tracking with metadata, row counts, error summaries, and timestamps
+- Permission-based node management with role-specific access controls (Admin/Subscriber/Public)
+- Price change fee system charging $0.50 for subscriber-initiated price modifications
+- Price change audit logging with before/after values, payment ID tracking, and approval workflows
+- Node permalink system for public access with systematic URL structure
+- Post-creation node management interface accessible from Admin Panel and property detail pages
+- Real-time node CRUD operations (create, read, update, delete) with immediate persistence using unit-safe values
+- Node order management and switching functionality with drag-and-drop or control buttons
+- Permission validation ensuring role-based access to node management features
+- Node management audit logging and change tracking with correlation IDs
+- Real-time validation and error handling for all node operations using unit-safe precision
+- Property submission queue management with approval workflow and node validation for unit-safe values
+- Dynamic node management system with add/remove nodes functionality and real-time UI updates using unit-safe coordinates
+- Auto-indexing of node fields with dynamic field generation using unit-safe precision
+- Node coordinate validation and altitude calculation with unit-safe support
+- Per-node pricing calculation and display with unit-safe precision
+- Dynamic table generation for node display with responsive design using unit-safe values
+- Node data persistence and validation across property lifecycle with unit-safe support
+- Node order switching with immediate backend updates and audit logging
+- Enhanced Fixtures system with dual verification capabilities
+- AI auto-detection system for feature identification and classification
+- Manual admin verification system with override capabilities
+- Dual checkbox interface for both AI and manual verification states
+- Enhanced dual verification system with separate "Fixture: Auto" and "Fixture: Manual" columns
+- Category-based feature organization with expandable/collapsible sections
+- Cryptographic verification using Merkle root and Verkle tree methods with dual verification context
+- Admin controls for inline editing, updating, and deleting features directly from the Fixtures table
+- Real-time feature status updates with both AI and manual verification tracking
+- Dynamic feature addition system that automatically adds missing or pending features to the Features page
+- Auto-checking mechanism for new features implemented by AI with automatic status updates
+- Feature scoring and ranking system for leaderboard promotion based on dual verification status
+- Leaderboard implementation displaying best features sorted by score or value
+- Enhanced property-specific gallery management system with robust image matching, reliable display, and strict property isolation for individual properties
+- Property-specific image upload system supporting PNG, JPG, JPEG formats with drag-and-drop functionality and comprehensive validation
+- Enhanced property image deduplication system using Merkle-root hash verification with property-specific validation and strict isolation
+- Automatic property-to-image association based on enhanced case-insensitive, extension-agnostic filename-to-property-ID matching with validated matching that ensures property ID matches with strict property isolation
+- Real-time property card image updates with cache-busting when validated matching images are uploaded for specific properties with immediate display and strict isolation
+- Robust property-specific image display system ensuring uploaded images appear immediately on the correct property cards and detail pages with comprehensive validation and strict isolation
+- Property image validation system including format verification, size limits, corruption detection, property matching validation, and isolation compliance
+- Property image optimization and compression for web display while preserving original quality with property-specific handling and isolation validation
+- Property-specific gallery interface with uploaded images preview, property association indicators, and strict isolation validation
+- Dedicated Gallery page implementation with comprehensive property-specific image management interface and strict property isolation
+- Gallery page routing and navigation integration with sitemap and main navigation with property-specific management
+- Clear UI guidance and file upload interface implementation for Gallery and Admin pages for property-specific image uploads with validation and error prevention
+- Enhanced case-insensitive, extension-agnostic filename matching implementation for property association with validated matching rules and strict isolation enforcement
+- Merkle-root verification implementation for all property images with property-specific deduplication tracking and isolation validation
+- Scalable and auditable property-specific gallery management with comprehensive validation, error handling, and strict property isolation
+- Enhanced property image cache management system with automatic invalidation, manual refresh capabilities, and property-specific versioning for individual properties
+- Cross-browser property image loading compatibility with fallback mechanisms for different devices and strict property isolation
+- Property image scaling and optimization for consistent display across all property cards and detail pages with property-specific handling and isolation validation
+- Comprehensive testing system for property image isolation with validation that prevents cross-property image display and ensures strict isolation
+- Enhanced error detection and admin notification system for gallery and image errors with rapid debugging capabilities and property isolation validation
+- Property-specific image serving validation system ensuring only validated matched images are displayed for each property with comprehensive access control and isolation enforcement
+- Robust cache-busting implementation with property-specific versioning to ensure image updates are reflected instantly across all browsers and devices
+- Enhanced image loading validation system that prevents shared or mismatched images from being displayed on property cards or detail pages with strict isolation
+- Comprehensive property image integrity validation system ensuring correct association and display only on validated matched properties with strict isolation enforcement
+- Property-specific gallery management system with strict isolation ensuring independent image management and display for each property
+- Enhanced blog post management system with robust Internet Identity delegation handling and error recovery
+- Advanced Internet Identity delegation validation with automatic expiry detection and proactive refresh
+- Comprehensive session management preventing "Invalid delegation expiry" errors during blog operations
+- Automatic delegation refresh mechanisms when sessions approach expiry thresholds
+- Enhanced error handling for authentication failures with detailed error responses and recovery guidance
+- Session timeout detection with graceful degradation and automatic re-authentication prompts
+- Automatic retry mechanisms for failed blog operations due to authentication issues with exponential backoff
+- Real-time blog post state synchronization across draft and live modes with immediate cache invalidation
+- Immediate cache invalidation and refresh mechanisms for published posts with instant live site propagation
+- Comprehensive error handling and user feedback for all blog operations with specific authentication context
+- Transaction-based blog operations with rollback capabilities and authentication state validation
+- Blog post validation and integrity checks before publishing with session validation
+- Loading states and progress indicators for blog operations with authentication status display
+- Success/error notification system with detailed feedback and authentication-specific guidance
+- Blog post status tracking and visibility management with instant synchronization across all components
+- Consistent blog listing retrieval with proper error handling and authentication state management
+- Real-time blog post updates with instant propagation to live site and admin dashboard synchronization
+- Enhanced user feedback system for authentication failures with clear re-authentication instructions
+- Automatic session recovery mechanisms with seamless operation continuation after successful login
+- Proactive session monitoring with early warning systems for approaching expiry
+- Robust error recovery workflows for various authentication failure scenarios
+- Comprehensive AI-actionable blog system technical implementation
+- Markdown and rich-text content processing with HTML sanitization
+- Real-time autosave functionality with conflict resolution
+- Multi-author collaboration with real-time editing indicators
+- AI-powered content generation and optimization APIs
+- Automated SEO analysis and optimization suggestions
+- Dynamic sitemap and RSS feed generation with auto-updates
+- Google Search Console and Google News API integration
+- Social media auto-posting with platform-specific optimization
+- Advanced comment system with AI-powered moderation
+- Newsletter integration with automated campaign management
+- Lead generation forms with dynamic field generation
+- Analytics integration with custom event tracking
+- Content recommendation engine with machine learning
+- Image optimization and automatic captioning
+- Video embedding with responsive player integration
+- Interactive maps integration for geo-targeted content
+- Price trend charts with real-time data visualization
+- Virtual tour embedding and management
+- A/B testing framework for content optimization
+- Performance monitoring and optimization tools
+- Intelligent social media management system with robust clean domain-only extraction, URL validation, and deterministic clean domain processing
+- Dynamic social media display with clean domain-only platform names with first character capitalized, lowercase domain-based icon names, and compact inline layout
+- CRUD operations for social media platform management with automatic clean domain-only extraction, proper validation, and error handling
+- Advanced domain extraction logic that processes any URL format to extract only the clean domain name
+- Auto-fill functionality for platform name and icon name fields using clean domain extraction, with editable capability
+- Legacy data migration system to update existing social media entries from full URLs to clean domain format
+- Guaranteed prevention of platform name or icon corruption with full URLs through robust validation and deterministic processing
+- Deterministic icon mapping logic ensuring consistent platform identification across all app components
+- Enhanced search functionality for social platforms on Contact Us page
+- Real-time update propagation system ensuring instant reflection of admin changes across Contact Us page, Dashboard, and search results
+- Professional, accurate, and compact social media display with imported remote logos where available
+- Enhanced Admin Dashboard with clickable table headers for improved navigation
+- Sitemap.xml file served at root URL path with proper MIME type headers and guaranteed availability
+- Robots.txt file served at root URL path with proper search engine directives
+- Comprehensive error handling and fallback mechanisms for all content functionality
+- Data isolation safeguards preventing any updates from affecting other page content
+- Automated testing framework for content integrity verification
+- Real-time monitoring and alerting for data consistency issues
+- Transaction-based content updates with rollback capabilities
+- Content validation and sanitization for all user inputs and data modifications
+- Automated health checks and system diagnostics for data integrity
+- SECoin logo clickable functionality with proper navigation to home page ("/")
+- Logo sizing at double the current display size with responsive scaling
+- Pay As You Use (PAYU) fee structure implementation with dynamic fee calculation
+- PAYU fee display system for Sale, Rental, and Lease operations
+- Sample fee structure templates with configurable pricing models
+- Predictable income calculation system for top referrers
+- Referral banner generation system with embeddable code functionality
+- Referral banner tracking implementation with Merkle root-based UID/Nonce/UserID tracking
+- Payout and income table generation for referral attraction
+- Client and subscriber conversion tracking system
+- Stripe configuration management system with secure environment variable handling
+- Stripe API key and webhook URL configuration interface
+- Allowed countries list management for Stripe payment processing
+- Secure environment variable storage with masked/hashed display in UI
+- One-time Stripe setup system preventing duplicate configuration requests
+- Automatic credential verification and setup completion tracking
+- Secure credential disposal system after verification for enhanced security
+- Modular and failure-resilient architecture for all critical features
+- Comprehensive backup system for all referral and property-catalog data
+- Audit mechanism implementation for all referral and property data operations
+- Application content language: English
+- Security and compliance implementation including HTTPS enforcement, CORS configuration, reCAPTCHA integration, GDPR compliance, content sanitization, auto-moderation, rate limiting, data encryption, and audit logging
+- Clean domain extraction functions for social media management
+- All social media display and management operations must use clean domain extraction for consistent domain processing and icon mapping
+- Compact, accurate, and error-free social media display with proper validation and testing
+- Blog system API endpoints for CRUD operations, category management, tag management, comment system, media file management, performance analytics, SEO optimization tools, newsletter management, lead generation tracking, and social media integration
+- Real-time features with WebSocket or Server-Sent Events for live updates
+- Caching strategy for improved performance and reduced server load
+- Database indexing for optimized query performance
+- Backup and disaster recovery procedures for blog content
+- Content delivery network (CDN) integration for media files
+- Search engine optimization with structured data markup
+- Performance monitoring and analytics integration
+- Automated testing suite for blog functionality
+- Documentation and API reference for developers
+- Comprehensive audit logging system for all node and property operations
+- Audit log interface with filtering, search, and export capabilities
+- Admin rollback system with snapshot restoration and confirmation dialogs
+- Import progress tracking with real-time status updates and error reporting
+- File validation system with checksum verification and format validation
+- Comprehensive validation system for all import, gallery, and feature management operations with detailed error messages, recovery procedures, and enhanced property image validation with strict property isolation
+- Enhanced error handling and validation for all related operations with comprehensive audit logging and property image isolation validation
+- Automated testing and validation system for property-to-image matching logic with comprehensive test coverage and property isolation verification
+- Cross-browser and cross-device testing for property image display functionality with strict property isolation validation
+- Property image isolation testing to ensure no cross-property image display with comprehensive validation and error prevention
+- Cache-busting validation for property-specific image updates with immediate refresh verification across all browsers and devices
+- Error handling testing for missing property images with fallback validation and property isolation compliance
+- Property image placeholder testing with automatic replacement validation and strict property isolation
+- Comprehensive testing framework for property image integrity with filename matching validation, property association verification, and isolation compliance
+- Enhanced error detection and logging testing for image serving operations with property ownership validation and cross-property access prevention
+- Comprehensive audit logging testing for cache-busting operations with property-specific versioning and immediate update validation
+- Property image operation testing with property ID validation, access control verification, and isolation compliance tracking
+- Enhanced error recovery testing with automatic retry validation and comprehensive property isolation verification
+- Comprehensive testing validation for image-to-property matching logic with property isolation verification and cross-property access prevention
+- Performance monitoring system implementation for tracking degraded performance states and admin notifications
+- SpecificationStatus page implementation for monitoring spec.yaml vs spec.json vs spec.md usage and performance metrics
+- Future-proofing system implementation for updates, upgrades, modifications, and migrations with error prevention tracking
+- Schema conversion system implementation for automatic migration from spec.md to spec.yaml format
+- Backend loader configuration system for YAML/JSON parsing with fallback hierarchy management
+- Specification source validation and activation system for canonical schema management
+- Proactive performance monitoring system with automated degraded performance prevention and admin notifications
+- Enhanced spec.yaml loader implementation with robust fallback handling for all future updates, upgrades, migrations, or modifications
+- System health monitoring implementation with proactive performance optimization and degraded mode prevention
+- Comprehensive node_modules deduplication and optimization system implementation
+- Tree-shaking implementation for eliminating unused code and reducing bundle size
+- Bundle splitting optimization for improved load times and caching efficiency
+- Dependency flattening system to eliminate redundant package installations
+- Symbol-level pruning for precise dead code elimination
+- Cache cleanup system for removing stale and unused cached dependencies
+- Essential module preservation system ensuring critical functionality remains intact
+- Redundant dependency removal with intelligent analysis and safe elimination
+- Build output optimization through advanced minification and compression
+- Dead-code elimination system with comprehensive analysis and removal
+- Alias resolution optimization to prevent excess dependencies and conflicts
+- Final bundle validation system ensuring runtime integrity and functionality preservation
+- Automated dependency analysis with optimization recommendations and impact assessment
+- Bundle size monitoring and reporting with detailed metrics and optimization tracking
+- Dependency tree visualization showing optimization results and redundancy elimination
+- Cache management system for optimized builds with intelligent invalidation and performance tracking
+- Performance impact analysis of optimization changes with before/after comparisons
+- Rollback capabilities for optimization changes if runtime issues are detected
+- Automated testing validation for optimized bundles ensuring complete functionality preservation
+- Build performance metrics tracking optimization effectiveness and improvement measurement
+- Memory usage optimization and monitoring for reduced application footprint
+- Load time improvement tracking and reporting with detailed performance analysis
+- Asset optimization including intelligent image compression and lazy loading implementation
+- Code splitting optimization for improved initial load times and progressive enhancement
+- Module federation support for scalable micro-frontend architecture
+- Progressive web app optimization with advanced service worker integration
+- Critical path optimization for faster initial rendering and improved user experience
+- Resource prioritization and intelligent preloading optimization for enhanced performance
+- Intelligent compression and module pruning within node_modules directory
+- Dependency flattening to eliminate redundant package installations
+- Tree-shaking implementation for unused code elimination
+- Vendor splitting for optimal caching strategies
+- Alias optimization to prevent dependency conflicts
+- Latest compatible lightweight module versions for reduced disk footprint
+- Enhanced performance robustness through optimized dependencies
+- Bundle optimization reports with size reduction metrics
+- Cache validation for improved performance tracking
+- Reduced disk footprint analysis and monitoring
+- Search menu analysis system implementation for tracking and validating all unique pages in the navigation menu
+- Menu structure data storage and retrieval system including page paths, labels, categories, and visibility settings
+- Automated menu validation system that checks for missing essential pages like /admin with automatic addition
+- Menu deduplication system ensuring no duplicate entries exist in the search menu with automatic cleanup
+- Admin page validation system ensuring /admin is always present in the menu structure with appropriate label ("Admin")
+- Menu integrity checking system that validates all menu entries link to existing pages with error reporting
+- Search menu configuration management system with automatic updates and validation
+- Menu structure audit logging system for tracking changes and ensuring completeness
+- Automated menu health checks ensuring all critical pages are accessible through search with real-time monitoring
+- MenuList component analysis system for reading current search menu structure from frontend
+- Menu entry counting system for tracking all unique pages currently in the search menu
+- Missing page detection system specifically checking for /admin presence in menu structure
+- Automatic menu entry addition system for appending missing /admin page with appropriate label
+- Deduplicated menu output system ensuring no duplicate entries in final menu structure
+- Menu validation system confirming proper linking of menu entries to existing pages like AdminDashboard.tsx
+- Real-time menu structure monitoring with automatic updates when changes are detected
+- Admin-only menu item identification system with lock icon indicators using admin-lock-icon-transparent.dim_16x16.png
+- Lock icon display system for admin-restricted pages in search menu
+- Admin authentication-based menu access control using useIsCallerAdmin() hook
+- Admin-only route protection system with hidden/disabled states for non-admins
+- Performance optimization system for component rendering with lazy loading and debouncing
+- Runtime error boundary system for error containment and graceful recovery
+- Deferred loading system for large admin components until authentication resolves
+- Memory-efficient rendering optimization for improved responsiveness
+- Cross-browser compatibility optimization for all page components
+- Client-side performance monitoring system for unresponsive behavior detection
+- Cached asset regeneration system and page manifest updates for optimization
+- Runtime error logging system and audit trail integration for performance issues
+- Cross-browser compatibility audit logging system for rendering and functionality issues
+- Admin permission audit logging system for access control and security events
+- Progressive rendering system implementation to prevent total page freeze
+- Enhanced error boundaries with fallback UI for slow modules to prevent blank screens
+- Lazy-loading guards for heavy components to prevent unresponsive state
+- Improved error handling with clearer alerts and snackbars for access denied scenarios
+- Cross-browser performance optimization specifically for Comet browser compatibility
+- Defensive rendering with requestIdleCallback and safer Suspense fallbacks
+- React hydration fixes to eliminate unresponsive state and blank screens
+- Global error handling system with user-friendly notifications for component failures
+- Access restriction enforcement for admin-only routes with proper redirects instead of blank screens
+- Performance monitoring for page-level optimization across all routes including /admin, /dashboard, /menu-analysis, /bundle-optimization
+- Memoization enforcement for expensive components to improve responsiveness and prevent freezing
+- Runtime error tracing system for React components to diagnose blank page issues
+- Component-level error boundaries to prevent total application freeze
+- Fallback UI implementation for failed component loads to maintain user experience
+- ProfileSetupModal.tsx implementation with responsive "Continue" button functionality
+- Form submission handling with proper validation and error management
+- Backend integration with saveCallerUserProfile() function for profile creation
+- Loading state management for form submission to prevent multiple requests
+- Cross-browser compatibility testing and optimization for profile setup modal
+- User state management updates after successful profile save
+- Modal close functionality with automatic page refresh after profile completion
+- Form validation implementation with real-time feedback and error display
+- Success/failure notification system integration with existing error boundary and auditLogger
+- Accessibility compliance for profile setup modal including keyboard navigation and screen reader support
+- Profile setup workflow state management with proper transitions
+- Responsive design optimization for profile setup modal across all device sizes
+- Enhanced user experience with smooth transitions and visual feedback during profile operations
+- Property detail routing system implementation supporting both `/property/:id` and `/properties/:id` URL patterns
+- React Router configuration with route definitions for property detail pages
+- Router redirect implementation mapping `/properties/:id` to `/property/:id` for backward compatibility
+- Property card navigation link generation using correct `/property/:id` path format
+- Dynamic property ID parameter extraction and validation from URL parameters
+- Property detail page data loading with proper property ID handling and error recovery
+- Cross-browser compatible property detail navigation with comprehensive error handling
+- Property detail route error handling preventing "Not Found" errors for valid property IDs
+- URL alias system implementation ensuring backward compatibility with existing property listing URLs
+- Property navigation validation system ensuring all property cards link to accessible detail pages
+- Enhanced property detail routing with comprehensive error handling, fallback mechanisms, and recovery options
+- Route parameter validation and sanitization for property ID values
+- Property detail page loading states with skeleton screens and progress indicators
+- Navigation error recovery with user-friendly error messages and redirect options
+- Property detail URL generation utilities for consistent link creation across components
+- Route matching optimization for improved navigation performance and reliability
+
+## Audit-Ready Technical Implementation
+- Structured JSON logging system with correlation ID generation and tracking across all operations including user profile operations
+- Error taxonomy implementation with standardized error codes, severity classification, and automated resolution pathways
+- Manifest and version tracking system with automated deployment logging and rollback capabilities
+- Preflight validation framework for all critical flows including profile setup with comprehensive validation rules and error reporting
+- Failure containment system with retry policies using exponential backoff algorithms
+- Circuit breaker implementation for external service dependencies with configurable thresholds
+- Dead-letter queue system for failed operations with manual review interfaces and reprocessing capabilities
+- Self-test suite automation for onboarding, listing, checkout, profile setup, and reconciliation operations with scheduled execution
+- Tiered concurrency management with priority queue implementation and resource allocation
+- Sharding and isolation strategies with automated load balancing and data partitioning
+- Cold-start mitigation with pre-warming strategies, connection pooling, and resource optimization
+- Chunked processing implementation for large data operations with progress tracking and resumption capabilities
+- Selective read/write operations with optimized query patterns and caching strategies
+- Telemetry budget system with cost monitoring, usage tracking, and optimization recommendations
+- Rate-limit guardian implementation with adaptive throttling based on system load and user behavior
+- Backpressure signal system for queue management and flow control with automatic scaling
+- User-facing degraded-mode banner system with clear status communication and estimated recovery times
+- Performance SLO enforcement with automated alerting, escalation procedures, and remediation workflows
+- Node and endpoint profiling with performance bottleneck identification and optimization recommendations
+- Reconciliation job system for data consistency validation and automated correction procedures
+- Transparent metering system with usage tracking, billing transparency, and cost optimization
+- Anomaly detection system with machine learning-based pattern recognition and automated alerting
+- Upgrade nudge system with feature deprecation warnings, migration guidance, and automated notifications
+- Operational budget tracking with cost monitoring, usage optimization, and budget alert systems
+- Deprecation policy enforcement with automated sunset procedures and migration assistance
+- Resilience drill system with chaos engineering, disaster recovery testing, and automated failover procedures
+- Uptime dashboard system with real-time system health monitoring and availability reporting
+- Composable module architecture with microservice design patterns and API versioning
+- Policy-as-code implementation with automated compliance checking and violation reporting
+- In-app AI assistance system for optimization recommendations and automated error recovery guidance
+- Checklist-driven operation system with automated validation, compliance verification, and audit trail generation
+- Supply-chain safety system with dependency scanning, vulnerability assessment, and automated patching
+- Automated vulnerability scanning with security patch management and compliance reporting
+- Manifest tracking system with version control, change management, and deployment automation
+- Queue management system with priority handling, overflow protection, and automatic scaling
+- Testing automation framework with continuous integration, deployment pipelines, and quality assurance
+- UI and finance transparency system with clear cost breakdowns, usage metrics, and billing information
+- Audit-first design implementation with comprehensive logging, compliance reporting, and regulatory adherence
+- Performance optimization system with resource monitoring, efficiency tracking, and automated tuning
+- Error recovery system with guided troubleshooting, automated remediation, and support escalation
+- System health monitoring with uptime tracking, degraded mode detection, and automated recovery
+- Operational transparency system with cost tracking, usage analytics, and performance reporting
+- Compliance reporting system with audit trails, verification status, and regulatory compliance tracking
+- Security monitoring system with threat detection, incident response, and vulnerability management
+- Maintenance mode system with scheduled downtime notifications, progress tracking, and automated recovery
+- Runtime error tracking system for client-side errors and performance issues
+- Cross-browser compatibility audit system for rendering and functionality issues
+- Admin permission audit system for access control and security events
+- Performance optimization audit system for page load times and responsiveness
+- User profile operation audit logging with comprehensive tracking of profile creation, updates, and validation
+- Profile setup workflow audit trails with detailed logging of form submissions, validation results, and completion status
+- Enhanced error handling audit system for profile operations with detailed logging and user feedback tracking
+- Property detail routing audit logging with navigation tracking, error monitoring, and performance metrics
+- Route validation audit system with comprehensive logging of navigation attempts, successes, and failures
+- Property navigation error tracking with detailed logging of "Not Found" errors and recovery actions

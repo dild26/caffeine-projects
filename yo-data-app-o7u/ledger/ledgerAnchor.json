@@ -1,0 +1,10 @@
+{
+  "purpose": "Anchor content Merkle roots to ICP ledger transactions",
+  "fields": [
+    "merkleRoot",
+    "timestamp",
+    "canisterId",
+    "txHash"
+  ],
+  "frequency": "on content update"
+}

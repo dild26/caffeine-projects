@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: oklch(100% 0 0);
+    --foreground: oklch(15% 0 0);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(15% 0 0);
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(15% 0 0);
+    --primary: oklch(50% 0.2 264);
+    --primary-foreground: oklch(100% 0 0);
+    --secondary: oklch(96% 0 0);
+    --secondary-foreground: oklch(15% 0 0);
+    --muted: oklch(96% 0 0);
+    --muted-foreground: oklch(45% 0 0);
+    --accent: oklch(96% 0 0);
+    --accent-foreground: oklch(15% 0 0);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(100% 0 0);
+    --border: oklch(90% 0 0);
+    --input: oklch(90% 0 0);
+    --ring: oklch(50% 0.2 264);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: oklch(15% 0 0);
+    --foreground: oklch(98% 0 0);
+    --card: oklch(15% 0 0);
+    --card-foreground: oklch(98% 0 0);
+    --popover: oklch(15% 0 0);
+    --popover-foreground: oklch(98% 0 0);
+    --primary: oklch(65% 0.2 264);
+    --primary-foreground: oklch(15% 0 0);
+    --secondary: oklch(25% 0 0);
+    --secondary-foreground: oklch(98% 0 0);
+    --muted: oklch(25% 0 0);
+    --muted-foreground: oklch(65% 0 0);
+    --accent: oklch(25% 0 0);
+    --accent-foreground: oklch(98% 0 0);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0 0);
+    --border: oklch(25% 0 0);
+    --input: oklch(25% 0 0);
+    --ring: oklch(65% 0.2 264);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.memo-tooltip {
+  position: fixed;
+  background: black;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.memo-fixing {
+  animation: pulse 1s ease-in-out infinite;
+  border: 2px solid orange;
+}
+
+.memo-fixed {
+  border: 2px solid green;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.memo-editing {
+  border: 2px solid blue;
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.memo-deleting {
+  animation: shake 0.5s ease-in-out;
+  border: 2px solid red;
+}
+
+.memo-pinned {
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: memo-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}

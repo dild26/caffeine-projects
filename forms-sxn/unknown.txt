@@ -1,0 +1,20 @@
+
+## Form Submission Process
+Each form submission generates:
+- Complete manifest including field definitions, default values, validation rules, calculation graphs, and visibility rules
+- Value differences (diffs) from default values
+- Cryptographic verification data (hashes, nonces, signatures)
+- Timestamp and user identification
+- Merkle proof paths for data integrity verification
+
+## System Management
+- Continuous monitoring of canister cycle balance with configurable warning thresholds
+- User-friendly notifications when cycle balance is low
+- Deployment failure detection with specific error categorization
+- Step-by-step guidance for resolving deployment issues
+- Clear instructions for switching between Permanent and Ephemeral deployment modes
+- Dashboard integration showing real-time canister health and deployment status
+- Automated compression using modern compression algorithms
+- Production build optimization removing devDependencies and test modules
+- Schema file deduplication and metadata optimization processes
+- Admin-controlled sitemap management with strict access controls and audit trails

@@ -1,0 +1,28 @@
+{
+    "canisters": {
+        "icp_cloud_storage_backend": {
+            "main": "src/backend/main.mo",
+            "type": "motoko"
+        },
+        "icp_cloud_storage_frontend": {
+            "dependencies": [
+                "icp_cloud_storage_backend"
+            ],
+            "frontend": {
+                "entrypoint": "src/frontend/dist/index.html"
+            },
+            "source": [
+                "src/frontend/dist"
+            ],
+            "type": "assets"
+        }
+    },
+    "defaults": {
+        "build": {
+            "args": "",
+            "packtool": ""
+        }
+    },
+    "output_env_file": ".env",
+    "version": 1
+}

@@ -1,0 +1,28 @@
+src/blob-storage/FileStorage.ts(4,28): error TS2307: Cannot find module '../config' or its corresponding type declarations.
+src/blob-storage/FileStorage.ts(6,10): error TS2305: Module '"../backend"' has no exported member 'FileReference'.
+src/blob-storage/FileStorage.ts(32,32): error TS2339: Property 'listFileReferences' does not exist on type 'Actor'.
+src/blob-storage/FileStorage.ts(123,25): error TS2339: Property 'dropFileReference' does not exist on type 'Actor'.
+src/blob-storage/StorageClient.ts(1,28): error TS2305: Module '"../backend"' has no exported member 'FileReference'.
+src/blob-storage/StorageClient.ts(495,26): error TS2339: Property 'registerFileReference' does not exist on type 'Actor'.
+src/blob-storage/StorageClient.ts(501,33): error TS2339: Property 'listFileReferences' does not exist on type 'Actor'.
+src/blob-storage/StorageClient.ts(508,48): error TS2339: Property 'getFileReference' does not exist on type 'Actor'.
+src/components/AdminPage.tsx(1577,69): error TS2345: Argument of type '"pending" | { pending: null; } | { completed: null; } | { failed: null; } | "completed" | "failed"' is not assignable to parameter of type 'string'.
+  Type '{ pending: null; }' is not assignable to type 'string'.
+src/components/AdminPage.tsx(1578,33): error TS2322: Type '"pending" | { pending: null; } | { completed: null; } | { failed: null; } | "completed" | "failed"' is not assignable to type 'ReactNode'.
+  Type '{ pending: null; }' is not assignable to type 'ReactNode'.
+src/components/EnhancedAdminPanel.tsx(1051,9): error TS2353: Object literal may only specify known properties, and 'allowedCountries' does not exist in type 'StripeConfiguration'.
+src/components/EnhancedExportManager.tsx(599,71): error TS2345: Argument of type '"pending" | { pending: null; } | { completed: null; } | { failed: null; } | "completed" | "failed"' is not assignable to parameter of type 'string'.
+  Type '{ pending: null; }' is not assignable to type 'string'.
+src/components/EnhancedExportManager.tsx(600,35): error TS2322: Type '"pending" | { pending: null; } | { completed: null; } | { failed: null; } | "completed" | "failed"' is not assignable to type 'ReactNode'.
+  Type '{ pending: null; }' is not assignable to type 'ReactNode'.
+src/components/FullScreenPreviewModal.tsx(119,46): error TS2339: Property 'constructArchiveFallbackUrl' does not exist on type 'Actor'.
+src/components/ReferralsPage.tsx(668,31): error TS2322: Type '"pending" | { pending: null; } | { paid: null; } | "paid"' is not assignable to type 'ReactNode'.
+  Type '{ pending: null; }' is not assignable to type 'ReactNode'.
+src/components/ui/calendar.tsx(103,54): error TS2322: Type 'import("/Users/AdminDil/Documents/_GAGAgent/node_modules/.pnpm/@types+react@18.3.27/node_modules/@types/react/index").Ref<HTMLDivElement> | undefined' is not assignable to type 'React.Ref<HTMLDivElement> | undefined'.
+  Type '(instance: HTMLDivElement | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+    Type '(instance: HTMLDivElement | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type '(instance: HTMLDivElement | null) => void | (() => VoidOrUndefinedOnly)'. Two different types with this name exist, but they are unrelated.
+      Type 'void | (() => VoidOrUndefinedOnly)' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'. Two different types with this name exist, but they are unrelated.
+        Type '() => VoidOrUndefinedOnly' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+          Type '() => VoidOrUndefinedOnly' is not assignable to type '() => VoidOrUndefinedOnly'. Two different types with this name exist, but they are unrelated.
+            Type 'VoidOrUndefinedOnly' is not assignable to type 'VoidOrUndefinedOnly'. Two different types with this name exist, but they are unrelated.
+              Type '{ [UNDEFINED_VOID_ONLY]: never; }' is not assignable to type 'VoidOrUndefinedOnly'.

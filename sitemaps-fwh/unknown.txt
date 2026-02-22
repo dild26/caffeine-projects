@@ -1,0 +1,12 @@
+
+## Support
+
+For issues or questions regarding these external JavaScript files:
+- Contact: dild26@gmail.com
+- Website: https://www.seco.in.net
+- Documentation: See project README.md
+
+## License
+
+These files are part of the SitemapAI Platform project.
+© 2025 Sudha Enterprises. All rights reserved.

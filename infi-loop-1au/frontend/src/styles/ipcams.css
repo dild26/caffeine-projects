@@ -1,0 +1,254 @@
+/* IPCams IPv4 Grid Styles */
+
+.ipcams-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: hsl(var(--background));
+}
+
+.ipcams-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.ipcams-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ipcams-nav-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.ipcams-nav-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ipcams-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ipcams-tabs {
+  margin-bottom: 1.5rem;
+}
+
+.ipcams-tab {
+  display: flex;
+  align-items: center;
+}
+
+.ipcams-tab-content {
+  margin-top: 1rem;
+}
+
+.ipcams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.ipcams-camera-card {
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ipcams-camera-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ipcams-camera-preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: hsl(var(--muted));
+  overflow: hidden;
+}
+
+.ipcams-camera-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--muted) / 0.5) 100%);
+}
+
+.ipcams-camera-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.ipcams-camera-card:hover .ipcams-camera-overlay {
+  opacity: 1;
+}
+
+.ipcams-camera-info {
+  padding: 1rem;
+  background: hsl(var(--card));
+}
+
+.ipcams-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ipcams-modal {
+  background: hsl(var(--card));
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ipcams-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.ipcams-modal-body {
+  padding: 1.5rem;
+}
+
+.ipcams-player {
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.ipcams-player-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.ipcams-player-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.ipcams-footer {
+  padding: 1rem 2rem;
+  background: hsl(var(--card));
+  border-top: 1px solid hsl(var(--border));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ipcams-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .ipcams-nav-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ipcams-main {
+    padding: 1rem;
+  }
+
+  .ipcams-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ipcams-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .ipcams-modal-header {
+    padding: 1rem;
+  }
+
+  .ipcams-modal-body {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ipcams-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Dark mode adjustments */
+.dark .ipcams-camera-placeholder {
+  background: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--muted) / 0.3) 100%);
+}
+
+/* Rainbow theme adjustments */
+.rainbow .ipcams-nav {
+  background: linear-gradient(135deg, 
+    oklch(0.7 0.15 0) 0%,
+    oklch(0.7 0.15 60) 20%,
+    oklch(0.7 0.15 120) 40%,
+    oklch(0.7 0.15 180) 60%,
+    oklch(0.7 0.15 240) 80%,
+    oklch(0.7 0.15 300) 100%
+  );
+}
+
+.rainbow .ipcams-camera-card:hover {
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+}

@@ -1,0 +1,310 @@
+<!doctype html>
+<html>
+    <head>
+        <title>InfiLoop v52 Compact ALG</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: "Courier New", monospace;
+                background: #05081a; /* deep indigo */
+                color: #c6ff00; /* lime text */
+                height: 100vh;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #ip-grid {
+                display: grid;
+                gap: 1px;
+                padding: 5px;
+                width: 90vw;
+                max-width: 100%;
+                box-sizing: border-box;
+                margin: 0 auto;
+            }
+            .ip-cell {
+                padding: 6px;
+                background: rgba(0, 255, 0, 0.08);
+                border: 1px solid #0f0;
+                cursor: pointer;
+                font-size: clamp(9px, 1vw, 11px);
+                transition: all 0.15s;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .ip-cell:hover {
+                background: #0f0;
+                color: #000;
+                transform: scale(1.03);
+            }
+            .pagination {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                padding: 5px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #0f0;
+            }
+            .page-btn {
+                background: #0f0;
+                color: #000;
+                padding: 6px 12px;
+                margin: 0 4px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .page-btn:hover {
+                background: #fff;
+            }
+            .page-btn:disabled {
+                opacity: 0.3;
+            }
+            .status {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                color: #0f0;
+                font-size: 11px;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 8px;
+                border-radius: 4px;
+            }
+            .tooltip {
+                position: fixed;
+                background: rgba(0, 0, 0, 0.95);
+                color: #0f0;
+                padding: 10px;
+                border: 1px solid #0f0;
+                font-size: 11px;
+                pointer-events: none;
+                z-index: 999;
+                display: none;
+                max-width: 200px;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="status" id="status">Page 1 | IP: -- | Pos: (0,0)</div>
+        <div id="tooltip" class="tooltip"></div>
+        <div id="ip-grid"></div>
+        <div class="pagination">
+            <button class="page-btn" id="first">First</button>
+            <button class="page-btn" id="next">Next</button>
+            <button class="page-btn" id="prev">Prev</button>
+
+            <span id="page-info">Page 1</span>
+            <input
+                id="page-input"
+                type="number"
+                min="1"
+                value="1"
+                style="width: 90px; margin: 0 6px; text-align: center"
+            />
+            <button class="page-btn" id="go">Go</button>
+
+            <span id=""></span>
+
+            <button class="page-btn" id="last">Last</button>
+        </div>
+
+        <script>
+            // ---------- PARAMETERS ----------
+            const total = 4294967296; // number of IPs to show
+            const ipsPerPage = 1024; // about one screen
+            // 1.1.1.1 as 32‑bit int: (1<<24)+(1<<16)+(1<<8)+1
+            const startInt = (1 << 24) + (1 << 16) + (1 << 8) + 1;
+
+            let currentPage = 0;
+            let trackingActive = false;
+            let hoverTimer = null;
+
+            // ---------- INT <-> IP ----------
+            function intToIp(n) {
+                const a = (n >>> 24) & 255;
+                const b = (n >>> 16) & 255;
+                const c = (n >>> 8) & 255;
+                const d = n & 255;
+                return a + "." + b + "." + c + "." + d;
+            }
+
+            function indexToIp(idx) {
+                return intToIp(startInt + idx);
+            }
+
+            // ---------- RENDERING ----------
+            function updateGridCols() {
+                const grid = document.getElementById("ip-grid");
+
+                // current container width
+                const containerWidth = grid.clientWidth || window.innerWidth;
+
+                // desired base cell width (~80px), but clamp to at most 12 columns
+                let cols = Math.floor(containerWidth / 80);
+                if (cols < 1) cols = 1;
+                if (cols > 12) cols = 12; // hard max of 12 columns
+
+                grid.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
+            }
+
+            function updateButtons() {
+                const maxPage = Math.max(
+                    0,
+                    Math.floor((total - 1) / ipsPerPage),
+                );
+                document.getElementById("first").disabled = currentPage === 0;
+                document.getElementById("prev").disabled = currentPage === 0;
+                document.getElementById("last").disabled =
+                    currentPage === maxPage;
+                document.getElementById("next").disabled =
+                    currentPage === maxPage;
+            }
+
+            function renderPage(page) {
+                const maxPage = Math.max(
+                    0,
+                    Math.floor((total - 1) / ipsPerPage),
+                );
+                currentPage = Math.max(0, Math.min(page, maxPage));
+
+                const start = currentPage * ipsPerPage;
+                const end = Math.min(start + ipsPerPage, total);
+
+                document.getElementById("page-info").textContent =
+                    "Page " + (currentPage + 1);
+                document.getElementById("page-input").value = currentPage + 1;
+
+                const cells = [];
+                for (let i = start; i < end; i++) {
+                    const ip = indexToIp(i);
+                    const url = "https://" + ip;
+                    cells.push(
+                        '<div class="ip-cell" data-ip="' +
+                            ip +
+                            '" data-idx="' +
+                            i +
+                            '" onclick="window.open(\'' +
+                            url +
+                            "')\">" +
+                            ip +
+                            "</div>",
+                    );
+                }
+
+                document.getElementById("ip-grid").innerHTML = cells.join("");
+                document.getElementById("page-info").textContent =
+                    "Page " +
+                    (currentPage + 1) +
+                    " (" +
+                    (start + 1) +
+                    "-" +
+                    end +
+                    "/" +
+                    total +
+                    ")";
+                updateGridCols();
+                updateButtons();
+            }
+
+            // ---------- TRACKING ----------
+            document.addEventListener("mouseover", function (e) {
+                if (e.target.classList.contains("ip-cell") && !trackingActive) {
+                    if (hoverTimer) clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(function () {
+                        trackingActive = true;
+                    }, 10000); // 10s delay
+                }
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (!trackingActive) return;
+                const cell = document.querySelector(".ip-cell:hover");
+                if (cell) {
+                    const ip = cell.dataset.ip;
+                    const idx = cell.dataset.idx;
+                    const tooltip = document.getElementById("tooltip");
+                    tooltip.innerHTML =
+                        "URL: https://" +
+                        ip +
+                        "<br>Index: " +
+                        idx +
+                        "<br>Pos: (" +
+                        Math.round(e.clientX) +
+                        "," +
+                        Math.round(e.clientY) +
+                        ")";
+                    tooltip.style.display = "block";
+                    tooltip.style.left = e.clientX + 15 + "px";
+                    tooltip.style.top = e.clientY + 15 + "px";
+
+                    document.getElementById("status").textContent =
+                        "Page " +
+                        (currentPage + 1) +
+                        " | IP: " +
+                        ip +
+                        " | Pos: (" +
+                        Math.round(e.clientX) +
+                        "," +
+                        Math.round(e.clientY) +
+                        ")";
+                }
+            });
+
+            document.addEventListener("mouseout", function (e) {
+                if (!e.relatedTarget || !e.relatedTarget.closest(".ip-cell")) {
+                    document.getElementById("tooltip").style.display = "none";
+                }
+            });
+
+            // ---------- INIT ----------
+            document.addEventListener("DOMContentLoaded", function () {
+                renderPage(0);
+                window.addEventListener("resize", updateGridCols);
+
+                document.getElementById("first").onclick = function () {
+                    renderPage(0);
+                };
+                document.getElementById("last").onclick = function () {
+                    const maxPage = Math.max(
+                        0,
+                        Math.floor((total - 1) / ipsPerPage),
+                    );
+                    renderPage(maxPage);
+                };
+                document.getElementById("prev").onclick = function () {
+                    renderPage(currentPage - 1);
+                };
+                document.getElementById("next").onclick = function () {
+                    renderPage(currentPage + 1);
+                };
+
+                // custom page # navigation
+                document.getElementById("go").onclick = function () {
+                    const maxPage = Math.max(
+                        0,
+                        Math.floor((total - 1) / ipsPerPage),
+                    );
+                    let p = parseInt(
+                        document.getElementById("page-input").value,
+                        10,
+                    );
+                    if (isNaN(p)) return;
+                    p = Math.min(Math.max(p, 1), maxPage + 1); // clamp 1..maxPage+1
+                    renderPage(p - 1);
+                };
+            });
+        </script>
+    </body>
+</html>

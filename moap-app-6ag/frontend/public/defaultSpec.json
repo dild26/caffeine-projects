@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "appsRegistry": [
+    {
+      "id": "moap-app-6ag",
+      "name": "MoAP",
+      "description": "Caffeine Domains Apps Store",
+      "features": ["search", "compare", "analytics"],
+      "rank": 1,
+      "url": "https://moap-app-6ag.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "profile-app-3qv",
+      "name": "Profile App",
+      "description": "Create and manage Caffeine profile cards",
+      "features": ["profile creation", "social links", "customization"],
+      "rank": 2,
+      "url": "https://profile-app-3qv.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "factory-exchange-2q9",
+      "name": "Factory Exchange",
+      "description": "Decentralized exchange platform for Caffeine Domains",
+      "features": ["swaps", "liquidity pools", "analytics"],
+      "rank": 3,
+      "url": "https://factory-exchange-2q9.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "factory-service-2q9",
+      "name": "Factory Service",
+      "description": "Domain factory management service",
+      "features": ["domain creation", "factory management", "analytics"],
+      "rank": 4,
+      "url": "https://factory-service-2q9.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "domain-app-mre",
+      "name": "Domain App",
+      "description": "Manage your Caffeine Domains",
+      "features": ["domain search", "registration", "management"],
+      "rank": 5,
+      "url": "https://domain-app-mre.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "whois-azk",
+      "name": "WHOIS Lookup",
+      "description": "Check domain ownership and availability",
+      "features": ["lookup", "history", "analytics"],
+      "rank": 6,
+      "url": "https://whois-azk.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "caffeine-game-ftw",
+      "name": "Caffeine Game",
+      "description": "Play games and earn rewards",
+      "features": ["games", "rewards", "leaderboards"],
+      "rank": 7,
+      "url": "https://caffeine-game-ftw.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "factory-core-6dq",
+      "name": "Factory Core",
+      "description": "Main domain factory core system",
+      "features": ["core services", "management", "analytics"],
+      "rank": 8,
+      "url": "https://factory-core-6dq.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "meta-app-4fa",
+      "name": "Meta App",
+      "description": "Caffeine meta tools and services",
+      "features": ["tools", "services", "analytics"],
+      "rank": 9,
+      "url": "https://meta-app-4fa.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "sign-in-app-okv",
+      "name": "Sign In App",
+      "description": "Authentication and sign-in services",
+      "features": ["auth", "login", "security"],
+      "rank": 10,
+      "url": "https://sign-in-app-okv.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "caffeine-factory-ex7",
+      "name": "Caffeine Factory",
+      "description": "Caffeine domains factory system",
+      "features": ["factory", "management", "analytics"],
+      "rank": 11,
+      "url": "https://caffeine-factory-ex7.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "sync-app-tr2",
+      "name": "Sync App",
+      "description": "Sync services for domains and apps",
+      "features": ["sync", "integration", "management"],
+      "rank": 12,
+      "url": "https://sync-app-tr2.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "analytics-app-7dx",
+      "name": "Analytics App",
+      "description": "Analyze domains and app data",
+      "features": ["analytics", "reports", "visualizations"],
+      "rank": 13,
+      "url": "https://analytics-app-7dx.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "links-app-311",
+      "name": "Links App",
+      "description": "Manage and share domain links",
+      "features": ["links", "sharing", "management"],
+      "rank": 14,
+      "url": "https://links-app-311.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "rewards-app-4ls",
+      "name": "Rewards App",
+      "description": "Earn and redeem rewards",
+      "features": ["rewards", "points", "redeem"],
+      "rank": 15,
+      "url": "https://rewards-app-4ls.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "factory-db7",
+      "name": "Factory DB",
+      "description": "Database services for domains",
+      "features": ["database", "queries", "management"],
+      "rank": 16,
+      "url": "https://factory-db7.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "caffeine-core-3xw",
+      "name": "Caffeine Core",
+      "description": "Main core services for Caffeine",
+      "features": ["services", "core", "tools"],
+      "rank": 17,
+      "url": "https://caffeine-core-3xw.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "caffeine-domain-rw8",
+      "name": "Caffeine Domain",
+      "description": "Manage Caffeine domain properties",
+      "features": ["management", "properties", "analytics"],
+      "rank": 18,
+      "url": "https://caffeine-domain-rw8.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "search-app-icn",
+      "name": "Search App",
+      "description": "Search domains and apps",
+      "features": ["search", "filter", "analytics"],
+      "rank": 19,
+      "url": "https://search-app-icn.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "factory-llq",
+      "name": "Factory",
+      "description": "Create and manage domain factories",
+      "features": ["create", "manage", "analytics"],
+      "rank": 20,
+      "url": "https://factory-llq.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "webpage-app-qpg",
+      "name": "Webpage App",
+      "description": "Create and manage web pages",
+      "features": ["create", "manage", "publish"],
+      "rank": 21,
+      "url": "https://webpage-app-qpg.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "media-app-vz6",
+      "name": "Media App",
+      "description": "Manage domain media content",
+      "features": ["media", "management", "analytics"],
+      "rank": 22,
+      "url": "https://media-app-vz6.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "inventory-app-m9r",
+      "name": "Inventory App",
+      "description": "Track and manage inventory",
+      "features": ["track", "manage", "analytics"],
+      "rank": 23,
+      "url": "https://inventory-app-m9r.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "catalog-app-mre",
+      "name": "Catalog App",
+      "description": "Manage domain catalogs",
+      "features": ["manage", "catalog", "analytics"],
+      "rank": 24,
+      "url": "https://catalog-app-mre.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "finance-app-7jw",
+      "name": "Finance App",
+      "description": "Manage domain finance data",
+      "features": ["manage", "finance", "analytics"],
+      "rank": 25,
+      "url": "https://finance-app-7jw.caffeine.xyz/",
+      "archived": false
+    },
+    {
+      "id": "test-app-rde",
+      "name": "Test App",
+      "description": "Testing features for Caffeine Apps",
+      "features": ["unit testing", "integration testing", "analytics"],
+      "rank": 26,
+      "url": "https://test-app-rde.caffeine.xyz/",
+      "archived": false
+    }
+  ],
+  "sitemap": {
+    "sections": []
+  },
+  "features": [],
+  "leaderboards": {
+    "rankings": []
+  },
+  "versions": {
+    "versionHistory": []
+  },
+  "schemaVersion": 1,
+  "specVersion": 1,
+  "generatedAt": 0
+}

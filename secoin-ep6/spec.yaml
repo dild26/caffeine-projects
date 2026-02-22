@@ -1,0 +1,407 @@
+# SECoin Property Management System - Specification
+# Version: 2.0.0
+# Last Updated: 2025-11-02
+# Purpose: Comprehensive YAML schema for property management with DRY principles, unit-safe storage, and future-proofing
+
+version: "2.0.0"
+schema_format: "yaml"
+performance_mode: "optimal"
+
+# ============================================================================
+# METADATA & VERSIONING
+# ============================================================================
+metadata:
+  application_name: "SECoin Property Management"
+  description: "Blockchain-based fractional property ownership platform"
+  maintainer: "SECoin Development Team"
+  last_migration: "2025-11-02T00:00:00Z"
+  schema_version: "2.0.0"
+  backward_compatible_with: ["1.0.0", "1.5.0"]
+
+# ============================================================================
+# FUTURE-PROOFING & MIGRATION SUPPORT
+# ============================================================================
+future_proofing:
+  version_management:
+    semantic_versioning: true
+    breaking_changes_notification: true
+    deprecation_warning_period_days: 90
+    
+  migration_support:
+    automated_migrations: true
+    rollback_support: true
+    pre_migration_validation: true
+    post_migration_verification: true
+    backup_before_migration: true
+    
+  update_types:
+    - schema_version_updates
+    - module_additions
+    - module_removals
+    - field_type_migrations
+    - unit_conversions
+    - permission_model_changes
+    
+  error_prevention:
+    pre_flight_checks: true
+    data_integrity_validation: true
+    dependency_resolution: true
+    conflict_detection: true
+    
+  admin_notifications:
+    on_degraded_mode: true
+    on_fallback_mode: true
+    on_migration_required: true
+    on_breaking_changes: true
+    notification_channels:
+      - in_app_banner
+      - email
+      - audit_log
+
+# ============================================================================
+# PERFORMANCE MONITORING
+# ============================================================================
+performance:
+  monitoring:
+    enabled: true
+    metrics:
+      - response_time
+      - cache_hit_rate
+      - query_performance
+      - module_load_time
+    
+  degraded_mode_triggers:
+    response_time_threshold_ms: 1000
+    cache_miss_rate_threshold: 0.3
+    error_rate_threshold: 0.05
+    
+  fallback_conditions:
+    - yaml_parse_failure
+    - module_load_failure
+    - cache_corruption
+    
+  recovery_actions:
+    auto_reload_modules: true
+    clear_corrupted_cache: true
+    notify_admin: true
+    log_to_audit: true
+
+# ============================================================================
+# MODULE DEFINITIONS (DRY with anchors)
+# ============================================================================
+modules:
+  authentication: &auth_module
+    enabled: true
+    type: "core"
+    dependencies: []
+    cache_ttl_seconds: 3600
+    
+  storage: &storage_module
+    enabled: true
+    type: "core"
+    dependencies: ["authentication"]
+    cache_ttl_seconds: 1800
+    
+  nodes: &nodes_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication", "storage"]
+    cache_ttl_seconds: 600
+    
+  images: &images_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication", "storage"]
+    cache_ttl_seconds: 300
+    image_matching:
+      case_insensitive: true
+      normalize_filenames: true
+      validation_required: true
+      cache_busting: true
+    
+  audit: &audit_module
+    enabled: true
+    type: "core"
+    dependencies: []
+    cache_ttl_seconds: 0  # No caching for audit logs
+    
+  billing: &billing_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication"]
+    cache_ttl_seconds: 1800
+    
+  blog: &blog_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication"]
+    cache_ttl_seconds: 600
+    
+  referrals: &referrals_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication"]
+    cache_ttl_seconds: 1800
+    
+  sitemap: &sitemap_module
+    enabled: true
+    type: "feature"
+    dependencies: []
+    cache_ttl_seconds: 3600
+    
+  gallery: &gallery_module
+    enabled: true
+    type: "feature"
+    dependencies: ["authentication", "storage", "images"]
+    cache_ttl_seconds: 300
+    
+  faq: &faq_module
+    enabled: true
+    type: "feature"
+    dependencies: []
+    cache_ttl_seconds: 1800
+    
+  frontend: &frontend_module
+    enabled: true
+    type: "core"
+    dependencies: ["authentication"]
+    cache_ttl_seconds: 600
+    
+  operations: &operations_module
+    enabled: true
+    type: "core"
+    dependencies: ["audit"]
+    cache_ttl_seconds: 0
+
+# ============================================================================
+# UNIT-SAFE STORAGE SCHEMA
+# ============================================================================
+unit_safe_storage:
+  enabled: true
+  enforcement_level: "strict"
+  
+  numeric_field_schema: &numeric_field
+    value:
+      type: "Float"
+      description: "Numeric value stored as Float for precision"
+    unit:
+      type: "string"
+      description: "Unit of measurement (e.g., 'm', 'sqft', 'INR')"
+      required: true
+    editableBy:
+      type: "array"
+      items: "string"
+      description: "Roles allowed to edit this field"
+      default: ["Admin"]
+      
+  supported_units:
+    length:
+      - "m"
+      - "cm"
+      - "km"
+      - "ft"
+      - "in"
+    area:
+      - "m²"
+      - "sqm"
+      - "cm²"
+      - "km²"
+      - "sqft"
+      - "acre"
+    price:
+      - "INR"
+      - "USD"
+      - "EUR"
+      - "paise"
+      - "cents"
+    volume:
+      - "m³"
+      - "L"
+      - "gal"
+    weight:
+      - "kg"
+      - "g"
+      - "lb"
+      - "oz"
+
+# ============================================================================
+# PROPERTY SCHEMA
+# ============================================================================
+property_schema:
+  id:
+    type: "string"
+    required: true
+    unique: true
+    
+  name:
+    type: "string"
+    required: true
+    
+  location:
+    type: "string"
+    required: true
+    
+  price:
+    type: "bigint"
+    required: true
+    
+  latitude:
+    type: "Float"
+    required: true
+    default: 0.0
+    
+  longitude:
+    type: "Float"
+    required: true
+    default: 0.0
+    
+  area:
+    <<: *numeric_field
+    
+  elevation:
+    <<: *numeric_field
+    
+  pricePerUnit:
+    <<: *numeric_field
+    
+  gallery:
+    type: "array"
+    items: "ExternalBlob"
+    description: "Property-specific images with validated matching"
+    validation:
+      case_insensitive_matching: true
+      property_id_validation: true
+      cache_busting: true
+      
+  nodes:
+    type: "array"
+    items:
+      id: "string"
+      latitude: "Float"
+      longitude: "Float"
+      altitude: "Float"
+      createdAt: "bigint"
+      updatedAt: "bigint"
+      
+  fractionalOwnership:
+    type: "array"
+    items:
+      owner: "string"
+      percentage: "bigint"
+      
+  floors:
+    type: "array"
+    items:
+      floorNumber: "bigint"
+      area: "bigint"
+      price: "bigint"
+
+# ============================================================================
+# IMAGE MATCHING & GALLERY RULES
+# ============================================================================
+image_matching:
+  enabled: true
+  rules:
+    case_insensitive: true
+    normalize_filenames: true
+    remove_extensions: true
+    remove_separators: ["_", "-", " "]
+    
+  validation:
+    property_id_check: true
+    url_parameter_validation: true
+    cross_property_prevention: true
+    
+  cache_strategy:
+    cache_busting: true
+    timestamp_based: true
+    property_id_in_url: true
+    index_in_url: true
+    ttl_minutes: 1
+    
+  error_handling:
+    log_mismatches: true
+    log_validation_failures: true
+    prevent_cross_contamination: true
+    audit_all_operations: true
+
+# ============================================================================
+# DISPLAY PRIORITY SYSTEM
+# ============================================================================
+display_priority:
+  property_card:
+    priority_order:
+      1: "map_if_coordinates_available"
+      2: "image_if_available"
+      3: "placeholder"
+    
+  property_detail:
+    default_view: "map"
+    fallback_view: "image"
+    show_gallery_section: true
+    allow_toggle: true
+
+# ============================================================================
+# AUDIT & LOGGING
+# ============================================================================
+audit:
+  enabled: true
+  log_levels:
+    - "debug"
+    - "info"
+    - "warn"
+    - "error"
+    
+  operations_to_log:
+    - property_card_load
+    - gallery_upload
+    - image_matching
+    - cache_invalidation
+    - url_validation
+    - performance_degradation
+    - fallback_activation
+    
+  correlation_ids: true
+  performance_metrics: true
+  error_taxonomy: true
+
+# ============================================================================
+# CACHE MANAGEMENT
+# ============================================================================
+cache:
+  enabled: true
+  strategy: "property_specific"
+  
+  invalidation_triggers:
+    - gallery_upload
+    - property_update
+    - manual_refresh
+    
+  storage:
+    type: "sessionStorage"
+    key_prefix: "property_images_"
+    ttl_minutes: 5
+    
+  validation:
+    check_property_id: true
+    check_timestamp: true
+    check_integrity: true
+
+# ============================================================================
+# ERROR PREVENTION & RECOVERY
+# ============================================================================
+error_prevention:
+  validation:
+    pre_upload: true
+    pre_display: true
+    pre_cache: true
+    
+  recovery:
+    auto_retry: true
+    max_retries: 3
+    fallback_to_placeholder: true
+    
+  notifications:
+    admin_on_error: true
+    user_on_failure: true
+    log_all_errors: true

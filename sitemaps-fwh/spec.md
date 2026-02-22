@@ -1,0 +1,1678 @@
+# Sitemap Subscription Platform
+
+## Overview
+A futuristic sitemap subscription platform that allows users to search and subscribe to sitemap data with tiered access levels. The platform provides both public and authenticated access to sitemap search functionality with comprehensive navigation, advanced multi-level referral system, commission tracking, token-based payout management, analytics and export capabilities, auto-backup and auto-restore system, enhanced XML sitemap import functionality, secure link preview system, CPC analytics with leaderboard tracking, enhanced domain filtering, permanent storage with auto-backup system, enterprise-grade upgrade management, dedicated Feature Checklist admin page, persistent bottom navigation bar, integrated Stripe payment processing, robust field management system, enhanced pagination, subscriber-only external link access, fully responsive full-viewport preview modal system, ultra-high-performance unified search system, enterprise-grade UI robustness, deployment resilience, machine-readable specification system, external JavaScript file integration, comprehensive catalog system, and automated deployment diagnostic and recovery system.
+
+## Automated Deployment Diagnostic & Recovery System
+
+### System Overview
+- Comprehensive deployment failure detection and automated repair system for "Go live failed" deployment errors
+- Real-time diagnostic scanning to identify root causes of deployment failures
+- Automated recovery mechanisms with self-healing capabilities
+- Admin-only diagnostic interface with visual progress indicators and detailed error reporting
+- Integration with existing error boundaries and monitoring systems for proactive failure prevention
+- Persistent deployment logs and diagnostic history for troubleshooting and analysis
+
+### Frontend Deployment Diagnostics Panel
+- New DeploymentDiagnostics.tsx component under frontend/src/components/ for comprehensive diagnostic interface
+- Admin-only diagnostic panel accessible from AdminPage.tsx sidebar with role-based access control
+- Comprehensive diagnostic scanning capabilities detecting:
+  - Missing or misconfigured environment variables including Stripe secret key, publishable key, and webhook secrets
+  - Inaccessible external JavaScript files or missing root assets (server.js, sitemaps-fwh.node.js, sitemaps-fwh.node-1.js)
+  - Build errors including malformed imports, cyclic dependencies, and misreferenced routes
+  - Missing frontend build artifacts or corrupted file references
+  - Asset compilation failures and missing static resources
+  - Configuration validation errors and incomplete setup procedures
+- Interactive diagnostic interface with "Run Diagnostics" and "Auto-Fix" buttons
+- Visual progress indicators showing real-time diagnostic progress and completion status
+- Readable error summaries with detailed explanations and recommended solutions
+- Diagnostic results display with categorized error types and severity levels
+- Recovery action recommendations with automated fix options
+- Diagnostic history and log viewer for tracking deployment issues over time
+
+### Backend Self-Check Endpoint and Validation
+- Extended backend/main.mo with new runDeploymentDiagnostics() method returning structured diagnostic information
+- Comprehensive backend validation system detecting deployment anomalies:
+  - Access control initialization verification with role and permission validation
+  - Stripe configuration validity checking including key validation and webhook setup
+  - File reference validation via Registry.list for all registered assets
+  - Stable data maps validation ensuring all persistent data has valid state
+  - Environment variable validation and configuration completeness checking
+  - External JavaScript file accessibility and integration status verification
+  - Backend service health monitoring and dependency validation
+- Structured diagnostic response format with error categorization and severity levels
+- Real-time system health monitoring with proactive failure detection
+- Diagnostic data persistence using stable variables for historical tracking
+- Backend diagnostic APIs with comprehensive error reporting and recovery recommendations
+
+### Automated Recovery Actions and Self-Healing
+- Frontend recovery handler with automated cleanup and redeploy capabilities:
+  - Static asset rebuilding with validation and integrity checking
+  - Missing file reference re-registration with automatic detection and correction
+  - Incomplete environment variable setup repair with template generation
+  - Corrupted build cache purging with reinitialization procedures
+  - Asset compilation retry with error detection and correction
+  - Configuration validation and automatic repair procedures
+- Automated recovery workflow with step-by-step progress tracking
+- Recovery success validation with post-recovery diagnostic verification
+- Rollback capabilities for failed recovery attempts with state restoration
+- Recovery action logging with detailed operation tracking and audit trails
+- Self-healing integration with existing error boundaries and monitoring systems
+
+### Admin Interface Integration and User Experience
+- Deployment diagnostics panel integrated into AdminPage.tsx sidebar navigation
+- Admin-only access with comprehensive role verification and permission controls
+- Intuitive diagnostic interface with clear visual indicators and progress feedback
+- Real-time diagnostic execution with live progress updates and status indicators
+- Comprehensive error reporting with detailed explanations and solution recommendations
+- One-click recovery actions with confirmation dialogs and progress tracking
+- Diagnostic history viewer with searchable logs and filtering capabilities
+- Export functionality for diagnostic reports and recovery logs
+- Integration with existing admin panel styling and theme support
+
+### Auto-Healing System Integration
+- Integration with existing global App error boundary and watchdog system via App.tsx
+- Automatic diagnostic execution when deployment errors are detected
+- Proactive monitoring with early failure detection and prevention
+- Self-healing capabilities with automatic recovery attempt initiation
+- Error pattern recognition with predictive failure prevention
+- System health monitoring with continuous diagnostic validation
+- Automated recovery escalation with manual intervention options when needed
+- Recovery success tracking with system reliability metrics and improvement analytics
+
+### Deployment Logs and Monitoring
+- Persistent deployment logs storage using stable variables for historical tracking
+- Comprehensive diagnostic event logging with timestamps and detailed information
+- Deployment failure analysis with root cause identification and trend tracking
+- Recovery operation logging with success rates and performance metrics
+- Diagnostic history management with retention policies and archival procedures
+- Log export functionality for external analysis and reporting
+- Real-time log monitoring with alert systems for critical failures
+- Integration with existing analytics and reporting systems
+
+## Complete "Include in Catalogs" Feature for Uploaded Data Files
+
+### Catalog System Overview
+- Comprehensive catalog system that automatically processes and indexes all uploaded data files (.json, .csv, .md, .zip)
+- Dynamic catalog entries created from file contents with structured metadata and searchable content
+- Integration with existing search infrastructure and unified search functionality
+- Support for multiple file formats with intelligent parsing and content extraction
+- Catalog entries include file type, title, source URL, summary text, and comprehensive metadata
+- Persistent catalog storage across all upgrades and migrations with stable variable implementation
+
+### Backend Catalog Processing and Storage
+- Automatic file ingestion system that processes all uploaded files through existing upload panels
+- Multi-format file parsing supporting .json, .csv, .md, and .zip file types:
+  - JSON files parsed into discrete entries with key-value extraction and content chunking
+  - CSV files processed row-by-row with column header recognition and data structuring
+  - Markdown files chunked into sections with header recognition and content extraction
+  - ZIP files extracted and contents processed recursively with nested file handling
+- Intelligent content chunking system that breaks files into searchable catalog entries
+- Structured catalog entry creation with standardized metadata fields:
+  - File type and format information
+  - Entry title extracted from content or generated automatically
+  - Source URL extraction when present in file contents
+  - Summary text generation from content samples
+  - Metadata fields including upload date, file size, keywords, and content tags
+  - SEO metrics including rank, click count, popularity, and relevance scores
+  - Performance metrics including backlinks, ping response, load speed, and bounce rate
+- Dynamic indexing system supporting full-text search across all catalog content
+- Keyword extraction and tagging system for enhanced searchability
+- Metadata-based querying with advanced filtering capabilities
+- Backend stores all catalog entries using stable variables with guaranteed persistence
+- Backend provides catalog management APIs for retrieval, filtering, and sorting
+- Backend implements vectorized indexing preparation for future semantic search capabilities
+
+### Frontend Catalogs Page and User Interface
+- New dedicated CatalogsPage accessible from main navigation with comprehensive catalog browsing
+- Default list view displaying sortable resource entries with title, type, and metadata columns
+- Toggle functionality for "List" vs "Card/Gallery" view modes with distinct visual styling
+- Card view featuring preview images or file type icons with visual badges and action buttons
+- Responsive AdvancedSearchBar component supporting multiple search types:
+  - Keyword-based search across all catalog content
+  - Semantic search capabilities with intelligent matching
+  - Tag-based search using extracted keywords and metadata
+  - Collapsible and expandable filter panels for advanced search options
+- Live dynamic filters that adapt based on query context and search results
+- Automatic filter hiding for irrelevant options based on current search context
+- Comprehensive filtering options including:
+  - SEO rank and performance metrics
+  - Click count and popularity scores
+  - Relevance and recency filters
+  - Visibility and backlink metrics
+  - Load speed and bounce rate filtering
+- Personalization features with smart ranking based on user search history and preferences
+- Integration with existing search infrastructure for unified search capabilities
+- Catalog entries discoverable through both dedicated catalog search and main platform search
+
+## External JavaScript File Integration
+- Integration of external JavaScript files (`server.js`, `sitemaps-fwh.node.js`, and `sitemaps-fwh.node-1.js`) into the project's root directory
+- Files saved with proper UTF-8 encoding and appropriate file permissions
+- External JavaScript functionality integrated with existing platform features
+- File management system ensuring proper handling of JavaScript assets
+- Integration with build system and deployment processes
+- Proper file versioning and update management for external JavaScript files
+- Security validation for external JavaScript file content
+- Performance optimization for external JavaScript file loading
+- Error handling for external JavaScript file integration failures
+- Backend stores external JavaScript file metadata and integration status using stable variables
+- Backend provides file management APIs for external JavaScript integration
+- Backend handles file validation, security checks, and integration monitoring
+
+## Machine-Readable Specification System (spec.ml)
+- Comprehensive spec.ml format implementation for machine-readable feature specification encoding
+- All unique features, requirements, and modular roadmap items encoded in structured spec.ml format
+- Future-proof specification system ensuring audit-safe and scalable integration capabilities
+- Core reference system for all future upgrades, debugging, and modular feature tracking
+- Robust, modular, and optimized specification for live updates and migrations
+- Automated specification validation and consistency checking
+- Version-controlled specification management with change tracking
+- Integration with development workflow for automated feature verification
+- Specification-driven development ensuring all features align with documented requirements
+- Machine-readable format enabling automated testing and validation
+- Modular specification architecture supporting incremental feature development
+- Specification export and import capabilities for cross-platform compatibility
+- Real-time specification synchronization with actual implementation status
+- Automated specification updates based on feature completion and changes
+- Backend stores spec.ml configuration data, feature definitions, and validation rules using stable variables
+- Backend provides specification management APIs for updates, validation, and synchronization
+- Backend implements automated specification checking and compliance validation
+- Backend stores specification version history and change tracking using stable variables
+
+## Critical Deployment Resilience and Error Recovery System
+- Comprehensive deployment failure diagnosis and prevention system:
+  - Pre-deployment validation checks for all modules, dependencies, and configurations
+  - Build system validation ensuring all assets are properly generated and referenced
+  - Migration logic validation with rollback capabilities for failed deployments
+  - Dependency audit system checking for missing or incompatible packages
+  - Configuration validation ensuring all environment variables and settings are properly configured
+  - Asset compilation verification preventing deployment with missing or corrupted assets
+  - Database migration validation with integrity checks and rollback procedures
+  - Service health checks before deployment completion with comprehensive monitoring
+- Automated deployment recovery mechanisms:
+  - Automatic rollback to previous stable version on deployment failure
+  - Emergency deployment procedures with minimal downtime and data preservation
+  - Deployment monitoring with real-time failure detection and automatic recovery
+  - Post-deployment validation ensuring all services are operational
+  - Deployment logging with comprehensive error tracking and analysis
+  - Canary deployment support with gradual rollout and automatic rollback
+  - Blue-green deployment capabilities for zero-downtime updates
+- Build system robustness and error prevention:
+  - Comprehensive build validation with error detection and prevention
+  - Asset optimization and compression with integrity verification
+  - Build cache management preventing stale or corrupted builds
+  - Cross-platform build compatibility ensuring consistent deployment across environments
+  - Build artifact validation with checksum verification and corruption detection
+  - Automated build testing with comprehensive validation before deployment
+  - Build system monitoring with performance optimization and error prevention
+- Migration and upgrade resilience:
+  - Safe migration procedures with comprehensive backup and rollback capabilities
+  - Data integrity validation during migrations with corruption detection and recovery
+  - Schema migration validation with compatibility checks and error prevention
+  - Version compatibility checks preventing incompatible upgrades
+  - Migration monitoring with real-time progress tracking and error detection
+  - Automated migration testing with validation and rollback procedures
+  - Migration logging with comprehensive audit trails and error analysis
+
+## Enterprise-Grade Module Architecture with Comprehensive Error Resilience
+- Modular application architecture with complete component isolation:
+  - Search module with independent state management and error boundaries
+  - Upload module with isolated processing and comprehensive error handling
+  - Admin module with secure access control and error recovery mechanisms
+  - Preview module with fallback systems and error-resistant rendering
+  - Sidebar module with complete decoupling and error isolation
+  - Authentication module with secure session management and error recovery
+  - Payment module with secure transaction handling and error prevention
+  - Catalog module with independent processing and comprehensive error handling
+  - Deployment diagnostics module with isolated diagnostic processing and error recovery
+- Comprehensive error boundary implementation for all modules:
+  - Module-level error boundaries preventing cascading failures
+  - Component-level error boundaries with granular error handling
+  - Service-level error boundaries for backend integration
+  - Network-level error boundaries for API communication failures
+  - Data-level error boundaries for storage and retrieval operations
+  - UI-level error boundaries for rendering and interaction failures
+- Automated self-healing and recovery system:
+  - Component failure detection with automatic restart and recovery
+  - Service health monitoring with proactive failure prevention
+  - Data corruption detection with automatic repair and restoration
+  - Network failure recovery with automatic retry and fallback mechanisms
+  - UI freeze detection with automatic refresh and recovery
+  - Memory leak detection with automatic cleanup and optimization
+  - Performance degradation detection with automatic optimization
+- Module communication resilience:
+  - Fault-tolerant inter-module communication with retry mechanisms
+  - Message queue system for reliable module communication
+  - Event-driven architecture with error handling and recovery
+  - API gateway with load balancing and failure detection
+  - Circuit breaker pattern for service protection and recovery
+  - Timeout management with configurable thresholds and fallback procedures
+  - Error propagation control preventing system-wide failures
+
+## Guaranteed Data Persistence and Zero-Loss Architecture
+- Bulletproof data persistence system ensuring no data loss during any operation:
+  - All uploaded .json, .xml, .csv, .md, and .zip data stored in stable variables with guaranteed persistence
+  - All catalog entries and processed file contents stored with guaranteed persistence
+  - Instant indexing system ensuring all data is immediately searchable after upload
+  - Real-time data synchronization with backend storage and validation
+  - Atomic transaction processing preventing partial data loss
+  - Data integrity validation with checksum verification and corruption detection
+  - Redundant storage systems with automatic failover and recovery
+  - Continuous data backup with versioning and point-in-time recovery
+- Enhanced stable variable implementation with enterprise-grade reliability:
+  - Multi-layered stable variable storage with redundancy and error correction
+  - Automatic data validation and integrity checking on every operation
+  - Transaction logging with complete audit trails and rollback capabilities
+  - Data compression and optimization for efficient storage utilization
+  - Concurrent access control preventing data corruption and conflicts
+  - Data encryption and security measures for sensitive information protection
+  - Performance optimization for large-scale data operations
+- Migration-safe data architecture:
+  - Pre-migration data backup with comprehensive validation and verification
+  - Migration-aware data structures with version compatibility
+  - Post-migration data validation with integrity checking and recovery
+  - Rollback procedures for failed migrations with complete data restoration
+  - Data format conversion with validation and error handling
+  - Schema evolution support with backward compatibility
+  - Migration monitoring with real-time progress tracking and error detection
+- Real-time data availability guarantee:
+  - Instant data indexing ensuring immediate searchability after any operation
+  - Real-time search index updates with consistency validation
+  - Live data synchronization across all application components
+  - Cache invalidation and refresh mechanisms for data consistency
+  - Data availability monitoring with automatic recovery procedures
+  - Performance optimization for real-time data access and retrieval
+  - Load balancing for high-availability data access
+
+## Advanced Sitemap Search Module Standardization and Cloning
+- Complete Advanced Sitemap Search module standardization across Homepage and Sitemaps page:
+  - Identical search functionality with unified codebase and shared components
+  - Single search field implementation combining all search capabilities
+  - Ultra-high-performance search with instant results and bulletproof reliability
+  - Inurl-style keyword matching with case-insensitive multi-level path segment search
+  - Smart result prioritization with top-level segments appearing first
+  - 2-second debounce implementation for optimal performance and reduced API calls
+  - Guaranteed data availability with instant indexing and zero data loss
+  - Robust error handling with progress feedback and self-healing capabilities
+  - Admin unlimited access with enterprise-grade performance and no restrictions
+- Enhanced TLD support system with complete coverage and intelligent recognition:
+  - Comprehensive domain extension filtering with complete TLD coverage from ".ac" to ".zw"
+  - Common domain extensions (.com, .org, .net, .edu, .gov, .mil, .int, .info, .biz, .name, .pro) prominently displayed at top
+  - Intelligent TLD recognition supporting both "org" and ".org" search queries
+  - Autocomplete functionality in TLD dropdown for fast extension selection
+  - Searchable extension dropdown with real-time filtering and suggestion algorithms
+  - URL count integration with TLD filtering and real-time calculation
+  - Performance-optimized TLD indexes for fast lookup and filtering
+- True full-screen secure preview system with guaranteed functionality:
+  - Complete viewport coverage using 100vw width and 100vh height on all devices
+  - Guaranteed minimum height of 100vh with 400px absolute fallback
+  - Object-based preview rendering with secure content handling and compatibility
+  - Progressive fallback system with intelligent timeout management (3x, 2x, 1x delays)
+  - Internet Archive fallback integration with guaranteed execution
+  - Screenshot fallback system with guaranteed execution and minimum height support
+  - Enhanced URL validation and automatic protocol handling
+- Module cloning and consistency enforcement:
+  - Exact replication of Homepage search module to Sitemaps page
+  - Shared component library ensuring identical functionality and behavior
+  - Unified configuration and settings across all search implementations
+  - Consistent performance optimization and caching between instances
+  - Synchronized error handling and recovery mechanisms
+  - Identical visual design and user experience across all implementations
+
+## Robust Sidebar Component with Enhanced Error Recovery
+- Comprehensive sidebar error handling and recovery system:
+  - Enhanced user data fetch logic with multiple retry attempts and exponential backoff
+  - Fallback user data sources with cached information and default values
+  - Graceful degradation when user data cannot be loaded with alternative navigation
+  - Clear error messages with recovery instructions and user guidance
+  - Automatic retry mechanisms for failed requests with intelligent timing
+  - Fallback navigation options when sidebar component fails completely
+- Sidebar reliability and self-healing capabilities:
+  - Component health monitoring with proactive failure detection and prevention
+  - Automatic component refresh without full page reload when errors occur
+  - State preservation during sidebar recovery with user preference retention
+  - Alternative authentication state detection when primary methods fail
+  - Emergency navigation access when sidebar becomes unresponsive
+  - Cross-browser compatibility with consistent behavior across all environments
+- Enhanced sidebar data loading optimization:
+  - Multiple data source fallbacks for user information retrieval
+  - Cached user data with offline access capabilities and intelligent refresh
+  - Progressive loading with skeleton screens during data fetch operations
+  - Timeout handling with clear user feedback and retry options
+  - Data validation with corruption detection and automatic recovery
+  - Real-time synchronization with backend user data updates
+- Complete sidebar component isolation and modularity:
+  - Portal-based rendering ensuring complete decoupling from main application layout
+  - Independent state management preventing interference with other components
+  - Modular architecture allowing sidebar replacement without affecting core functionality
+  - Error boundaries that contain failures within sidebar component only
+  - Guaranteed fallback UI that always renders valid React elements
+  - Alternative navigation methods available when sidebar is unavailable
+
+## Optimized XML Sitemap Import with Exclusive <loc> Field Processing
+- Refactored XML sitemap import system focused exclusively on <loc> elements:
+  - XML parsing engine that processes only <loc> elements, ignoring all other fields
+  - Streamlined URL extraction from <loc> tags with validation and normalization
+  - Enhanced error handling for malformed XML with partial import capabilities
+  - Real-time progress tracking with accurate URL count display during processing
+  - Import verification system ensuring all discovered <loc> URLs are successfully processed
+  - Clear import feedback with detailed statistics and error reporting
+- Comprehensive <loc> field processing optimization:
+  - Efficient XML parsing focused exclusively on <loc> element detection
+  - URL validation and normalization for each extracted <loc> entry
+  - Duplicate URL detection and intelligent deduplication during processing
+  - Error categorization for invalid URLs with detailed reporting and recovery
+  - Complete coverage of all <loc> entries regardless of XML structure complexity
+  - Performance optimization for large XML files with streaming processing
+- Enhanced import feedback and error handling system:
+  - Real-time URL count display showing exact numbers found and processed
+  - Progress indicators for parsing, extraction, and import phases
+  - Import summary with comprehensive statistics including success and failure counts
+  - Detailed error reporting for parsing failures and invalid entries
+  - Import history tracking with searchable logs and performance metrics
+  - Recovery procedures for failed imports with partial data preservation
+- Backend integration with guaranteed persistence and instant indexing:
+  - Immediate stable variable storage for all successfully imported URLs
+  - Real-time search index updates ensuring instant searchability
+  - Comprehensive URL indexing for all imported XML <loc> URLs
+  - Integration with existing sitemap search and display functionality
+  - Performance optimization for large-scale XML import operations
+  - Data integrity validation and corruption detection during import
+
+## Comprehensive Search, Preview, and Pagination Feature Optimization
+- Enhanced pagination system with mandatory first/last page navigation:
+  - First page button always present and visible before Previous button
+  - Last page button always present and visible after Next button
+  - Previous/Next page navigation positioned between First/Last buttons
+  - Page number display with direct page input functionality
+  - Smooth navigation across large datasets with performance optimization
+  - Pagination controls with robust error handling and freeze prevention
+- Subscriber-only external link access with true hyperlink implementation:
+  - "Web Page" links visible only to authenticated subscribers and admins
+  - True hyperlinks with target="_blank" attribute opening actual URL in new tab
+  - Clear visual distinction for subscriber-only features with proper styling
+  - Subscription upgrade prompts for non-subscribers with clear messaging
+  - Authentication status validation with real-time verification
+- True full-screen preview system with guaranteed functionality across all devices:
+  - Complete viewport coverage (100vw/100vh) on mobile, tablet, laptop, and desktop
+  - Guaranteed minimum height of 100vh with 400px absolute fallback
+  - Object-based preview rendering for secure content handling
+  - Progressive fallback system with intelligent timeout management
+  - Internet Archive integration with automatic fallback switching
+  - Screenshot capture system with guaranteed execution and minimum height
+- Cross-device compatibility and responsive design optimization:
+  - Mobile-responsive design with touch-optimized controls
+  - Tablet optimization with adaptive layouts and gesture support
+  - Desktop/laptop optimization with keyboard navigation and hover states
+  - Cross-browser compatibility testing and validation
+  - Performance optimization for all device types and screen sizes
+  - Accessibility compliance with screen reader support and keyboard navigation
+
+## Automated Self-Healing and Monitoring System
+- Comprehensive application monitoring and health checking:
+  - Real-time performance monitoring with automatic optimization triggers
+  - Component health tracking with proactive failure detection
+  - Memory usage monitoring with automatic cleanup and optimization
+  - Network connectivity monitoring with automatic retry mechanisms
+  - Database connection monitoring with failover and recovery procedures
+  - User experience monitoring with automatic improvement suggestions
+- Automated recovery and self-healing mechanisms:
+  - Component failure detection with automatic restart and recovery
+  - UI freeze detection with automatic refresh and state restoration
+  - Data corruption detection with automatic repair and validation
+  - Network failure recovery with intelligent retry and fallback systems
+  - Performance degradation detection with automatic optimization
+  - Error pattern analysis with proactive prevention measures
+- Predictive maintenance and optimization system:
+  - Performance trend analysis with predictive failure detection
+  - Resource usage optimization with automatic scaling and adjustment
+  - Error pattern recognition with preventive measures and fixes
+  - User behavior analysis with experience optimization recommendations
+  - System capacity planning with automatic resource allocation
+  - Maintenance scheduling with minimal disruption and downtime
+- Comprehensive logging and analytics for continuous improvement:
+  - Detailed error logging with categorization and trend analysis
+  - Performance metrics tracking with optimization recommendations
+  - User interaction logging with experience improvement insights
+  - System health metrics with predictive maintenance alerts
+  - Recovery success tracking with process optimization
+  - Continuous improvement recommendations based on data analysis
+
+## HTML Template and Build System Requirements
+- HTML template must use the user-provided format with correct meta tags, title, and style elements
+- Dynamic asset referencing system that automatically updates script and link tags with current build filenames
+- No hardcoded asset filenames in HTML template (avoid static references like index-CHWGZuri.js)
+- Build system integration that injects correct asset paths during compilation
+- Removal of any legacy or default HTML templates that override user-supplied structure
+- Consistent branding and layout through proper HTML template structure
+- Root div element with id='root' for React app mounting
+- Proper asset loading verification to prevent blank pages or missing content
+- English language content specification in HTML template
+- Backend index() query must return the exact user-provided HTML template format
+- Frontend index.html must match the exact user-provided HTML template format
+- All meta tags, styles, and asset references must be preserved exactly as provided
+- No default or outdated HTML code should remain in the template
+
+## Internet Identity Authentication System
+- Internet Identity integration for secure user login and registration
+- Automatic user profile creation upon first login with default settings
+- Session management with persistent authentication state across browser sessions
+- Secure logout functionality with proper session cleanup
+- Authentication state management with real-time updates
+- User identity verification and validation
+- Authentication error handling with user-friendly feedback
+- Cross-browser authentication compatibility
+- Mobile-responsive authentication interface
+- Backend stores user authentication data and session information using stable variables
+- Backend validates user identity and manages authentication tokens
+- Backend provides authentication APIs for login, logout, and session validation
+
+## User Profile and Session Management
+- Automatic user profile creation with default metadata upon first authentication
+- User profile storage including preferences, settings, and account information
+- Session persistence across browser sessions and page refreshes
+- Profile update functionality for user preferences and settings
+- Account information display and management interface
+- User role assignment and management (regular user, admin)
+- Profile data synchronization with backend storage
+- Privacy controls and data management options
+- Backend stores comprehensive user profiles and metadata using stable variables
+- Backend manages user sessions and authentication state
+- Backend provides profile management APIs for updates and data retrieval
+
+## Public Access and Always-Visible Sign In
+- Public access to key pages without authentication requirement:
+  - Homepage with public search functionality
+  - About Us page with complete business information
+  - Contact Us page with contact details and social links
+  - God's Eye Summary page with platform overview
+  - Sitemaps page with complete Advanced Sitemap Search functionality
+  - Catalogs page with public catalog browsing and search functionality
+  - Public advanced search functionality
+- Always-visible "Sign In" button in top navigation bar on all pages
+- Sign In button remains accessible and prominent regardless of authentication state
+- Clear visual distinction between authenticated and non-authenticated states
+- Seamless transition between public and authenticated experiences
+- Public content optimization for search engines and accessibility
+- Guest user functionality with limited access to premium features
+- Authentication prompts for premium features with clear upgrade paths
+
+## Role-Based Feature Display and Access Control
+- Dynamic feature visibility based on user authentication status and role
+- Admin-only features completely hidden from regular users:
+  - Admin Panel access and management tools
+  - Feature Checklist page and controls
+  - Sitemap management and upload functionality
+  - XML import capabilities
+  - Backup and restore operations
+  - System upgrade management
+  - Secure Stripe payment configuration and management controls
+  - Catalog management and administrative controls
+  - Deployment diagnostics panel and recovery tools
+- Authenticated user features with proper access control:
+  - User dashboard with personalized content
+  - Subscription management and tier access
+  - Referral system and commission tracking
+  - Advanced search with higher limits
+  - Analytics and export functionality
+  - Payment initiation for subscriptions and Pay As You Use batches
+  - External link access in search results (subscriber-only "Web Page" links)
+  - Full catalog access with advanced search and filtering
+- Role verification and permission checking for all protected features
+- Graceful degradation for unauthorized access attempts
+- Clear messaging for feature availability based on user status
+- Admin account has unrestricted access to all data and features with no search, registration, subscription, or transaction limits
+- Backend implements comprehensive role-based access control
+- Backend validates user permissions for all protected operations
+- Backend stores user roles and permission matrices using stable variables
+- Backend provides unlimited access for admin accounts with proper role verification
+- Backend validates subscription status for external link access
+
+## Enhanced Secure Stripe Payment Processing Integration
+- Secure Stripe payment integration using official Stripe.js and React Stripe.js libraries on the frontend
+- Backend Motoko Stripe integration module for creating and managing checkout sessions
+- Stripe Checkout Session creation for both subscription and Pay As You Use purchases
+- Frontend payment modal or checkout button integration with Stripe Elements
+- Secure payment flow that never exposes secret keys to the frontend:
+  - Frontend initiates payment request to backend
+  - Backend creates Stripe Checkout Session using secure environment variables
+  - Backend returns session URL to frontend for redirection
+  - User completes payment on Stripe's secure checkout page
+  - Backend verifies payment completion and updates user entitlements
+- Payment status verification and user entitlement updates after successful transactions
+- Comprehensive payment history display in user dashboard and admin panel
+- Payment error handling with user-friendly feedback and retry mechanisms
+- Subscription payment processing for all tier levels:
+  - Basic Plan: $9/month
+  - Pro Plan: $45/month
+  - Enterprise Plan: $99/month
+- Pay As You Use batch purchase processing:
+  - Top 10 domains ($0.01)
+  - Top 100 domains ($0.1)
+  - Top 1,000 domains ($1)
+  - Top 10,000 domains ($10)
+  - Top 100,000 domains ($100)
+  - Top 1,000,000 domains ($1,000)
+- Payment confirmation and receipt generation
+- Refund processing and cancellation handling
+- Payment analytics and financial reporting
+- Enhanced Security-Focused Admin Stripe Configuration with guaranteed persistence:
+  - Admin interface allows input of Stripe SECRET_KEY and optional WEBHOOK_SECRET for secure server-side storage
+  - Configuration persistence across all updates, upgrades, and migrations with stable variable backup
+  - Secret keys stored securely in environment variables with stable variable configuration tracking
+  - Stripe PUBLISHABLE_KEY loaded from environment variables and never editable in admin UI
+  - Clear security notices warning against pasting secret keys into UI
+  - Configuration completion status tracking with persistent validation
+- Backend stores payment transaction data, subscription status, and billing history using stable variables
+- Backend provides payment processing APIs with Stripe integration
+- Backend handles payment verification, user entitlement updates, and transaction logging
+- Backend implements admin-only payment management APIs with role verification
+- Backend stores secure Stripe configuration status and settings using stable variables with environment variable management
+
+## Subscription System
+- Three subscription tiers with different access levels and limits:
+  - Basic Plan: $9/month
+  - Pro Plan: $45/month
+  - Enterprise Plan: $99/month
+- Pay As You Use subscription option with domain batch pricing featuring:
+  - Top 10 domains ($0.01) - One-time/lifetime access to top 10 highest quality domains
+  - Top 100 domains ($0.1) - One-time/lifetime access to top 100 highest quality domains (marked as "Best Value")
+  - Top 1,000 domains ($1) - One-time/lifetime access to top 1,000 highest quality domains
+  - Top 10,000 domains ($10) - One-time/lifetime access to top 10,000 highest quality domains
+  - Top 100,000 domains ($100) - One-time/lifetime access to top 100,000 highest quality domains
+  - Top 1,000,000 domains ($1,000) - One-time/lifetime access to top 1,000,000 highest quality domains
+- Users can create and manage subscriptions through the frontend with secure Stripe payment integration
+- Subscription upgrade and downgrade functionality with prorated billing
+- Usage tracking and quota management for each tier
+- Subscription renewal and cancellation management
+- Backend stores subscription data including tier level, status, pricing, and user associations using stable variables
+- Backend stores Pay As You Use purchase records and quota tracking using stable variables
+- Backend provides subscription management APIs for tier changes and billing
+- Backend integrates with Stripe for payment processing and subscription management
+
+## Advanced Multi-Level Referral System
+- Unique referral link generation for each user with permalink creation
+- Multi-level referral hierarchy mapping and tracking with unlimited depth
+- Referral relationship storage with parent-child connections
+- Users can view their referral links and complete referral hierarchy in their dashboard
+- Backend stores referral relationships, tracks referral conversions, and maintains referral level data using stable variables
+- Referral conversion tracking and analytics with detailed hierarchy visualization
+- Dashboard displays referral tree structure showing all levels and connections
+- Dynamic multi-level commission calculation with configurable depth and rates
+- Real-time referral performance tracking and analytics
+- Referral link sharing functionality with social media integration
+- Referral performance metrics and leaderboards
+- Backend provides referral management APIs for link generation and tracking
+
+## Commission Tracking System
+- Dynamic multi-level commission calculation based on referral relationships and configurable profit share percentages
+- Commission tracking for referral-based earnings across all referral levels with real-time updates
+- Commission history storage with detailed transaction records and audit trails
+- Pending payout tracking and commission accumulation with automatic calculations
+- Users can view their commission history, pending payouts, and earnings breakdown in the dashboard
+- Backend stores commission data, payout records, and configurable profit share percentages per referral level using stable variables
+- Real-time profit share adjustment capabilities for administrators
+- Commission threshold enforcement with configurable minimum amounts
+- Automated commission distribution processing
+- Commission analytics and reporting with trend analysis
+- Tax reporting features and documentation export
+- Backend provides commission calculation APIs and payout management
+
+## Token-Based Payout Management
+- Payout account generation for each user with unique token-based identifiers
+- Self-service commission withdrawal system with user-initiated payout requests
+- Commission threshold enforcement with minimum payout amounts and configurable limits
+- Payout limit enforcement with maximum withdrawal restrictions and daily/monthly caps
+- Warning system when users approach or exceed payout limits with real-time notifications
+- Users can manage their payout accounts and initiate withdrawals through the dashboard
+- Backend stores payout account data, withdrawal requests, threshold configurations, and limit tracking using stable variables
+- Payout status tracking with pending, processing, completed, and failed states
+- Token-based security for payout operations with expiration and validation
+- Automated payout processing with configurable approval workflows
+- Payout history and transaction tracking with detailed records
+- Integration with payment processors for automated disbursements
+- Backend provides payout management APIs and security validation
+
+## Enhanced High-Performance Sitemap Upload System with Guaranteed Persistence and Instant Searchability
+- Admin-only sitemap management with multiple upload methods:
+  - Multiple JSON file upload with drag-and-drop interface and high-performance batch processing
+  - Refactored XML sitemap URL import with exclusive URL extraction from <loc> elements only
+  - Manual sitemap entry form for individual additions
+  - Multi-format file upload supporting .csv, .md, and .zip files with automatic catalog inclusion
+- Simplified JSON format requiring only "urls" field: `[{"urls": "https://example.com/page"}]`
+- High-performance chunked upload processing for large files:
+  - Chunked file processing for files with tens of thousands of URLs
+  - Parallel processing of multiple chunks simultaneously
+  - Real-time progress feedback with percentage completion and processing speed
+  - UI responsiveness maintained during large file uploads
+  - Background processing with non-blocking UI operations
+  - Memory-efficient processing to handle large datasets
+  - Deduplication system to prevent duplicate URL entries
+- Automatic field completion with intelligent defaults:
+  - Domain extraction from URLs with validation against hardcoded TLD list
+  - Default tier assignment as "basic"
+  - Default qualityScore as 0
+  - Default backlinks as 0
+- Guaranteed data persistence with immediate stable variable storage:
+  - All uploaded data immediately written to stable variables upon successful processing
+  - Real-time confirmation of successful storage with backend validation
+  - Instant comprehensive URL indexing ensuring immediate searchability of all uploaded content with keyword-based search support
+  - Comprehensive error handling that processes valid entries and reports invalid ones
+- Upload progress tracking with detailed feedback:
+  - Real-time processing status for each file and entry with speed metrics
+  - Success/failure reporting with specific error details
+  - Upload confirmation with summary of processed entries
+  - Comprehensive logging of all upload operations
+  - Progress indicators showing chunk processing status
+  - Estimated time remaining for large uploads
+- Automatic catalog inclusion for all uploaded files with instant processing and indexing
+
+## Comprehensive Analytics System
+- User analytics dashboard displaying activity metrics, subscription usage, search statistics, revenue analytics, referral performance, commission earnings, click tracking analytics, payment analytics, catalog usage analytics, and deployment diagnostic analytics
+- Enhanced admin analytics dashboard featuring platform-wide metrics, subscription analytics, usage statistics, revenue tracking, referral and commission analytics, payout processing analytics, export activity tracking, public search analytics, click analytics with leaderboards, XML import analytics, link preview analytics, system performance metrics, user behavior analytics, financial forecasting, backup and restore analytics, upgrade analytics, feature checklist analytics, payment analytics, secure Stripe payment management analytics, comprehensive catalog analytics, and deployment diagnostic analytics with failure tracking and recovery metrics
+- Real-time analytics updates with live data streaming
+- Analytics data visualization with interactive charts and graphs
+- Analytics filtering and export functionality
+- Custom analytics dashboards with personalized metrics
+- Predictive analytics and forecasting capabilities
+- Backend stores analytics data and metrics calculations using stable variables
+- Analytics performance optimized for millions of domains and billions of URLs
+- Advanced analytics dashboards with drill-down capabilities
+- Performance benchmarking and comparative analytics
+- Custom dashboard creation with drag-and-drop widgets
+- Catalog-specific analytics including file type distribution, search patterns, and content effectiveness
+- Deployment diagnostic analytics including failure patterns, recovery success rates, and system reliability metrics
+
+## Advanced Export System
+- Multi-format export functionality supporting CSV, XLSX, JSON, and ZIP formats
+- Referral data export with complete hierarchy information and performance metrics
+- Commission data export with detailed transaction history and earnings breakdown
+- Payout data export including account information and withdrawal records
+- Sitemap and search results export with comprehensive URL data and metadata
+- Click tracking data export with performance analytics and engagement metrics
+- XML import history export with processing logs and statistics
+- User data export with privacy controls and audit logging
+- Analytics data export with customizable metrics and date ranges
+- Backup data export for external storage and disaster recovery
+- System configuration and version data export
+- Feature checklist data export with implementation status
+- Payment data export with transaction history and billing records
+- Catalog data export with file metadata and content summaries
+- Deployment diagnostic data export with failure logs and recovery statistics
+- Export history tracking and download management
+- Export progress monitoring with real-time status updates
+- Download management interface with file access controls
+- Bulk export operations with queue management
+- Export scheduling with automated recurring exports
+- Custom export templates with field selection
+- Export validation and quality assurance features
+- Backend handles export processing and file generation
+- Export operations optimized for large datasets
+- Export security with access controls and audit trails
+
+## Feature Checklist Admin Page
+- Dedicated full-page "Feature Checklist" admin interface accessible from sidebar navigation
+- Admin-only access with role verification and permission controls
+- Comprehensive indexed list of all major platform features organized by priority levels:
+  - P1 (Critical): Core authentication, subscription system, search functionality, payment processing, deployment diagnostics
+  - P2 (High): Referral system, commission tracking, analytics, backup system, admin panel, automated recovery
+  - P3 (Medium): XML import, click tracking, export system, link preview, upgrade management, catalog system
+  - P4 (Low): Advanced analytics, feature checklist, documentation, optimization features
+- Interactive checklist interface with status tracking for each feature
+- Feature linking and navigation system with direct links to corresponding app modules
+- Documentation and guidance system with detailed tooltips and implementation guidelines
+- Live update functionality with real-time synchronization and auto-save
+- Public progress transparency system with read-only progress summary
+- Advanced checklist management features including bulk operations and filtering
+- Real-time feature status detection and automatic updates
+- Integration with actual app features to reflect true implementation status
+- Modular integration system with non-intrusive implementation
+- Backend stores feature checklist data using stable variables
+- Backend provides checklist management APIs with status updates and progress calculations
+
+## Enhanced Admin Panel - Full Page Interface with Reliable Configuration Application and Robust Error Handling
+- Dedicated full-page admin interface accessible from sidebar navigation
+- Comprehensive field management system with robust persistent data storage:
+  - Global site-wide search and replace functionality with guaranteed persistence across all platform content
+  - Real-time text replacement updating all instances with immediate stable variable storage
+  - Search functionality to locate specific fields and content with persistent results
+  - Replace functionality for company names, emails, addresses, and any text content with guaranteed persistence
+  - Enhanced global replacement operations with complete coverage and stable variable synchronization
+  - Real-time verification system confirming all instances updated with backend validation
+  - Global cache invalidation and data refresh after replacement operations
+- Advanced field selection and management interface with persistent state:
+  - Individual checkbox selection for each field with persistent selection state
+  - "Select All" checkbox to toggle all fields with persistent state management
+  - Clear Add, Edit, and Update controls for direct management with persistent operation tracking
+  - Bulk operations for selected fields with persistent transaction handling
+- Live-editable input fields for all business and contact data with guaranteed persistence:
+  - Company information with persistent backend storage
+  - Contact details with stable variable persistence
+  - Payment information with secure persistent storage
+  - Social media links with persistent backend updates
+  - Financial data with stable variable storage
+  - Subscription pricing with persistent configuration
+  - Platform branding with guaranteed backend persistence
+- Real-time data synchronization ensuring all changes saved and reflected live with stable variable persistence
+- Organized field display system with persistent configuration and alphabetically sorted lists
+- Enhanced auto-save functionality with guaranteed persistence:
+  - Automatic save trigger 30 seconds after field modification with stable variable storage
+  - Auto-save processes only checked/selected fields with persistent selection tracking
+  - Visual indicators showing auto-save status with persistent status display
+  - Manual save option for immediate persistence with guaranteed stable variable updates
+- Reliable field update system with enhanced feedback and persistent confirmation:
+  - Save operations wait for successful backend response with stable variable confirmation
+  - All field updates properly persisted to backend storage with transaction guarantees
+  - UI reloads latest data after successful save operations with persistent data validation
+  - Real-time validation and error handling with persistent error logging
+  - Clear visual feedback for all operation states with persistent status tracking
+- Enhanced "Apply Configuration" button functionality with comprehensive reliability and robust error handling:
+  - Button reliably saves and applies all admin settings with guaranteed persistence and comprehensive validation
+  - Real-time feedback showing configuration application progress with detailed status updates and error recovery
+  - Success confirmation with persistent validation and backend verification with comprehensive logging
+  - Robust error handling with detailed feedback, specific failure reasons, and recovery options
+  - Rollback capabilities for failed configuration changes with automatic recovery and data restoration
+  - Configuration verification and validation after successful application with integrity checking and audit trails
+  - Persistent storage of all configuration changes with stable variable backup and comprehensive audit trails
+  - Loading states and progress indicators during configuration application with timeout handling
+  - User feedback preventing multiple simultaneous configuration applications with proper state management
+  - Transaction-based configuration updates ensuring atomicity, consistency, and data integrity
+  - Comprehensive error handling with clear user feedback, recovery options, and support information
+  - Configuration application never fails silently - always provides clear status with detailed logging
+  - Retry mechanisms for failed configuration applications with exponential backoff and error recovery
+  - Configuration validation before application with comprehensive checks and error prevention
+- Enhanced Sitemap Upload System with guaranteed persistence:
+  - Multiple JSON file upload with drag-and-drop interface
+  - Batch processing of multiple .json files simultaneously
+  - Simplified JSON format requiring only "urls" field per entry
+  - Automatic domain extraction with validation against hardcoded TLD list
+  - Default value assignment for missing fields with proper validation
+  - Manual JSON editor with syntax highlighting and validation
+  - Clear upload instructions with sample JSON format
+  - Robust error handling processing valid entries and reporting invalid ones
+  - Real-time upload progress indicators
+  - Upload confirmation with processing summary
+  - Comprehensive URL indexing for all uploaded files ensuring complete searchability with keyword-based search support
+- Multi-Format File Upload System with automatic catalog inclusion:
+  - Support for .csv, .md, and .zip file uploads with intelligent processing
+  - Automatic catalog entry creation for all uploaded files
+  - Real-time processing status and progress indicators
+  - File validation and error handling with detailed feedback
+  - Batch upload capabilities for multiple file types simultaneously
+  - Integration with existing upload workflow and catalog system
+- Refactored XML Sitemap Import Interface with exclusive <loc> extraction and guaranteed persistence:
+  - XML sitemap URL input field with validation
+  - "Import XML Sitemap" button triggering refactored import process focused exclusively on <loc> elements
+  - Real-time import progress indicators showing <loc> URL extraction phases with accurate counting
+  - Progress tracking with detailed status updates including exact URL counts found in <loc> elements and processed
+  - Import success/failure feedback with comprehensive error reporting and detailed statistics
+  - Import history display with timestamps, <loc> extraction statistics, and URL count summaries
+  - Clear instructions for XML sitemap URL format and exclusive <loc> element focus
+  - Error handling for invalid URLs, network failures, and <loc> parsing errors with graceful recovery
+  - Integration with existing sitemap upload workflow
+  - Comprehensive URL indexing for all imported XML <loc> URLs ensuring complete searchability and persistence with keyword-based search support
+  - Real-time URL count display during <loc> import process showing progress and final totals
+  - Verification system ensuring all discovered <loc> URLs are successfully imported and indexed
+- Catalog Management Interface with comprehensive administrative controls:
+  - Catalog entry management with bulk operations and filtering
+  - File processing status monitoring with real-time updates
+  - Catalog analytics and performance metrics display
+  - Content validation and quality assurance tools
+  - Catalog search and filtering with advanced options
+  - Export capabilities for catalog data and metadata
+  - Integration with existing admin workflow and controls
+- Deployment Diagnostics Management Interface with comprehensive diagnostic and recovery controls:
+  - Deployment diagnostics panel integration with admin-only access and role verification
+  - "Run Diagnostics" button for comprehensive system scanning and validation
+  - "Auto-Fix" button for automated recovery and repair procedures
+  - Real-time diagnostic progress indicators with detailed status updates
+  - Comprehensive error reporting with categorized issues and severity levels
+  - Recovery action recommendations with automated and manual fix options
+  - Diagnostic history viewer with searchable logs and filtering capabilities
+  - Export functionality for diagnostic reports and recovery logs
+  - Integration with existing admin panel styling and theme support
+  - Visual progress indicators showing diagnostic execution and recovery progress
+  - Detailed error summaries with explanations and solution recommendations
+  - One-click recovery actions with confirmation dialogs and progress tracking
+- Backup and Restore Management Interface with .zip archive support:
+  - "Create Backup Now" button for immediate .zip backup creation
+  - Backup history table displaying all available .zip backups
+  - "Restore from Backup" interface allowing specific .zip backup selection
+  - Restore confirmation dialog with clear warnings
+  - Backup status indicators showing real-time progress
+  - Backup operation logs with detailed activity history
+  - Backup integrity verification display
+  - Backup retention settings for automatic cleanup policies
+  - Emergency restore functionality with quick access to recent .zip backup
+  - Backup export options for downloading .zip backups to external storage
+- Upgrade Management Interface with version tracking:
+  - "App Version" display showing current application version
+  - "Last Upgrade" timestamp showing most recent upgrade date
+  - Upgrade history log with version changes and migration status
+  - Pre-upgrade backup controls with automatic backup triggers
+  - Upgrade monitoring dashboard with real-time status
+  - Post-upgrade validation tools with data integrity checks
+  - System health indicators showing platform status after upgrades
+  - Rollback controls for failed upgrades with backup restoration
+- Click Analytics Management Interface accessible to all users:
+  - Click tracking analytics dashboard with domain and URL performance metrics
+  - Leaderboard displays for top-performing domains and URLs based on click counts
+  - Click analytics filtering and date range selection
+  - Click data export functionality with comprehensive reporting options
+  - Click fraud detection and monitoring tools
+  - Real-time click tracking status and performance indicators
+- Feature Checklist Management Interface:
+  - Direct access to Feature Checklist admin page from Admin Panel navigation
+  - Quick status overview showing overall completion percentage
+  - Recent feature updates and changes with timestamps
+  - Bulk status update controls for efficient checklist management
+- User Management Interface:
+  - User account overview with registration statistics
+  - Role assignment and permission management tools
+  - User activity monitoring and engagement tracking
+  - Account security and privacy controls
+  - Bulk user operations and management tools
+- Enhanced Secure Stripe Payment Management Interface (Admin-Only) with guaranteed persistence:
+  - Secure Stripe configuration form allowing input of SECRET_KEY and optional WEBHOOK_SECRET for server-side environment variable storage
+  - Clear security notices warning against pasting secret keys into UI
+  - Documentation and tooltips reinforcing best practices for environment variable management
+  - PUBLISHABLE_KEY automatically loaded from environment variables and never editable in admin UI
+  - Payment settings and webhook configuration interface
+  - Global payment history and transaction monitoring dashboard
+  - Payment analytics and financial reporting with detailed metrics
+  - Refund processing and dispute management tools
+  - Subscription management and billing controls
+  - Payment method configuration and processing settings
+  - Stripe account status and integration monitoring
+  - Payment security settings and fraud detection configuration
+  - Fixed Stripe Country Selection Management with guaranteed persistence:
+    - Default state with only specified countries pre-selected: AU, AT, BE, BR, BG, CA, CY, CZ, DK, EE, FI, FR, DE, GH, GI, GR, HK, HU, IN, ID, IE, IT, JP, KE, LV, LI, LT, LU, MT, MY, MX, NL, NZ, NO, PL, PT, RO, SG, SK, SL, ZA, ES, SE, CH, TH, AE, UK, US
+    - "Select All" checkbox functionality for bulk selection/deselection but not checked by default
+    - User-friendly country selection interface with search and filter capabilities
+    - Clear visual indicators showing active/inactive country status
+    - Bulk selection controls for efficient country management
+    - Country code validation and conversion from TLD format to Stripe country codes
+    - Real-time country status updates and configuration validation
+    - Configuration persistence across all updates, upgrades, and migrations
+- System Configuration Interface:
+  - Platform settings and feature flag management
+  - Performance monitoring and optimization controls
+  - Security settings and access control configuration
+  - Integration management and API configuration
+- Backend stores all editable field definitions, current values, selection states, and change history using stable variables with guaranteed persistence
+- Backend provides reliable field update mutations with proper transaction handling and persistent confirmation
+- Backend supports global search and replace operations across all platform content with persistent results
+- Backend stores search and replace history with audit trails and rollback capabilities using stable variables
+- Backend implements admin-only secure Stripe payment management APIs with comprehensive role verification
+- Backend stores secure Stripe configuration data in environment variables with stable variable configuration tracking
+- Backend validates and converts country codes from TLD format to Stripe-compatible country codes
+- Backend provides country selection management APIs with corrected default behavior and persistent configuration
+- Backend ensures default country selection is properly initialized and maintained across all operations and migrations
+- Backend implements robust field persistence system with stable variable storage and transaction guarantees
+- Backend provides field management APIs with persistent storage, conflict resolution, and audit trail tracking
+- Backend handles field synchronization across multiple admin sessions with real-time updates and persistent state management
+- Backend implements reliable configuration application system with comprehensive validation, persistent storage, detailed feedback, and robust error handling
+- Backend provides catalog management APIs with administrative controls and monitoring capabilities
+- Backend implements deployment diagnostic APIs with comprehensive system validation and recovery capabilities
+- Backend stores deployment diagnostic data, recovery logs, and system health metrics using stable variables
+
+## Business Information and Data Management
+- All business and contact information sourced from updated business details:
+  - Company name: "Sudha Enterprises"
+  - Business address: "Sudha Enterprises | No. 157, V R VIHAR, VARADARAJ NAGAR, VIDYARANYAPUR PO, BANGALORE-560097" with clickable map link to https://www.openstreetmap.org/way/1417238145
+  - Phone number: "+91-962-005-8644"
+  - Website: https://www.seco.in.net
+  - WhatsApp: https://wa.me/919620058644
+  - Email: dild26@gmail.com
+  - UPI ID: secoin@uboi
+  - ETH ID: 0x4a100E184ac1f17491Fbbcf549CeBfB676694eF7
+  - PayPal: newgoldenjewel@gmail.com (only PayPal contact to be shown)
+  - Social media links with specific URLs:
+    - Facebook: https://facebook.com/dild26
+    - LinkedIn: https://www.linkedin.com/in/dild26
+    - Telegram: https://t.me/dilee
+    - Discord: https://discord.com/users/dild26
+    - Blogspot: https://dildiva.blogspot.com/
+    - Instagram: https://www.instagram.com/newgoldenjewel
+    - X (Twitter): https://x.com/dil_sec
+    - YouTube: https://www.youtube.com/@dileepkumard4484
+  - CEO: DILEEP KUMAR D (CEO of SECOINFI)
+- Backend stores authentic business details using stable variables with persistent storage
+- Global replacement of any placeholder data with authentic business information with persistent backend updates
+- All social, payment, and contact links must be accurate and clickable with persistent validation
+- Business information displayed consistently across all pages with persistent synchronization
+- Real-time synchronization ensures all instances reflect authentic information with stable variable persistence
+
+## God's Eye Summary Public Display with Persistent Data Integration
+- Public-facing summary page displaying all completed business and platform information with persistent data synchronization
+- Aggregated financial data from all platform features including subscription fees, commission structures, transaction volumes, payout information, discount applications, and return processing
+- Real-time data synchronization ensuring summary reflects current platform state with immediate updates after admin changes and persistent backend validation
+- Enhanced data refresh and cache invalidation system ensuring God's Eye Summary displays updated information after global search and replace operations with stable variable synchronization
+- Comprehensive field validation and update verification for all displayed business information with persistent confirmation
+- Company information display with authentic business details and persistent backend storage
+- Platform branding and messaging with updated content and persistent synchronization
+- System version and upgrade information display with persistent tracking
+- Feature implementation progress display showing overall completion percentage with persistent status updates
+- Public transparency section with development roadmap and completed features with persistent progress tracking
+- Platform statistics and performance metrics including URL count analytics, catalog statistics, and deployment reliability metrics with persistent data storage
+- User testimonials and success stories with persistent content management
+- Visible to all users but not editable by non-admin users with proper role-based access control
+- Responsive design with clear information hierarchy and professional presentation
+- Integration with all platform pages ensuring consistent data display with persistent synchronization
+- Automatic refresh of displayed data when admin updates are saved with persistent backend validation
+- Global search and replace integration ensuring all field updates are reflected immediately with stable variable persistence
+- Backend validation ensuring no old or outdated information remains visible after replacements with persistent verification
+
+## Robust Navigation System with Fixed Layout and Seamless Bottom Navigation
+- Top navigation bar with menu items: Home, About Us, Contact Us, Sitemaps, Catalogs, Subscription, and God's Eye Summary
+- Top navigation bar positioned at very top of page with fixed positioning (position: fixed, top: 0) and no blank space above it
+- Navigation bar z-index properly set to ensure it stays above all other content
+- All page content properly positioned below navigation bar with appropriate top margin to prevent overlap
+- Navigation bar height calculated and applied as top spacing to main content containers
+- Consistent navigation bar positioning across all screen sizes with professional layout
+- Responsive design optimization ensuring navigation and content display correctly on all devices
+- No overlapping or misplaced elements between navigation bar and page content
+- Smooth scrolling behavior accounting for fixed navigation bar height
+- Content sections properly spaced and aligned below fixed navigation bar
+- Navigation bar background and styling optimized for visibility with proper contrast in both dark and light themes
+- Mobile-responsive navigation with proper touch targets and accessibility
+- Desktop/laptop navigation with hover states and keyboard navigation support
+- Cross-browser compatibility for fixed positioning and layout consistency
+- Performance optimization to prevent layout shifts during page load
+- Navigation bar remains functional and accessible during all page interactions
+- Content layout preservation when sidebar is toggled on/off
+- Proper viewport calculations for different screen orientations and sizes
+- Always-visible "Sign In" button prominently displayed in top navigation bar
+- Authentication state indicators showing login status
+- Left sidebar navigation system with comprehensive error handling:
+  - Sidebar component completely independent from main layout with isolated state management
+  - Sidebar rendered as overlay component that never interferes with main content layout
+  - Sidebar toggle button positioned in middle of sidebar for optimal accessibility
+  - Sidebar state managed through global state to prevent component coupling
+  - Sidebar component uses strict error boundaries with guaranteed fallback UI
+  - If sidebar component fails, main application content remains fully visible and functional
+  - Sidebar failure never causes blank pages, app crashes, or layout disruption
+  - Comprehensive fallback UI displays basic navigation options when sidebar encounters errors
+  - Alternative navigation methods remain available when sidebar is unavailable
+- Enhanced sidebar functionality and reliability:
+  - Toggle works reliably across all pages, device sizes, and browser environments
+  - Toggle state persistence across page navigation and browser sessions
+  - Toggle animation and transitions optimized for performance
+  - Toggle button remains accessible and functional even when sidebar encounters errors
+  - Cross-browser compatibility testing on all major browsers with consistent behavior
+  - Responsive design testing across all screen sizes with optimal user experience
+  - Performance testing ensuring sidebar doesn't cause UI freezes or memory leaks
+- Navigation items in sidebar with error-resistant rendering:
+  - Home, About Us, Contact Us, Dashboard (authenticated users only), Sitemaps, Catalogs, Subscription, Referrals (authenticated users only), God's Eye Summary, Admin Panel (admin users only), Feature Checklist (admin users only)
+- Navigation items shown/hidden based on authentication status and user role with error handling
+- Admin-only navigation items completely hidden for non-admin users with proper role validation
+- When sidebar is toggled off, all pages use full width for content with smooth layout transitions
+- All navigation and toggle controls styled for clarity and accessibility on all devices with proper contrast in both dark and light themes
+- Navigation system fully responsive and accessible on all device sizes with comprehensive error handling
+
+## Fixed Bottom Navigation Bar Layout with Seamless Positioning and No Extra Space
+- Bottom navigation bar positioned at very bottom of page with seamless layout integration and no extra space above it
+- Fixed positioning (position: fixed, bottom: 0) ensuring consistent placement across all pages with flush positioning
+- Bottom navigation bar z-index properly set to ensure it stays above page content but below modals
+- All page content properly positioned above bottom navigation bar with no gaps or extra spacing between content and navigation
+- Bottom navigation bar height calculated and applied as bottom spacing to main content containers ensuring seamless integration
+- Content flows directly to bottom navigation bar with no visible gaps or spacing issues on any device
+- Bottom navigation bar contains same menu items as top navigation: "Home," "About Us," "Contact Us," "Sitemaps," "Catalogs," "Subscription," "God's Eye Summary"
+- Bottom navigation bar includes integrated sitemap display section showing domain sitemap links as cards
+- Sitemap cards display with mandatory enhanced pagination including first/last page navigation:
+  - First page button always present and visible appearing before Previous button for quick navigation to beginning of results
+  - Last page button always present and visible appearing after Next button for quick navigation to end of results
+  - Previous/Next page navigation for sequential browsing positioned between First/Last buttons
+  - Page number display and direct page input functionality
+  - Smooth navigation across large datasets with performance optimization
+- Each sitemap card includes secure preview functionality with fully responsive full-viewport modal support
+- Sitemap cards fully accessible and visible on all device sizes
+- Bottom navigation bar background and styling optimized for visibility with proper contrast in both dark and light themes
+- Responsive design optimization ensuring bottom navigation displays correctly on all screen sizes with seamless positioning
+- Touch-optimized controls for mobile devices with proper touch targets
+- Hover states and keyboard navigation support for desktop/laptop devices
+- Cross-browser compatibility for fixed bottom positioning and layout consistency with seamless integration
+- Performance optimization to prevent layout shifts and ensure smooth scrolling with seamless positioning
+- Bottom navigation bar remains functional and accessible during all page interactions
+- Content layout preservation when sidebar is toggled on/off with proper spacing adjustments and seamless positioning
+- Sitemap card display with lazy loading for performance optimization
+- Mandatory enhanced pagination controls for sitemap cards with first/last page navigation
+- Search functionality within bottom navigation sitemap display
+- Filter options for sitemap cards by domain, tier, or other criteria
+- Secure link preview integration for all sitemap cards accessible to all users
+- Click tracking integration for sitemap card interactions
+- Mobile-responsive card layout with optimal spacing and readability
+- Desktop-optimized card layout with enhanced information display
+- Error handling for sitemap card loading and display failures
+- Loading states and skeleton screens for sitemap card content
+- Integration with existing sitemap search and filtering functionality
+- Real-time updates for sitemap card content and availability
+- Accessibility compliance for bottom navigation and sitemap card interactions
+- Backend provides sitemap card data with enhanced pagination and filtering support
+- Backend handles sitemap card click tracking and analytics
+- Backend stores bottom navigation preferences and display settings using stable variables
+- Backend provides mandatory first/last page navigation APIs for sitemap card pagination
+
+## User Management
+- User registration and profile management with automatic profile creation
+- Users can view and update their profile information and preferences
+- Admin role assignment and management with permission controls
+- User activity tracking and engagement metrics
+- Account security features and privacy controls
+- User preference management for notifications and settings
+- Data export functionality for user data and privacy compliance
+- Backend stores user profiles, account data, role assignments, and preferences using stable variables
+- Backend provides user management APIs for profile updates and data retrieval
+- Backend implements user activity logging and engagement tracking
+
+## Pages and Content
+- Homepage with redesigned layout featuring two prominent card-style buttons for subscription options, always-visible "Sign In" button, prominently positioned Advanced Sitemap Search section with unified search field supporting inurl-style keyword matching and 2-second debounce positioned just above the "Pay As You Use - Domain Batches" header with visually attractive and prominent styling, mandatory enhanced pagination including first/last page navigation and enhanced hardcoded complete scrollable searchable domain extension dropdown with all valid TLDs and URL count display, updated Pay As You Use section displaying all batch options with complete details, platform overview and feature highlights, and user testimonials
+- About Us page with center-aligned content displaying background image, authentic business details, complete business address with clickable map link, all contact information, "Connect With Us" section with all social media links as clickable icons/buttons opening in new tabs, payment information, section for "DILEEP KUMAR D" with business and technical service list clearly stating he is CEO of SECOINFI, company history and mission statement, and team information
+- Contact Us page with center-aligned content displaying complete business address with clickable map link, all contact information, "Connect With Us" section with all social media links as clickable icons/buttons opening in new tabs, payment information, contact form for inquiries, and business hours information
+- Dashboard for authenticated users showing subscriptions, search history, unified search functionality with 2-second debounced search and enhanced hardcoded complete domain extension dropdown with all valid TLDs and URL count display, referral hierarchy, commission history, pending payouts, payout account management, commission threshold warnings, click analytics with leaderboard access, payment history and transaction details, and comprehensive analytics displays
+- Sitemaps page with complete Advanced Sitemap Search module cloned from Homepage featuring identical functionality including ultra-high-performance unified search system with single search field combining all search functionalities (domain and URL path search) with instant results, true lazy loading, real-time filtering from all uploaded .json and .xml files' "urls" fields, inurl-style keyword search capabilities with case-insensitive multi-level path segment matching, smart result prioritization with top-level path segments appearing first, 2-second debounce implementation for optimal performance, guaranteed data availability with instant indexing, robust error handling and progress feedback for large operations, admin unlimited access with no restrictions, enhanced search performance optimization with multi-stage search algorithm (extension-first filtering, then domain, then subdomain), real-time search execution with guaranteed completion, always returns results guarantee for any keyword present in "urls" field regardless of slashes or path depth, comprehensive click tracking integration with analytics, enhanced hardcoded complete scrollable searchable domain extension dropdown with all valid TLDs including common extensions (.com, .org, .net, .edu, .gov, .mil, .int, .info, .biz, .name, .pro) prominently displayed at top and intelligent TLD recognition supporting both "org" and ".org" queries with autocomplete functionality and URL count display, mandatory enhanced pagination with first/last page navigation with robust error handling, true full-screen secure preview modal system with guaranteed minimum height of 100vh (400px fallback) using `<object>` tag with progressive fallback system and intelligent timeout management (3x, 2x, 1x average page load delays), automatic URL protocol handling with validation, Internet Archive fallback integration with guaranteed execution, screenshot fallbacks accessible to all users with minimum height support, subscriber-only external link access with "Web Page" links visible only to authenticated subscribers and admins as true hyperlinks with target="_blank" opening in new tab, click tracking for all links with leaderboard integration, comprehensive domain extension filtering with complete TLD coverage and URL counts, proper pagination support for all users with error handling, admin-only top navigation bar featuring "Add Sitemaps," "Upload .json Files," and "Import XML Sitemap" links visible only to admin users, and modular architecture ensuring search component independence with consistent behavior and performance
+- Catalogs page with comprehensive catalog browsing and search functionality featuring default list view with sortable resource entries, toggle for "List" vs "Card/Gallery" view modes, responsive AdvancedSearchBar component supporting keyword, semantic, and tag-based search with collapsible filter panels, live dynamic filters adapting to query context, comprehensive filtering by SEO rank, click count, popularity, relevance, recency, visibility, backlinks, ping response, load speed, and bounce rate, personalization with smart ranking based on search history and preferences, integration with existing search infrastructure, and public access with authentication-based feature enhancement
+- Subscription page with updated subscription tiers displaying Basic Plan ($9/month), Pro Plan ($45/month), Enterprise Plan ($99/month), updated Pay As You Use section displaying all batch options with complete pricing and features, subscription comparison table, secure Stripe payment integration and checkout process, and payment method management
+- Referrals page displaying user referral links, complete referral hierarchy tree, referral statistics, commission information, payout account details, withdrawal management, and payout notifications
+- Admin Panel page providing comprehensive field management with persistent data storage, global search and replace with guaranteed persistence, enhanced sitemap upload system with simplified JSON format, multi-format file upload system supporting .csv, .md, and .zip files with automatic catalog inclusion, refactored XML sitemap import functionality with exclusive URL extraction from <loc> elements only and accurate counting, catalog management interface with administrative controls, deployment diagnostics management interface with comprehensive diagnostic and recovery controls, backup and restore management interface with .zip archive support, upgrade management interface with version tracking and migration monitoring, click analytics management accessible to all users, enhanced secure Stripe payment management interface (admin-only) with environment variable-based key management and security notices, reliable "Apply Configuration" button functionality with comprehensive validation, persistent storage, and robust error handling, and administrative controls with robust field persistence
+- Feature Checklist page (admin-only) providing comprehensive indexed list of all platform features organized by priority levels, interactive status tracking with checkboxes and visual indicators, direct navigation links to corresponding app modules, documentation tooltips and implementation guidelines, live update functionality with real-time synchronization, progress visualization and completion metrics, bulk status update operations and management tools, and real-time feature detection and automatic status updates
+- God's Eye Summary page displaying comprehensive platform overview with aggregated financial data including updated subscription pricing, authentic company information with persistent synchronization, system version information, public feature implementation progress, URL count analytics, catalog statistics, and deployment reliability metrics with persistent data integration
+- All content in English language
+- Background images and layout styling to match reference site design
+- All pages properly positioned below fixed top navigation bar with appropriate spacing to prevent overlap
+- All pages properly positioned above fixed bottom navigation bar with seamless spacing integration and no extra space
+- Content sections aligned correctly with no layout shifts or misplacement on larger screens
+- Responsive design ensuring proper display on both mobile and desktop/laptop views
+- Bottom navigation bar integration on all pages with sitemap card display and mandatory enhanced pagination functionality
+
+## User Interface
+- Modern, responsive design optimized for scalability and performance with comprehensive accessibility and theme support
+- Critical color scheme and accessibility implementation with comprehensive color scheme and contrast optimization for both dark and light themes ensuring full readability and accessibility across all UI components
+- High contrast color palette with sufficient color difference between text and backgrounds meeting WCAG 2.1 AA standards with minimum 4.5:1 contrast ratio for normal text and 3:1 for large text
+- Dark theme support with light text colors on dark backgrounds and proper contrast ratios for all interface elements ensuring no black-on-black or dark-on-dark rendering
+- Light theme support with dark text colors on light backgrounds and proper contrast ratios for all interface elements ensuring no white-on-white or light-on-light rendering
+- Automatic theme detection and manual theme switching capabilities with user preference persistence
+- Color scheme testing and validation across all pages, components, and device sizes to prevent rendering issues
+- Enhanced contrast for all interactive elements including buttons, links, form fields, navigation items, and controls with proper hover and focus states
+- Proper color contrast for all text elements including headings, body text, labels, placeholder text, and error messages with explicit color definitions
+- Clean, futuristic aesthetic with fully decoupled toggleable left sidebar navigation featuring comprehensive error handling and isolation
+- Fixed top navigation bar positioned at very top of page with no blank space above it and proper contrast in both themes
+- Navigation bar z-index properly set to ensure it stays above all other content
+- All page content properly positioned below navigation bar with appropriate top margin to prevent overlap
+- Navigation bar height calculated and applied as top spacing to main content containers
+- Consistent navigation bar positioning across all screen sizes with professional layout maintained on larger screens
+- Responsive design optimization ensuring navigation and content display correctly on both mobile and desktop/laptop views with proper contrast
+- No overlapping or misplaced elements between navigation bar and page content
+- Smooth scrolling behavior accounting for fixed navigation bar height
+- Content sections properly spaced and aligned below fixed navigation bar
+- Navigation bar background and styling optimized for visibility and professional appearance with proper contrast in both dark and light themes
+- Mobile-responsive navigation with proper touch targets and accessibility
+- Desktop/laptop navigation with hover states and keyboard navigation support with proper contrast
+- Cross-browser compatibility for fixed positioning and layout consistency
+- Performance optimization to prevent layout shifts during page load
+- Navigation bar remains functional and accessible during all page interactions
+- Content layout preservation when sidebar is toggled on/off
+- Proper viewport calculations for different screen orientations and sizes
+- Top navigation bar with menu items: Home, About Us, Contact Us, Sitemaps, Catalogs, Subscription, and God's Eye Summary with error-resistant rendering and proper contrast
+- Top navigation bar always visible and accessible from every page with fallback navigation options
+- Always-visible "Sign In" button prominently displayed in top navigation bar with proper contrast and accessibility
+- Sidebar toggle button positioned in middle of sidebar for optimal accessibility and user experience across all device sizes with proper contrast
+- Toggle button located in center-middle area of sidebar for easier access and improved usability with error recovery mechanisms
+- Full-width content layout when sidebar is hidden with smooth transitions and error handling
+- Sidebar component completely decoupled from main layout using portal-based rendering or similar isolation technique
+- Sidebar overlay design that never interferes with main content layout or causes layout shifts
+- Sidebar error boundaries with comprehensive fallback UI that always renders a single valid React element
+- Sidebar color scheme optimization with proper background and text contrast in both dark and light themes
+- Fixed bottom navigation bar positioned at very bottom of page with seamless layout integration, no extra space above it, and proper contrast in both themes
+- Bottom navigation bar z-index properly set to ensure it stays above page content but below modals
+- All page content properly positioned above bottom navigation bar with no extra spacing between content and navigation ensuring seamless integration
+- Bottom navigation bar height calculated and applied as bottom spacing to main content containers with flush positioning
+- Bottom navigation bar contains same menu items as top navigation with integrated sitemap display
+- Sitemap cards in bottom navigation with proper contrast, accessibility, and responsive design
+- Mandatory enhanced pagination interface with first/last page navigation buttons for Advanced Sitemap Search results:
+  - First page button always present and visible appearing before Previous button with clear visual design and proper contrast
+  - Last page button always present and visible appearing after Next button with clear visual design and proper contrast
+  - Previous/Next page buttons positioned between First/Last buttons with consistent styling and proper contrast
+  - Page number display with proper contrast and accessibility
+  - Direct page input functionality with proper contrast and validation
+  - Smooth navigation transitions with loading states and proper contrast
+  - Pagination controls never freeze or become unresponsive with robust error boundaries
+- Subscriber-only external link interface elements with "Web Page" link display:
+  - "Web Page" links visible only to authenticated subscribers and admins next to Full-Screen Preview button as true hyperlinks with proper contrast and target="_blank" attribute
+  - Links open actual URL in new tab with proper security attributes
+  - Clear visual distinction for subscriber-only features with proper contrast and accessibility
+  - Subscription upgrade prompts for non-subscribers with proper contrast and clear messaging
+  - Authentication status indicators with proper contrast and real-time updates
+- True full-screen secure preview modal interface with guaranteed minimum height and complete device coverage:
+  - Complete viewport coverage using 100vw width and 100vh height on all devices (mobile, tablet, laptop, desktop) with proper contrast
+  - Guaranteed minimum height of 100vh (with 400px fallback) ensuring preview never renders as small banner or strip
+  - No parent container constraints limiting modal size or display area with robust height enforcement
+  - Modal container styled to fill entire viewport with proper z-index layering and guaranteed height validation
+  - Preview area uses minimum height of 100vh or 400px fallback for consistent display across all devices
+  - Object-based preview rendering using HTML `<object>` tag (not iframe) for secure content rendering and compatibility
+  - Object element with width and height set to 100% and min-height: 100vh (400px fallback) with guaranteed display area
+  - Object tag optimized for viewport-filling display on all device sizes with height enforcement and validation
+  - Proper object styling ensuring content scales to fill available space with minimum height guarantee
+  - Object element never constrained to banner-sized display area with robust height validation and error handling
+  - Progressive fallback preview system with intelligent timeout management and guaranteed delays (3x, 2x, 1x average page load)
+  - Progressive loading timeout interface with progress indicators and proper contrast for each fallback method
+  - Progressive fallback method switching interface with clear status display, proper contrast, and error handling
+  - Modal close controls with proper contrast, accessibility, and keyboard navigation support
+  - Touch-optimized controls for mobile devices with proper contrast and responsive design
+  - Keyboard navigation support with proper contrast, focus indicators, and accessibility compliance
+  - Modal properly overlays entire application interface with guaranteed viewport coverage
+  - Navigation and admin controls remain accessible and functional during preview with proper layering
+  - Modal never renders as small banner - always fills complete viewport (100vw/100vh) with guaranteed minimum height enforcement
+  - Comprehensive error handling preventing blank or broken states with robust fallback mechanisms
+  - Robust error handling for CORS, CSP, and unreachable URL scenarios with progressive fallback execution
+- Deployment diagnostics interface elements with proper contrast and accessibility:
+  - Deployment diagnostics panel with admin-only access and role-based visibility
+  - "Run Diagnostics" and "Auto-Fix" buttons with clear visual indicators and proper contrast
+  - Real-time diagnostic progress indicators with visual feedback and proper contrast
+  - Comprehensive error reporting interface with categorized issues and proper contrast
+  - Recovery action recommendations with clear visual hierarchy and proper contrast
+  - Diagnostic history viewer with searchable interface and proper contrast
+  - Export functionality interface for diagnostic reports with proper contrast
+  - Integration with existing admin panel styling and theme support
+- Card-style design elements for subscription options, analytics displays, catalog entries, and diagnostic reports with proper contrast
+- Center-aligned layout for informational pages matching reference site design with enhanced contrast
+- Background images and visual styling consistent with reference site and proper contrast
+- Enhanced mobile-responsive search interface with standard field width:
+  - Search input field with standard, user-friendly width ensuring easy usability on all mobile devices (not limited to single character)
+  - Mobile-optimized search field dimensions following platform UI guidelines for optimal user experience
+  - Touch-optimized search interface with proper touch targets and mobile keyboard support
+  - Responsive design ensuring search field maintains appropriate width across all screen sizes
+  - Search field width automatically adjusts to screen size while maintaining minimum usable width
+  - Mobile-first responsive design ensuring search functionality is fully accessible on smartphones and tablets
+- Complete Advanced Sitemap Search interface cloned from Homepage and integrated into Sitemaps page:
+  - Identical visual design, styling, and layout between Homepage and Sitemaps page implementations
+  - Same responsive design behavior and accessibility features across both implementations
+  - Consistent color scheme, theme support, and contrast optimization between Homepage and Sitemaps page
+  - Identical loading states, progress indicators, and error displays
+  - Same performance optimization and caching behavior
+  - Unified search configuration and settings across all implementations
+  - Multi-stage search optimization interface with extension-first filtering for optimal performance
+  - Intelligent TLD recognition interface supporting both "org" and ".org" queries
+  - Autocomplete functionality interface in TLD dropdown for fast selection
+- Comprehensive Catalogs page interface with responsive design and accessibility:
+  - Default list view with sortable columns and proper contrast
+  - Toggle functionality for "List" vs "Card/Gallery" view modes with clear visual indicators
+  - Card view with preview images, file type icons, visual badges, and action buttons
+  - Responsive AdvancedSearchBar component with collapsible filter panels
+  - Live dynamic filters with context-aware visibility and proper contrast
+  - Comprehensive filtering interface with multiple criteria options
+  - Personalization features with smart ranking and user preference integration
+  - Integration with existing search infrastructure and unified search capabilities
+  - Public access with authentication-based feature enhancement
+  - Mobile-responsive design with touch-optimized controls and proper contrast
+  - Desktop optimization with hover states and keyboard navigation support
+  - Accessibility compliance with screen reader support and proper contrast
+  - Error handling for catalog loading and display failures with graceful degradation
+  - Loading states and skeleton screens for catalog content with proper contrast
+  - Performance optimization for large catalog datasets with lazy loading
+- Ultra-high-performance Advanced Sitemap Search interface with single search field combining all search functionalities:
+  - Search input with instant results and real-time filtering from all uploaded .json and .xml files' "urls" fields
+  - Advanced inurl-style keyword search interface supporting case-insensitive multi-level path segment matching
+  - Smart result prioritization interface showing top-level paths first with intelligent ranking
+  - 2-second debounce implementation interface for optimal performance and reduced API calls
+  - Guaranteed data availability interface with instant indexing and zero data loss
+  - Robust error handling interface with progress feedback for large operations
+  - Admin unlimited access interface with no restrictions or limitations
+  - Enhanced search performance optimization interface with real-time execution
+  - Real-time search execution interface with guaranteed completion and maximum delay/await
+  - Always returns results guarantee interface for any keyword present in "urls" field regardless of slashes or path depth
+  - Comprehensive click tracking interface for all search interactions with analytics integration
+  - Multi-stage search algorithm interface with extension-first filtering, then domain, then subdomain for optimal performance
+  - Advanced query preprocessing interface with keyword extraction, normalization, validation, and optimization
+  - Performance optimization interface with caching, indexing, and real-time monitoring
+- Enhanced domain extension filtering interface with complete TLD support and intelligent recognition:
+  - Extension filter header changed from "All Extension" to "Extension" for clarity and consistency
+  - Common domain extensions (.com, .org, .net, .edu, .gov, .mil, .int, .info, .biz, .name, .pro) prominently displayed and always visible at the top of the extension dropdown
+  - Most frequently used extensions prioritized in dropdown order for better user experience
+  - Complete hardcoded TLD system with URL count display, proper contrast, and guaranteed coverage from ".ac" to ".zw"
+  - Intelligent TLD recognition supporting both "org" and ".org" search queries with smart matching
+  - Autocomplete functionality in TLD dropdown for fast extension selection with real-time filtering
+  - Searchable extension dropdown with autocomplete functionality for quick selection
+  - Extension count statistics and distribution data with priority display for common extensions
+- Lazy loading implementation for all large dropdowns and result lists with proper contrast and performance optimization
+- Click Tracking Interface Elements accessible to all users with proper contrast and analytics integration
+- Refactored XML Import Interface with real-time progress tracking, proper contrast, comprehensive error handling, and accurate URL counting focused exclusively on <loc> elements:
+  - Real-time URL count display during <loc> import process showing exact numbers found and processed
+  - Progress indicators for <loc> parsing, extraction, and import phases with detailed status updates
+  - Import summary with comprehensive statistics including total URLs extracted from <loc> elements and processed
+  - Error handling interface with specific feedback about <loc> parsing issues or failed entries
+  - Import history display with detailed <loc> extraction statistics and URL count summaries
+  - Clear feedback on import completion with exact counts and processing details focused exclusively on <loc> elements
+- Feature Checklist Interface (admin-only) with proper contrast and interactive status tracking
+- Public Feature Progress Display with proper contrast and real-time updates
+- XML file handling interface with proper contrast and robust error handling focused exclusively on <loc> elements
+- Progress indicators for admin operations with real-time updates, completion status, proper contrast, and error recovery
+- Referral hierarchy visualization with interactive tree structure display, drill-down capabilities, and proper contrast
+- Commission tracking and analytics displays with detailed breakdowns, charts, trend analysis, and proper contrast
+- Payout account management interface with withdrawal controls, status indicators, transaction history, and proper contrast
+- Analytics dashboards with interactive charts, graphs, data visualizations, filtering controls, and proper contrast
+- Export management interface with download history, progress tracking, file management, and proper contrast
+- Commission threshold warning displays with clear visual indicators, actionable alerts, and proper contrast
+- Payout notification system with real-time alerts, status updates, transaction confirmations, and proper contrast
+- Export/download management UI with progress bars, completion notifications, error handling, and proper contrast
+- Social media icons/buttons in "Connect With Us" sections that use appropriate platform icons and open links in new tabs with proper contrast
+- Enhanced Pay As You Use display with proper contrast and clear pricing information
+- Updated subscription tier display with proper contrast and feature comparison
+- Enhanced Admin Panel interface with persistent field management, proper contrast, and robust error handling
+- Enhanced Sitemap Upload Interface with proper contrast and comprehensive progress tracking
+- Multi-Format File Upload Interface with proper contrast, progress tracking, and catalog integration
+- Refactored XML Sitemap Import Interface with real-time progress tracking, proper contrast, error recovery, and comprehensive URL extraction feedback focused exclusively on <loc> elements
+- Catalog Management Interface with proper contrast, administrative controls, and comprehensive functionality
+- Deployment Diagnostics Interface with proper contrast, comprehensive diagnostic controls, and recovery management
+- Backup and Restore Interface with proper contrast and operation status indicators
+- Upgrade Management Interface with proper contrast and system health monitoring
+- Admin-only Sitemaps page navigation with proper contrast and role-based visibility
+- Click Analytics Interface accessible to all users with proper contrast and performance metrics
+- Enhanced Secure Stripe Payment Management Interface (admin-only) with proper contrast, secure design, and comprehensive error handling
+- Secure Stripe Configuration Interface with proper contrast, security notices, and robust validation including clear warnings against pasting secret keys into UI with prominent display, documentation explaining environment variable requirements with detailed tooltips, security best practices reinforcement with visual indicators, environment settings guidance with step-by-step instructions, and Git security reminders with clear warnings about .env files
+- Fixed Stripe Country Selection Interface with proper contrast, corrected default behavior, and comprehensive validation including default state showing only specified countries pre-selected with clear visual indicators, "Select All" checkbox available but not checked by default with proper contrast, country selection grid with search and filter capabilities and proper contrast, active/inactive country status indicators with clear visual distinction and proper contrast, bulk selection controls with intuitive interface design and proper contrast, and country code validation display with error handling and proper contrast
+- Multi-tab UI system with responsive design, proper contrast, and seamless navigation
+- User dashboard with personalized widgets, proper contrast, and real-time data updates
+- Authentication interface with Internet Identity integration, proper contrast, and error handling
+- Role-based UI elements with dynamic visibility, proper contrast, and access control
+- Performance-optimized interface with fast loading, smooth interactions, and error recovery
+- Reliable save/update feedback with proper loading states, success/error messages, proper contrast, and persistent confirmation
+- Error handling displays with user-friendly messages, recovery options, support links, proper contrast, and comprehensive logging
+- Performance indicators and loading states for better user experience, feedback, proper contrast, and timeout handling
+- Real-time data updates with live streaming, automatic refresh capabilities, and error recovery
+- Optimized for performance with billions of users and millions of domains/URLs with robust error handling
+- Advanced dashboard widgets with customizable layouts, drag-and-drop functionality, proper contrast, and error boundaries
+- Interactive data visualization tools with zoom, filter, drill-down capabilities, proper contrast, and performance optimization
+- Mobile-responsive design with touch-optimized controls, adaptive layouts optimized for all device sizes including laptops, desktops, tablets, and mobile devices with proper contrast and error handling
+- Enterprise-grade UI components with professional styling, accessibility features, proper contrast, and comprehensive error boundaries
+- Robust UI responsiveness with freeze prevention, performance optimization, and error recovery mechanisms
+- Enhanced Advanced Sitemap Search interface with single search field implementation, instant results capabilities, real-time filtering capabilities, inurl-style keyword search support with case-insensitive multi-level path segment matching, smart result prioritization with top-level segments appearing first, 2-second debounce for optimal performance, guaranteed data availability, robust error handling with progress feedback, admin unlimited access, enhanced performance optimization with multi-stage search algorithm, real-time search execution with guaranteed completion, always returns results guarantee for any keyword present in "urls" field regardless of slashes or path depth, comprehensive click tracking integration, enhanced hardcoded complete TLD system with intelligent recognition and autocomplete functionality, proper contrast, and comprehensive error handling
+- All navigation and toggle controls styled for clarity and accessibility on all devices with comprehensive error handling, proper contrast in both dark and light themes, and robust error recovery
+- Navigation system fully responsive and accessible on all device sizes with robust error recovery, proper contrast, and comprehensive fallback mechanisms
+- Sidebar component with guaranteed single child element rendering, comprehensive error boundaries using decoupled architecture, proper contrast, and robust error recovery
+- Navigation component error handling with graceful degradation, fallback UI options, proper contrast, and comprehensive error boundaries
+- Layout component error recovery with automatic fallback to basic navigation structure when errors occur, proper contrast, and robust error handling
+- Sidebar component completely isolated from main layout using portal-based rendering or similar technique to prevent interference, proper contrast, and comprehensive error boundaries
+- Color accessibility compliance with WCAG 2.1 AA standards for contrast ratios across all UI elements
+- Color-blind friendly palette with alternative visual indicators beyond color alone
+- High contrast mode support for users with visual impairments
+- Reduced motion support for users with vestibular disorders
+- Focus indicators with high contrast for keyboard navigation accessibility
+- Screen reader compatibility with proper color contrast and text alternatives
+- Cross-browser color compatibility testing to ensure consistent appearance and contrast
+- Theme switching functionality with user preference persistence and proper contrast validation
+- Form element styling with clear visibility and contrast for inputs, dropdowns, and buttons in both themes
+- Modal and overlay color schemes with proper backdrop and content contrast in both themes
+- Dashboard and analytics interface color schemes with clear data visualization and text readability in both themes
+- Theme switching functionality with immediate color scheme updates across all components
+- Color validation system that prevents invisible text or UI elements in any theme
+- Comprehensive audit of all color combinations to ensure visibility in both dark and light themes
+- Emergency fallback color schemes when theme switching fails
+- Real-time theme preview functionality showing color changes before applying
+- Color scheme persistence across browser sessions and device changes
+- Professional color palette that maintains brand consistency while ensuring accessibility
+- Dynamic color adjustment based on system preferences and user selections
+- Color contrast testing tools integrated into admin panel for ongoing validation
+- Automated color accessibility checks during development and deployment
+- Secure Stripe payment interface elements with proper contrast and accessibility
+- Payment modal and checkout interface with clear visibility and proper contrast
+- Payment status indicators and transaction displays with proper contrast
+- Payment history interface with clear data visualization and proper contrast
+- Field management interface elements with proper contrast and persistent visual feedback
+- Admin Panel field update interface with clear success/failure indicators and proper contrast
+- Global search and replace interface with proper contrast and persistent operation feedback
+- Field persistence status indicators with clear visual feedback and proper contrast
+- Reliable "Apply Configuration" button interface with clear feedback, proper contrast, and robust error handling
+- Deployment diagnostics interface elements with clear visual hierarchy, proper contrast, and comprehensive error handling
+- Prominently positioned Advanced Sitemap Search section on Homepage with visually attractive and prominent styling positioned just above the "Pay As You Use - Domain Batches" header with enhanced visual decoration and intuitive design
+
+## Data Storage
+- Backend stores user profiles, authentication data, and role assignments with security encryption using stable variables
+- Backend stores user session information and authentication state with secure token management using stable variables
+- Backend stores subscription information and tier details with usage tracking including updated pricing using stable variables:
+  - Basic Plan: $9/month
+  - Pro Plan: $45/month
+  - Enterprise Plan: $99/month
+- Backend stores Pay As You Use purchase records and quota tracking with real-time updates, including all batch options with complete pricing and feature details using stable variables
+- Backend stores multi-level referral relationships, conversion tracking data, and hierarchy mappings using stable variables
+- Backend stores commission calculations, history, status, payout records, and configurable profit share percentages using stable variables
+- Backend stores payout account data, withdrawal requests, threshold configurations, and limit tracking with token validation using stable variables
+- Backend stores sitemap data and search indexes with performance optimizations and caching using stable variables
+- Backend processes multiple JSON sitemap files with simplified format (only "urls" field required), validates format, extracts domains from URLs with validation against hardcoded TLD list including common extensions, applies default values for missing fields (domain with validation against hardcoded TLD list including common extensions, tier, qualityScore, backlinks), and stores processed sitemap entries using stable variables with guaranteed persistence
+- Backend stores comprehensive catalog system data including all uploaded file contents (.json, .csv, .md, .zip) with structured catalog entries using stable variables:
+  - Catalog entry metadata including file type, title, source URL, summary text, and comprehensive metadata fields
+  - File processing logs and content extraction results with parsing statistics
+  - Structured catalog entries with searchable content and keyword indexing
+  - Catalog search indexes supporting full-text search and metadata-based querying
+  - Filtering data for SEO rank, click count, popularity, relevance, recency, visibility, backlinks, ping response, load speed, and bounce rate
+  - Vectorized indexing preparation data for future semantic search capabilities
+  - Catalog analytics data including usage patterns, search statistics, and content effectiveness metrics
+- Backend stores comprehensive deployment diagnostic system data using stable variables:
+  - Deployment diagnostic logs with timestamps, error categories, and severity levels
+  - System validation results including environment variable checks, file accessibility validation, and configuration completeness
+  - Recovery operation logs with success rates, failure reasons, and performance metrics
+  - Diagnostic history with searchable records and filtering capabilities
+  - Error pattern analysis data with trend tracking and predictive failure detection
+  - Recovery success tracking with system reliability metrics and improvement analytics
+  - Deployment failure analysis with root cause identification and resolution tracking
+  - System health monitoring data with continuous validation and performance metrics
+- Backend implements high-performance chunked processing for large JSON files:
+  - Chunked file processing for files with tens of thousands of URLs with parallel processing capabilities
+  - Memory-efficient processing algorithms to handle large datasets without performance degradation
+  - Real-time progress tracking with percentage completion and processing speed metrics
+  - Background processing with non-blocking operations to maintain UI responsiveness
+  - Parallel chunk processing with optimized resource allocation and load balancing
+  - Immediate stable variable storage for each processed chunk ensuring no data loss
+  - Progress persistence across processing sessions with resume capabilities
+  - Deduplication system to prevent duplicate URL entries during processing
+  - Comprehensive error handling and recovery for each processing stage
+- Backend implements multi-format file processing for catalog system:
+  - JSON file parsing with discrete entry extraction and content chunking
+  - CSV file processing with row-by-row parsing and column header recognition
+  - Markdown file processing with section chunking and header recognition
+  - ZIP file extraction with recursive processing of nested contents
+  - Intelligent content extraction preserving file structure and relationships
+  - Metadata generation and enhancement for all processed files
+  - Content validation and sanitization for security and consistency
+  - Duplicate detection and handling across multiple file uploads
+  - Version tracking for updated files with change detection and history
+- Backend implements comprehensive deployment diagnostic validation system:
+  - Environment variable validation including Stripe key configuration, webhook secrets, and system settings
+  - External JavaScript file accessibility checking with integration status verification
+  - Build artifact validation with integrity checking and corruption detection
+  - Configuration completeness validation with missing component detection
+  - System dependency validation with service health monitoring
+  - Access control initialization verification with role and permission validation
+  - Stable data maps validation ensuring all persistent data has valid state
+  - File reference validation via Registry.list for all registered assets
+- Backend provides deployment diagnostic APIs with comprehensive system analysis:
+  - Structured diagnostic response format with error categorization and severity levels
+  - Real-time system health monitoring with proactive failure detection
+  - Diagnostic execution APIs with progress tracking and completion notifications
+  - Recovery recommendation APIs with automated and manual fix options
+  - Diagnostic history APIs with searchable logs and filtering capabilities
+  - System validation APIs with comprehensive checks and error reporting
+  - Recovery operation APIs with step-by-step execution and validation
+  - Deployment readiness APIs with pre-deployment checks and verification
+- Backend implements automated recovery system with self-healing capabilities:
+  - Automated recovery workflow execution with step-by-step progress tracking
+  - Recovery action validation with success verification and rollback capabilities
+  - Recovery operation logging with detailed tracking and audit trails
+  - Recovery success metrics with continuous improvement and optimization
+  - Automated recovery escalation with manual intervention options when needed
+  - Recovery pattern analysis with machine learning-based failure prediction
+  - Self-healing integration with existing error boundaries and monitoring systems
+  - Proactive recovery initiation based on system health monitoring and failure detection
+- Backend implements comprehensive URL indexing for all uploaded .json files ensuring every single URL (with http/https, with or without www, complete paths) is indexed and searchable using stable variables with zero data loss guarantee and instant availability
+- Backend provides ultra-high-performance Advanced Sitemap Search system with single search field combining all search functionalities:
+  - Instant search results with sub-100ms response times for datasets up to millions of URLs
+  - True lazy loading implementation that processes results from all uploaded .json and .xml files' "urls" fields in real time
+  - Real-time data processing directly from optimized stable variable storage with advanced indexing
+  - Dynamic filtering and search execution with intelligent caching and pre-computed indexes
+  - Memory-efficient processing algorithms optimized for billions of URLs without performance degradation
+  - Progressive loading with chunked data processing and virtualization for optimal performance
+  - Advanced inurl-style keyword search supporting case-insensitive multi-level path segment matching of any path segment
+  - Multi-word keyword support with space-separated terms and phrase matching
+  - Partial path matching supporting queries like "blog" matching "/blog/", "/company/blog/", "/api/blog", "/blog/posts/"
+  - Advanced path normalization handling slashes, case variations, special characters, and URL encoding
+  - Intelligent query parsing with keyword extraction, validation, and optimization
+  - Smart result prioritization with top-level path segments appearing first and relevance scoring
+  - Multi-level path matching with hierarchical relevance scoring and machine learning optimization
+  - Search result optimization for user intent and path structure with personalization
+  - Optimized 2-second debounce implementation for maximum performance preventing excessive API calls
+  - Search execution delayed by 2 seconds after user stops typing with intelligent prediction and request batching
+  - Guaranteed data availability with all uploaded .json and .xml sitemap data instantly indexed with advanced search structures
+  - Zero data loss guarantee after updates, upgrades, or migrations with automatic restoration
+  - Real-time search index updates ensuring all data remains searchable with consistency validation
+  - Comprehensive URL preservation during system changes with persistent validation
+  - Complete URL coverage with no artificial limitations or missing entries
+  - Always returns results guarantee for any keyword present in "urls" field of uploaded files regardless of slashes or path depth
+  - Comprehensive keyword matching across all URL components with fuzzy matching
+  - Fallback search mechanisms ensuring results are always found when data exists with intelligent query expansion
+  - Robust error handling preventing search failures with graceful degradation and comprehensive recovery
+  - Real-time progress indicators for large dataset searches with completion estimates and user feedback
+  - UI responsiveness maintained during intensive search operations with non-blocking processing
+  - Loading states and progress feedback preventing UI freezes with timeout handling
+  - User notification system for ongoing operations with clear status updates and retry mechanisms
+  - Admin unlimited access bypassing all search quotas, limitations, and subscription restrictions
+  - Unlimited search access for admin accounts with no result limitations or performance restrictions
+  - Admin-specific search APIs that bypass all quotas and performance limitations with dedicated high-performance endpoints
+  - Multi-stage search algorithm with extension-first filtering, then domain filtering, then subdomain filtering for optimal performance with millions of results
+  - Performance-optimized search queries for massive datasets (100M+ URLs) with intelligent caching and indexing
+  - Advanced search logic handling edge cases, special characters, and complex query patterns with robust error recovery
+  - Zero-latency search response for common queries with pre-computed optimization and performance monitoring
+  - Guaranteed result delivery for any valid keyword query regardless of complexity with comprehensive error handling
+  - Search result caching and optimization for frequently accessed data with intelligent invalidation
+  - Maximum delay/await implementation ensuring search operations complete successfully with configurable timeouts
+  - Configurable timeout thresholds with automatic adjustment based on dataset size and performance monitoring
+  - Progressive search execution with incremental result delivery and streaming with background processing continuation
+  - Search operation monitoring with performance metrics, optimization, and automatic retry mechanisms with exponential backoff
+- Backend provides comprehensive catalog search and filtering APIs:
+  - Full-text search across all catalog content with advanced indexing
+  - Metadata-based querying with multiple filter criteria support
+  - Keyword extraction and tagging system for enhanced searchability
+  - Dynamic filtering by file type, content metrics, and performance indicators
+  - Personalized search results based on user history and preferences
+  - Integration with existing search infrastructure for unified results
+  - Real-time search execution with instant results and performance optimization
+  - Advanced search algorithms supporting semantic and tag-based queries
+- Backend stores complete Advanced Sitemap Search module configuration data ensuring consistent behavior between Homepage and Sitemaps page implementations using stable variables
+- Backend provides shared search APIs for both Homepage and Sitemaps page with identical functionality and performance characteristics
+- Backend implements unified search state management and caching shared between Homepage and Sitemaps page search modules
+- Backend stores search module configuration settings, performance metrics, and usage analytics for both implementations using stable variables
+- Backend stores and provides the enhanced hardcoded TLD list with complete coverage and intelligent recognition using stable variables:
+  - Complete hardcoded list of all valid TLDs from ".ac" to ".zw" with no missing extensions
+  - Common domain extensions (.com, .org, .net, .edu, .gov, .mil, .int, .info, .biz, .name, .pro) prominently prioritized
+  - Both country code TLDs and generic TLDs in the hardcoded list with proper categorization
+  - TLD metadata including usage statistics and validation rules for the hardcoded list
+  - Alphabetically sorted hardcoded TLD list for efficient filtering and search with common extensions at top
+  - Performance-optimized hardcoded TLD indexes for fast lookup and filtering
+  - Complete hardcoded dropdown data with autocomplete functionality and searchable TLD lists
+  - Intelligent TLD recognition data supporting both "org" and ".org" queries with smart matching algorithms
+  - Hardcoded TLD recognition data for both dotted and non-dotted extension matching
+  - URL count metadata for each TLD extension with real-time calculation and updates
+  - Extension count statistics and distribution data for volume analysis
+  - TLD validation system preventing "No extensions found" errors for any valid TLD
+  - Autocomplete functionality data for TLD dropdown with real-time filtering and suggestion algorithms
+- Backend calculates and maintains real-time URL counts for each TLD extension based on all uploaded sitemap data using stable variables
+- Backend provides enhanced comprehensive domain extension filtering APIs using the hardcoded TLD list with performance optimization, caching, intelligent recognition, autocomplete functionality, and URL count calculations
+- Backend stores sitemap upload history, processing logs, error reports, and validation results for simplified JSON format using stable variables
+- Backend stores XML sitemap import data including source URLs, parsing results, conversion logs, processing statistics, and refactored URL extraction records focused exclusively on <loc> elements using stable variables
+- Backend handles XML sitemap fetching, parsing, validation, and conversion to JSON format with comprehensive domain extraction using hardcoded TLD list including common extensions and refactored URL extraction from <loc> elements only
+- Backend implements refactored XML parsing with exclusive <loc> URL extraction and graceful error handling:
+  - Parse XML document structure focusing exclusively on <loc> elements for URL extraction
+  - Extract URLs only from <loc> fields, completely ignoring all other XML elements and fields
+  - Handle standard XML sitemap formats with strict <loc> element focus and error tolerance
+  - Process large XML files efficiently with streaming and chunked processing optimized for <loc> extraction
+  - Gracefully handle malformed or incomplete XML sitemaps with detailed error reporting and partial <loc> import capabilities
+  - Validate each extracted <loc> URL and apply proper domain extraction with TLD validation including common extensions
+  - Store comprehensive <loc> extraction logs and statistics for all processed XML sitemaps with accurate URL counts
+  - Real-time URL counting during <loc> parsing and extraction phases with progress tracking
+  - Focused field scanning to identify only <loc> elements for URL extraction
+  - URL validation and normalization for each extracted <loc> entry with duplicate detection and error handling
+  - Complete coverage of all <loc> entries regardless of XML structure complexity with error recovery
+  - Import verification system ensuring all discovered <loc> URLs are successfully imported and indexed
+  - Comprehensive error handling and recovery for all <loc> parsing and extraction phases with graceful degradation
+- Backend implements comprehensive URL indexing for all imported XML <loc> URLs ensuring complete searchability with keyword-based search support using stable variables
+- Backend stores comprehensive click tracking data including individual click events, domain-level aggregations, URL-level counts, and analytics calculations using stable variables
+- Backend processes real-time click tracking updates and analytics calculations for all preview interactions
+- Backend provides click performance APIs for leaderboards and analytics displays accessible to all users
+- Backend stores mandatory enhanced pagination data including first/last page navigation state for Advanced Sitemap Search results, page boundaries, navigation history, and performance metrics using stable variables
+- Backend provides mandatory enhanced pagination APIs with first/last page navigation support for Advanced Sitemap Search results, boundary validation, and smooth navigation optimization
+- Backend stores subscriber access control data including subscription status validation, external link permissions, and access logging using stable variables
+- Backend validates subscription status for external link access and provides subscriber-only feature APIs
+- Backend stores true full-screen secure preview modal data including device-specific configurations, progressive fallback system preferences, progressive loading timeout settings for each fallback method (3x, 2x, 1x average page load delays), guaranteed minimum height configurations (100vh with 400px fallback), and complete viewport coverage support using stable variables
+- Backend handles enhanced secure proxy functionality for external content loading with progressive fallback system support, automatic URL protocol handling, progressive timeout management for each method with guaranteed delays, progressive fallback switching with intelligent timeout management, and responsive scaling optimization with complete viewport coverage (100vw/100vh) and guaranteed minimum height (100vh with 400px fallback)
+- Backend validates and sanitizes preview content for security compliance across all preview methods including progressive fallback system and true full-screen modal display with guaranteed minimum height
+- Backend implements automatic URL protocol validation and correction system with URL protocol detection, automatic "https://" prepending, protocol correction and fallback handling, secure protocol enforcement, and URL validation and sanitization using stable variables
+- Backend implements optimized progressive fallback preview system with intelligent timeout management and guaranteed delays, progressive loading timeout calculations for each method (3x, 2x, 1x average page load), progressive fallback method switching with timeout enforcement, cross-browser compatibility handling, security isolation, complete viewport coverage support, and guaranteed minimum height enforcement using stable variables
+- Backend implements Internet Archive fallback system with automatic archive URL construction, archive URL validation and error handling, archive content availability checking, archive preview performance tracking, archive content caching and loading optimization, archive fallback detection, CORS evasion mechanisms, and progressive timeout integration with guaranteed delays using stable variables
+- Backend implements screenshot capture system with automatic generation, caching, optimization for fallback previews, responsive scaling, guaranteed minimum height support, and progressive timeout handling with guaranteed delays using stable variables
+- Backend stores screenshot data, metadata, caching information, progressive fallback switching logs, progressive timeout performance metrics with guaranteed delays, and minimum height enforcement data using stable variables
+- Backend provides screenshot APIs with lazy loading, optimization features, automatic fallback detection, responsive scaling support, and guaranteed minimum height compliance
+- Backend handles automatic progressive fallback detection and switching logic between direct preview, Internet Archive, and screenshot methods with progressive timeout management for each method (3x, 2x, 1x average page load delays) and guaranteed minimum height enforcement
+- Backend implements robust error handling for all preview scenarios including CORS errors, CSP violations, and unreachable URLs with appropriate fallback mechanisms and guaranteed timeout management
+- Backend stores comprehensive backup data including complete sitemap data backups stored in .zip archives with versioning, metadata, and integrity checksums using stable variables
+- Backend handles automatic .zip backup creation, manual backup creation, restore operations, and backup management for .zip archives
+- Backend provides .zip backup integrity verification, corruption detection, rollback capabilities, and emergency restore functionality
+- Backend implements comprehensive preservation of all uploaded .json/.xml sitemap data and related records during upgrades with automatic restoration using stable variables with zero data loss guarantee
+- Backend maintains complete URL indexes during upgrades and migrations ensuring all URLs remain searchable after system updates with immediate searchability restoration and keyword-based search support
+- Backend stores comprehensive upgrade management data including version history, migration logs, validation results, and system health metrics using stable variables
+- Backend implements preupgrade and postupgrade hooks for safe data migration with serialization, deserialization, and transformation logic
+- Backend stores comprehensive feature checklist data including feature definitions, status tracking, progress calculations, and audit trails using stable variables
+- Backend provides feature checklist management APIs with status updates, progress calculations, and real-time synchronization
+- Backend stores comprehensive analytics data, metrics calculations, performance statistics, historical trends, URL count analytics, catalog analytics, and deployment diagnostic analytics using stable variables
+- Backend stores export history, download management data, activity logs, and file metadata using stable variables
+- Backend stores all editable field definitions, current values, field categories, selection states, and change history with guaranteed persistence using stable variables
+- Backend stores authentic business information including company details, contact information, social media links, and payment details using stable variables with persistent synchronization
+- Backend provides reliable field update mutations with proper transaction handling, bulk operations support, and data consistency using stable variables with guaranteed persistence
+- Backend stores field validation rules, formatting templates, display configurations, and auto-save settings using stable variables
+- Backend stores real-time field update logs, modification tracking, auto-save history, and bulk operation records with audit trails using stable variables
+- Backend supports global search and replace operations with comprehensive text matching and replacement across all platform content with persistent results
+- Backend stores search and replace history, operation logs, and rollback data for audit and recovery purposes using stable variables
+- Backend stores God's Eye Summary template configuration, variable definitions, aggregated financial data including updated subscription pricing, catalog statistics, deployment reliability metrics, and field organization settings using stable variables with persistent synchronization
+- Backend stores error logs, performance metrics, system health data, and monitoring information using stable variables
+- Backend stores audit trails for all administrative actions, financial transactions, data access, field modifications, bulk operations, system operations, mandatory pagination operations for Advanced Sitemap Search results, subscriber access validations, true full-screen secure preview modal operations with guaranteed minimum height, ultra-high-performance Advanced Sitemap Search system operations with instant results, complete Advanced Sitemap Search operations cloned from Homepage to Sitemaps page, configuration application operations, deployment operations, module error recovery operations, self-healing system operations, machine-readable specification operations, external JavaScript file integration operations, catalog system operations, and deployment diagnostic operations using stable variables
+- Backend provides comprehensive admin statistics, handles multiple sitemap file uploads with high-performance chunked processing, manages multi-format file uploads with automatic catalog inclusion, manages refactored XML sitemap imports with exclusive URL extraction from <loc> elements only and accurate counting, handles all data exports, field updates, bulk operations, backup operations, restore operations, upgrade operations, click tracking, feature checklist management, mandatory enhanced pagination with first/last page navigation for Advanced Sitemap Search results, subscriber access control, true full-screen secure preview modal management with complete viewport coverage and guaranteed minimum height, ultra-high-performance Advanced Sitemap Search system management with instant results and bulletproof reliability, complete Advanced Sitemap Search management with consistent functionality across Homepage and Sitemaps page, catalog system management with comprehensive processing and analytics, deployment monitoring and recovery, module health monitoring, self-healing system management, machine-readable specification management, external JavaScript file integration management, deployment diagnostic system management with comprehensive validation and recovery, and maintains system configuration parameters
+- Backend stores admin role permissions and access control data for all protected features and operations using stable variables
+- Backend validates admin permissions and user roles for all protected operations and logs access attempts
+- Backend provides unlimited access for admin accounts with proper role verification and no restrictions
+- Backend provides optimized APIs for ultra-high-performance Advanced Sitemap Search queries with instant results, advanced caching, indexing, and guaranteed result delivery
+- Backend stores search performance metrics, UI responsiveness statistics, and optimization data using stable variables
+- Backend handles lazy loading APIs for large dropdowns and result sets with progressive data loading and virtualization support
+- Backend processes inurl-style keyword searches and URL path searches with advanced matching algorithms, multi-stage search logic, and fallback mechanisms
+- Backend implements multi-stage search logic with extension-first filtering, then domain filtering, then subdomain filtering, and path segment filtering in optimized order with URL count tracking and guaranteed result delivery
+- Backend provides comprehensive search indexing that handles large file uploads (100,000+ URLs) with complete URL path coverage, keyword extraction, and URL count statistics using stable variables
+- Backend implements admin-specific search APIs that bypass all quotas, limitations, and subscription restrictions
+- Backend ensures admin search results display all matching data without pagination or result count filtering
+- Backend provides unlimited search access for admin users with no result limitations or subscription-based restrictions
+- Search results and pagination handled by backend APIs with quota enforcement and performance optimization (unlimited access for admin accounts)
+- Real-time data synchronization for all system operations including commission calculations, payout processing, analytics updates, export operations, field updates, auto-save operations, sitemap processing with high-performance chunked uploads, multi-format file processing with automatic catalog inclusion, refactored XML import processing with exclusive URL extraction from <loc> elements and accurate counting, catalog processing and indexing, backup operations, restore operations, upgrade operations, click tracking updates, feature checklist updates, summary aggregation, URL count calculations, screenshot capture operations, automatic progressive fallback switching with guaranteed timeout delays, URL protocol handling, progressive fallback preview operations with guaranteed minimum height, Internet Archive integration operations, field persistence operations, mandatory enhanced pagination operations for Advanced Sitemap Search results, subscriber access validation, true full-screen secure preview modal operations with guaranteed minimum height, ultra-high-performance Advanced Sitemap Search system operations with instant results and bulletproof reliability, complete Advanced Sitemap Search operations cloned from Homepage to Sitemaps page with consistent functionality, configuration application operations with robust error handling, deployment monitoring and recovery operations, module health monitoring operations, self-healing system operations, machine-readable specification operations, external JavaScript file integration operations, catalog system operations, and deployment diagnostic operations with comprehensive validation and recovery
+- Data storage optimized for large-scale operations with millions of domains and billions of URLs using advanced indexing, caching, and partitioning strategies
+- Advanced analytics data warehousing with historical data retention and archival policies
+- Export queue management with priority processing and resource allocation
+- Enhanced field management system with versioning, rollback capabilities, bulk operation support, auto-save tracking, and change tracking with reliable persistence using stable variables and guaranteed data integrity
+- System configuration storage with versioning and rollback capabilities using stable variables
+- Enterprise-grade data management with backup, recovery, and disaster recovery capabilities
+- Enhanced data consistency guarantees for all operations with proper transaction management and persistent validation
+- Backup storage optimization with .zip compression, deduplication, and efficient space utilization
+- Backup encryption and security measures for .zip archive data protection and compliance
+- Cross-version backup compatibility ensuring .zip backups can be restored across different app versions and deployments
+- Enhanced search data storage with optimization, performance caching, comprehensive domain extension filtering including common extensions, intelligent TLD recognition with autocomplete functionality, keyword-based indexing, and URL count calculations using stable variables
+- Click tracking data optimization with real-time aggregation, performance indexing, and leaderboard calculations using stable variables
+- Refactored XML import data storage with processing logs, conversion results, performance metrics, comprehensive domain validation including common extensions, exclusive URL extraction records from <loc> elements only, accurate URL counting, and import verification data using stable variables
+- Enhanced comprehensive hardcoded TLD system data storage with complete catalog including common extensions prioritized, intelligent recognition algorithms supporting both "org" and ".org" queries, performance indexes, usage statistics, optimization data, autocomplete functionality data, and URL count metadata using stable variables
+- Feature checklist data storage optimization with real-time synchronization, status tracking, and progress calculation using stable variables
+- Permanent storage system with .zip archive management for comprehensive data preservation across app upgrades and migrations using stable variables
+- Modular data architecture with independent storage modules for all system components using stable variables
+- Version-aware data storage with schema migration capabilities and backward compatibility using stable variables
+- Enterprise-grade data persistence with stable variable implementation ensuring data survival across all canister upgrades and deployments
+- User dashboard data storage with personalized settings, preferences, and customization options using stable variables
+- Multi-tab UI data storage with tab configurations, state persistence, and user preferences using stable variables
+- Performance optimization data storage with caching strategies, monitoring metrics, and optimization settings using stable variables
+- Authentication data storage with session management, security tokens, and user verification data using stable variables
+- Role-based access control data storage with permissions, user roles, and access logs using stable variables
+- Bottom navigation bar data storage with preferences, display settings, seamless positioning configurations with no extra space, and sitemap card configurations using stable variables
+- Global search and replace data storage with operation history, validation results, verification logs, and persistent confirmation tracking using stable variables
+- Enhanced secure Stripe payment data storage with comprehensive transaction records, payment history, subscription status, and billing information using stable variables (admin-only access for management data)
+- Backend stores Stripe checkout session data, payment verification results, and transaction logs using stable variables
+- Backend handles payment processing data with security measures, fraud detection, and compliance tracking using stable variables
+- Payment analytics data storage with transaction metrics, revenue tracking, and financial reporting using stable variables
+- Subscription management data storage with tier information, billing cycles, and payment status using stable variables
+- Pay As You Use purchase data storage with batch information, quota tracking, and access records using stable variables
+- Backend stores secure Stripe configuration data in environment variables with stable variable configuration tracking for setup completion status
+- Backend implements secure environment variable management for all sensitive Stripe keys with validation and error handling
+- Backend stores Stripe payment management logs, configuration changes, administrative actions, and country selection history using stable variables (admin-only access)
+- Backend provides admin-only secure Stripe management APIs with comprehensive role verification and secure data handling
+- Backend stores corrected country selection data with proper default initialization including active/inactive status, bulk operation history, and configuration validation results using stable variables with guaranteed persistence across all updates and migrations
+- Backend validates and converts country codes from TLD format to Stripe-compatible country codes with mapping tables and validation rules
+- Backend provides country selection management APIs with corrected default behavior, bulk operations, validation, real-time updates, and audit logging
+- Backend ensures default country selection is properly initialized with only specified countries pre-selected and maintains this configuration across all operations and migrations
+- Environment variable validation and secure key management with proper error handling and security logging
+- Secure key rotation procedures and management with audit trails and compliance tracking
+- Mandatory enhanced pagination data storage with first/last page navigation state for Advanced Sitemap Search results, page boundaries, navigation history, performance metrics, and user preferences using stable variables
+- Subscriber access control data storage with subscription validation logs, external link permissions, access attempts, and security monitoring using stable variables
+- True full-screen secure preview modal data storage with device configurations, progressive fallback system settings, progressive loading timeout configurations for each method with guaranteed delays (3x, 2x, 1x average page load), progressive fallback method preferences, guaranteed minimum height configurations (100vh with 400px fallback), and performance optimization data using stable variables with complete viewport coverage support (100vw/100vh)
+- Screenshot capture data storage with image metadata, caching information, optimization settings, responsive scaling data, guaranteed minimum height compliance data, and progressive loading timeout performance metrics with guaranteed delays using stable variables
+- Automatic progressive fallback switching data storage with method tracking, success rates, performance metrics, progressive loading timeout integration for each method with guaranteed delays, guaranteed minimum height enforcement tracking, and optimization settings using stable variables
+- URL count calculation data storage with real-time statistics, distribution analysis, performance optimization, and pagination integration using stable variables
+- Complete URL indexing data storage with comprehensive coverage of all uploaded URLs ensuring searchability and preservation with keyword-based search support using stable variables with zero data loss guarantee and instant availability
+- Admin unlimited access data storage with role verification, bypass mechanisms, access logging, and comprehensive permission tracking using stable variables
+- URL protocol handling data storage with validation logs, correction history, performance metrics, and progressive loading timeout integration with guaranteed delays using stable variables
+- Progressive fallback preview system data storage with performance metrics, compatibility tracking, optimization settings, responsive scaling data, guaranteed minimum height enforcement data, and progressive loading timeout management with guaranteed delays using stable variables
+- Internet Archive integration data storage with URL construction logs, archive content availability statistics, fallback usage analytics, performance optimization data, CORS evasion tracking, and progressive loading timeout performance metrics with guaranteed delays using stable variables
+- Field management data storage with persistent field values, update history, validation results, and synchronization logs using stable variables with guaranteed data integrity
+- Admin Panel field persistence data storage with transaction logs, auto-save history, bulk operation records, change tracking, and configuration application logs using stable variables
+- God's Eye Summary data synchronization storage with field update logs, cache invalidation records, and persistent validation results using stable variables
+- Business information persistence storage with global replacement logs, validation results, and synchronization tracking using stable variables
+- Field update confirmation storage with backend validation logs, persistent confirmation tracking, and error recovery data using stable variables
+- Refactored XML sitemap import progress tracking data storage with real-time status updates, completion notifications, <loc> extraction statistics, accurate URL counting, and import verification logs using stable variables
+- Comprehensive <loc> URL extraction data storage with parsing logs, field scanning results, URL validation records, processing performance metrics, and accurate counting statistics using stable variables
+- Configuration application data storage with validation logs, persistence verification, rollback data, operation tracking, and robust error handling logs using stable variables
+- High-performance chunked upload data storage with processing metrics, chunk status tracking, progress persistence, performance optimization data, deduplication tracking, and comprehensive error handling logs using stable variables
+- Multi-format file processing data storage with parsing logs, content extraction results, catalog entry creation records, processing performance metrics, and error handling statistics using stable variables
+- Catalog system data storage with comprehensive indexing, search optimization, analytics tracking, and performance monitoring using stable variables
+- Ultra-high-performance search algorithm optimization data storage with query performance metrics, result relevance tracking, search improvement analytics, guaranteed result delivery statistics, and bulletproof reliability metrics using stable variables
+- Error handling and fallback mechanism data storage with error logs, recovery statistics, system reliability metrics, and comprehensive error recovery data using stable variables
+- Object-based preview rendering data storage with object element configurations, viewport-filling display settings, minimum height enforcement data, and cross-browser compatibility tracking using stable variables
+- Modal container styling data storage with viewport coverage configurations, z-index management settings, and device-specific display optimizations using stable variables
+- Preview modal accessibility data storage with keyboard navigation settings, touch optimization configurations, and screen reader compatibility data using stable variables
+- Ultra-high-performance Advanced Sitemap Search system data storage with single search field configurations, instant results algorithms, real-time filtering algorithms, inurl-style keyword search algorithms with case-insensitive multi-level path segment matching, smart result prioritization rules with top-level path segments appearing first, optimized 2-second debounce implementation settings, guaranteed data availability tracking with instant indexing, robust error handling logs with progress feedback, admin unlimited access configurations with no restrictions, enhanced search performance optimization data with real-time execution, real-time search execution logs with guaranteed completion and maximum delay/await, always returns results guarantee tracking for any keyword present in "urls" field regardless of slashes or path depth, comprehensive click tracking integration data with analytics, multi-stage search algorithm data with extension-first filtering then domain then subdomain for optimal performance, advanced query preprocessing data with keyword extraction, normalization and validation, guaranteed result delivery tracking, bulletproof reliability metrics, and robust error recovery data using stable variables
+- Complete Advanced Sitemap Search module data storage with component configuration settings, shared state management data, performance metrics for both Homepage and Sitemaps page implementations, caching optimization data, unified search behavior tracking, and modular architecture data ensuring search component independence using stable variables
+- Complete TLD coverage data storage with validation systems including common extensions prioritized, intelligent TLD recognition algorithms supporting both "org" and ".org" queries, extension availability checking, dropdown population algorithms, autocomplete functionality data, "No extensions found" error prevention, and guaranteed coverage validation using stable variables
+- Search result prioritization data storage with path depth algorithms, relevance scoring systems, ranking optimization, machine learning optimization, and intelligent ranking data using stable variables
+- Click tracking integration data storage with analytics calculations, leaderboard processing, performance metrics, and comprehensive interaction tracking using stable variables
+- Ultra-high-performance Advanced Sitemap Search system data storage with instant results performance metrics, progressive loading optimization data, memory-efficient processing algorithms, chunked data processing configurations, timeout management settings with configurable maximum delays, progressive search execution data with incremental result delivery, background processing continuation logs, search operation monitoring data with performance metrics and optimization, automatic retry mechanism configurations, and bulletproof reliability validation using stable variables
+- Mobile-responsive search interface data storage with standard field width configurations, touch optimization settings, mobile keyboard support data, and responsive design parameters using stable variables
+- Enhanced domain extension filtering data storage with common extensions prioritization, intelligent TLD recognition with autocomplete functionality, clear header configurations, extension count statistics, and user experience optimization data using stable variables
+- Comprehensive sitemap upload error handling data storage with error categorization, recovery mechanisms, validation logs, and processing statistics using stable variables
+- Refactored XML sitemap import error handling data storage with <loc> parsing error logs, recovery statistics, validation results, and comprehensive error analysis using stable variables
+- Sidebar component error handling data storage with error logs, recovery statistics, fallback UI activation logs, and user data loading failure tracking using stable variables
+- Sidebar reliability data storage with component health monitoring logs, automatic retry attempt records, state preservation tracking, and error recovery success metrics using stable variables
+- Robust sidebar error boundary data storage with isolation logs, fallback UI rendering records, alternative navigation activation tracking, and comprehensive error handling statistics using stable variables
+- Deployment resilience data storage with deployment failure logs, recovery statistics, build validation results, migration monitoring data, and system health tracking using stable variables
+- Module architecture data storage with component isolation logs, error boundary activation records, self-healing system statistics, and module communication reliability metrics using stable variables
+- Automated monitoring data storage with performance metrics, health check results, predictive maintenance alerts, and system optimization recommendations using stable variables
+- Self-healing system data storage with recovery operation logs, failure detection statistics, automatic repair records, and system reliability metrics using stable variables
+- Machine-readable specification data storage with spec.ml configuration data, feature definitions, validation rules, version history, change tracking, automated specification checking results, compliance validation logs, and specification synchronization data using stable variables
+- Backend stores spec.ml format implementation data, feature encoding algorithms, modular roadmap tracking, audit-safe integration logs, and scalable specification management using stable variables
+- Backend provides specification management APIs with automated validation, consistency checking, version control, change tracking, and real-time synchronization using stable variables
+- Backend implements automated specification checking with compliance validation, feature verification, implementation status tracking, and specification-driven development support using stable variables
+- External JavaScript file integration data storage with file metadata, integration status, validation results, security check logs, performance metrics, version tracking, and deployment monitoring using stable variables
+- Backend stores external JavaScript file management data including file paths, permissions, encoding validation, integration logs, and security verification using stable variables
+- Backend provides external JavaScript file management APIs with validation, security checks, integration monitoring, and error handling using stable variables
+- Backend handles external JavaScript file deployment with proper file handling, security validation, and integration verification using stable variables
+- Deployment diagnostic system data storage with comprehensive diagnostic logs, system validation results, recovery operation tracking, error pattern analysis, system health monitoring, deployment failure analysis, and recovery success metrics using stable variables
+- Backend stores deployment diagnostic configuration data, validation rules, recovery procedures, and system health thresholds using stable variables
+- Backend provides deployment diagnostic APIs with comprehensive system analysis, recovery recommendations, and automated fix capabilities using stable variables
+- Backend implements deployment diagnostic validation with environment variable checking, file accessibility validation, configuration completeness verification, and system dependency validation using stable variables
+
+## Automated Specification Deduplication and Cleanup System
+
+### Specification File Analysis and Optimization
+- Automated deduplication system that identifies and removes duplicate or redundant entries within all specification files
+- Intelligent content analysis to detect repeated definitions, duplicated examples, and redundant configuration lines
+- Consolidation engine that merges repeated content under unified sections while preserving structure and hierarchy
+- Validation system ensuring resulting files remain well-formed, syntactically correct, and maintain full functional equivalency
+- Integration with existing optimization system for ongoing maintenance and continuous improvement
+
+### Deduplication Process and Implementation
+- Comprehensive scanning of all specification content to identify redundant patterns and duplicate instructions
+- Smart merging algorithm that consolidates similar requirements under single, comprehensive definitions
+- Structure preservation system maintaining document hierarchy, comments, and organizational integrity
+- Syntax validation ensuring all consolidated specifications remain technically accurate and implementable
+- Version control integration tracking all deduplication changes with rollback capabilities
+
+### Ongoing Maintenance Integration
+- Automated deduplication triggers integrated into specification update workflows
+- Real-time redundancy detection during specification modifications and additions
+- Continuous optimization monitoring to prevent specification bloat and maintain clarity
+- Performance optimization ensuring deduplication process doesn't impact system responsiveness
+- Quality assurance validation confirming all deduplicated specifications maintain complete functionality
+
+### Backend Deduplication Management
+- Backend stores deduplication rules, patterns, and optimization algorithms using stable variables
+- Backend provides specification analysis APIs for redundancy detection and content optimization
+- Backend implements automated deduplication workflows with validation and rollback capabilities
+- Backend stores deduplication history, change logs, and optimization metrics using stable variables
+- Backend ensures specification integrity and functional equivalency throughout deduplication process

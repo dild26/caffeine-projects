@@ -1,0 +1,19 @@
+
+## Future Extensions
+
+The modular API is designed for extensibility:
+
+- Custom shader effects
+- Animated geometry transformations
+- Multi-output data splitting
+- Conditional execution paths
+- Real-time collaboration features
+- Plugin marketplace integration
+
+## Support
+
+For questions or issues with the Modular Block API:
+- Check the inline code documentation
+- Review example blocks in `blockDefinitions.ts`
+- Test with the debug overlay enabled (press 'D')
+- Monitor performance metrics in real-time
