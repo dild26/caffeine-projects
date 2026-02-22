@@ -1,4 +1,4 @@
-                                              # 🚀 Never Seen Before Opportunity: Bridge the Digital Divide with Secoinfi-Apps
+  # 🚀 Never Seen Before Opportunity: Bridge the Digital Divide with Secoinfi-Apps
 
 Welcome to the future of open-source development and true decentralized ownership! **Sudha Enterprises** is proud to introduce a revolutionary way to collaborate, build, and earn. We are currently scaling over **40+ Secoinfi-Apps** (Caffeine Projects), and we're issuing a global call to passionate developers to help us upgrade and revolutionize our ecosystem.
 
