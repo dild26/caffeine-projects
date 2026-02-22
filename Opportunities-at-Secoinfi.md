@@ -34,5 +34,5 @@ The code you write today is the asset you will own tomorrow. Become a part of th
 **Sudha Enterprises**,   Bangalore - 560097  
 **CEO:** Dileep Kumar D,  eMail: dild26[@]gmail.com  
 **WhatsApp:** [wa.me/919620058644](https://wa.me/919620058644)
-http://seco.in.net/   | http://www.seco.in.net/
-Github: https://github.com/dild26/caffeine-projects/  Our-Blog: https://dildiva.blogspot.com/
+**Web: http://seco.in.net/   | site: http://www.seco.in.net/
+**Github: https://github.com/dild26/caffeine-projects/  Our-Blog: https://dildiva.blogspot.com/
